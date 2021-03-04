@@ -1,1 +1,21 @@
-<p>login works!</p>
+<div class="main-content">
+  <div class="login">
+    <img src="../../assets/blinker-logo.png" alt="" class="logo">
+    <form [formGroup]="form">
+      <div class="user-field">
+        <mat-form-field class="full-width username">
+          <mat-label>Username</mat-label>
+          <input formControlName="username" matInput>
+        </mat-form-field>
+      </div>
+      <div class="pwd-field">
+        <mat-form-field class="full-width password">
+          <mat-label>Password</mat-label>
+          <input type="password" formControlName="password" matInput>
+        </mat-form-field>
+      </div>
+      <button color="primary" (click)="login()" class="login-btn" mat-raised-button>Login <span class="material-icons">send</span></button>
+    </form>
+  </div>
+</div>
+

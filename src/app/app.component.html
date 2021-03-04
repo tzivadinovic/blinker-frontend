@@ -1,1 +1,18 @@
-<app-login></app-login>
+<mat-drawer-container class="navbar-container">
+  <mat-drawer #sidenav [opened]="opened" id="menu" mode="side">
+    <img src="../assets/blinker-logo.png" alt="" class="logo" routerLink="/home">
+    <mat-list class="menu-list">
+      <mat-list-item *ngFor="let menuItem of menuItems" class="menu-list-item">
+        <mat-icon mat-list-icon>{{menuItem.icon}}</mat-icon>
+        <div mat-line routerLink="{{menuItem.path}}">{{menuItem.title}}</div>
+      </mat-list-item>
+      <mat-list-item class="menu-list-item logout">
+        <mat-icon mat-list-icon>meeting_room</mat-icon>
+        <div (click)="logout()" mat-line>Logout</div>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

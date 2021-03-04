@@ -1,0 +1,51 @@
+::ng-deep .mat-drawer-inner-container {
+  background-color: #16456d;
+}
+
+::ng-deep mat-drawer-content {
+  height: 100vh !important;
+}
+
+::ng-deep .menu-list {
+  text-align: left;
+  height: 100%;
+}
+
+::ng-deep .menu-list {
+  text-align: left;
+  height: 100%;
+}
+
+::ng-deep .menu-list .menu-list-item {
+  color: white !important;
+  cursor: pointer;
+  font-size: 20px !important;
+
+}
+
+::ng-deep .menu-list .menu-list-item:hover {
+  background-color: #0c263d;
+  transition: background-color 150ms linear;
+}
+
+::ng-deep mat-drawer .mat-drawer-inner-container {
+  overflow-y: hidden !important;
+  text-align: center;
+  user-select: none;
+}
+
+.logo {
+  margin-top: 1em;
+  width: 75%;
+}
+
+::ng-deep .menu-list .menu-list-item.logout {
+  position: absolute;
+  bottom: 0;
+}
+
+::ng-deep ::selection {
+  color: white;
+  /*background: #34be5b;*/
+  background: #197278;
+}
