@@ -1,0 +1,29 @@
+<div class="main-content">
+  <div class="invoice-number">
+    <h3>Add new product</h3>
+  </div>
+  <form [formGroup]="form">
+
+    <mat-form-field class="example-full-width" tabindex="2">
+      <mat-label>Product code</mat-label>
+      <input formControlName="code" matInput type="text">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Title</mat-label>
+      <input formControlName="title" matInput type="text">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Description</mat-label>
+      <input formControlName="description" matInput type="text">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Price</mat-label>
+      <input formControlName="price" matInput type="number">
+    </mat-form-field>
+
+    <button class="edit-invoice" color="primary" mat-raised-button>Save</button>
+  </form>
+</div>

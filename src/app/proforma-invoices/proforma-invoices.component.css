@@ -4,7 +4,7 @@
 }
 
 .title-content {
-  margin-left: 43%;
+  margin-left: 40%;
   margin-top: 40px;
 }
 
@@ -82,7 +82,7 @@ tr:hover {
 
 .financial-info {
   margin-top: 20px;
-  margin-left: 12%;
+  margin-left: 75%;
 }
 
 mat-panel-title{
@@ -102,19 +102,6 @@ mat-panel-title{
   float: right;
 }
 
-.print-btn {
-  float: right;
-  margin-top: -200px;
-  font-size: 80px;
-  margin-right: 200px;
-}
-
-.print-btn:hover {
-  color: #16446c;
-  cursor: pointer;
-  transition: .2s;
-
-}
 
 .edit-btn {
   float: right;
@@ -133,14 +120,5 @@ mat-panel-title{
   display: flex;
 }
 
-.items-box{
-  margin-top: 20px;
-  margin-left: 10%;
-  width: 50%;
-}
-
-.textarea-field{
-  width: 600px;
-}
 
 

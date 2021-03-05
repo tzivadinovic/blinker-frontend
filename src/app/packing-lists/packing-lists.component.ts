@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {PrintOptionsDialogComponent} from './dialogs/print-options-dialog/print-options-dialog.component';
-import {EditInvoiceDialogComponent} from './dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
+import {EditInvoiceDialogComponent} from '../invoices/dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
+import {EditPackingListDialogComponent} from '../invoices/dialogs/edit-packing-list-dialog/edit-packing-list-dialog.component';
 
-export interface MockData {
+export interface MockPackingList {
   itemNo: number;
   code: string;
   title: string;
@@ -14,7 +14,7 @@ export interface MockData {
   totalValue: number;
 }
 
-const elData: MockData[] = [
+const elData: MockPackingList[] = [
   {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
   {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
   {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
@@ -39,30 +39,23 @@ const elData: MockData[] = [
 ];
 
 @Component({
-  selector: 'app-invoices',
-  templateUrl: './invoices.component.html',
-  styleUrls: ['./invoices.component.css']
+  selector: 'app-packing-lists',
+  templateUrl: './packing-lists.component.html',
+  styleUrls: ['./packing-lists.component.css']
 })
-export class InvoicesComponent implements OnInit {
+export class PackingListsComponent implements OnInit {
   panelOpenState = false;
   displayedColumns: string[] = ['itemNo', 'code', 'title', 'description', 'unit', 'quantity', 'price', 'totalValue', 'options'];
   dataSource = elData;
 
-  constructor(public dialog: MatDialog) {
-  }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
-  openPrintOptionsDialog(): void{
+  openEditPackingListDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
-    this.dialog.open(PrintOptionsDialogComponent, dialogConfig).afterClosed();
-  }
-
-  openEditInvoiceDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px';
-    this.dialog.open(EditInvoiceDialogComponent, dialogConfig).afterClosed();
+    this.dialog.open(EditPackingListDialogComponent, dialogConfig).afterClosed();
   }
 }

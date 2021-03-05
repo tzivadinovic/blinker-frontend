@@ -1,0 +1,91 @@
+<div class="main-content">
+  <div class="invoice-number">
+    <h3>Invoice No. 0001/IT/21</h3>
+  </div>
+  <form [formGroup]="form">
+
+    <mat-form-field tabindex="2">
+      <input [matDatepicker]="picker1" formControlName="date" matInput placeholder="Invoice date">
+      <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker1>
+      </mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Invoice number</mat-label>
+      <input formControlName="invoiceNumber" matInput type="text">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Customer</mat-label>
+      <mat-select formControlName="customer">
+        <mat-option>
+          LINEAEFFE SpA
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>State</mat-label>
+      <mat-select formControlName="state">
+        <mat-option>
+          Italy
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Transport terms</mat-label>
+      <mat-select formControlName="transportTerms">
+        <mat-option>
+          DAP San Pietro in Casale
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Currency</mat-label>
+      <mat-select formControlName="currency">
+        <mat-option>
+          EUR Export
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Payment conditions</mat-label>
+      <input formControlName="paymentConditions" matInput type="text">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Stamp and signature</mat-label>
+      <mat-select formControlName="stampSignature">
+        <mat-option>
+          Maja Živadinović
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Total boxes</mat-label>
+      <input formControlName="totalBoxes" matInput type="number">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Gross Weight</mat-label>
+      <input formControlName="grossWeight" matInput type="number">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Net Weight</mat-label>
+      <input formControlName="netWeight" matInput type="number" disabled>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Shipping Fees</mat-label>
+      <input formControlName="shippingFees" matInput type="number">
+    </mat-form-field>
+
+    <button class="edit-invoice" color="primary" mat-raised-button>Save</button>
+  </form>
+</div>

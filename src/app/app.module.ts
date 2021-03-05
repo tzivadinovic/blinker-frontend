@@ -8,7 +8,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-import {MatLineModule} from '@angular/material/core';
+import {MatLineModule, MatNativeDateModule} from '@angular/material/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
@@ -21,11 +21,23 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {InvoicesComponent} from './invoices/invoices.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ProformaInvoicesComponent } from './proforma-invoices/proforma-invoices.component';
+import { PackingListsComponent } from './packing-lists/packing-lists.component';
+import { PrintOptionsDialogComponent } from './invoices/dialogs/print-options-dialog/print-options-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { EditInvoiceDialogComponent } from './invoices/dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { EditProformaInvoiceDialogComponent } from './invoices/dialogs/edit-proforma-invoice-dialog/edit-proforma-invoice-dialog.component';
+import { EditPackingListDialogComponent } from './invoices/dialogs/edit-packing-list-dialog/edit-packing-list-dialog.component';
+import { CreateProductDialogComponent } from './invoices/dialogs/create-product-dialog/create-product-dialog.component';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'invoices', component: InvoicesComponent}
+  {path: 'invoices', component: InvoicesComponent},
+  {path: 'proforma-invoices', component: ProformaInvoicesComponent},
+  {path: 'packing-lists', component: PackingListsComponent}
 ];
 
 @NgModule({
@@ -35,6 +47,13 @@ const appRoutes: Routes = [
     HomeComponent,
     FloatsComponent,
     InvoicesComponent,
+    ProformaInvoicesComponent,
+    PackingListsComponent,
+    PrintOptionsDialogComponent,
+    EditInvoiceDialogComponent,
+    EditProformaInvoiceDialogComponent,
+    EditPackingListDialogComponent,
+    CreateProductDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +71,17 @@ const appRoutes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ], entryComponents: [
+    PrintOptionsDialogComponent,
+    EditInvoiceDialogComponent,
+    EditPackingListDialogComponent,
+    EditProformaInvoiceDialogComponent,
+    CreateProductDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
