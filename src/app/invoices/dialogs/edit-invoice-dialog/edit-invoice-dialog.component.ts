@@ -11,6 +11,7 @@ export class EditInvoiceDialogComponent implements OnInit {
     invoiceNumber: new FormControl(null),
     customer: new FormControl(null),
     state: new FormControl(null),
+    city: new FormControl(null),
     transportTerms: new FormControl(null),
     currency: new FormControl(null),
     paymentConditions: new FormControl(null),
