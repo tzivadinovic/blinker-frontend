@@ -1,0 +1,91 @@
+<div class="title-content">
+  <h1>Invoices management</h1>
+</div>
+<div class="main-content">
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          0001/IT/21
+        </mat-panel-title>
+        <mat-panel-description class="invoice-date">
+          12.07.2000.
+        </mat-panel-description>
+        <mat-panel-description>
+          19.500,00 EUR
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="invoice-info">
+        <h3>Customer: <b>LINEAEFFE SpA</b></h3>
+        <h3>City: <b>40018 San Pietro in Casale</b></h3>
+        <h3>State: <b>Italy</b></h3>
+        <h3>Transport terms: <b>DAP San Pietro in Casale</b></h3>
+        <h3>Currency: <b>EUR Export</b></h3>
+        <h3>Payment conditions: <b>SWIFT 60 Days</b></h3>
+      </div>
+
+      <i class="large material-icons print-btn" matTooltip="Print invoice">print</i>
+      <i class="large material-icons edit-btn" matTooltip="Edit invoice">edit</i>
+
+      <div class="stamp-signature">
+        <h3>Stamp and signature: <b>Maja Živadinović</b></h3>
+      </div>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="itemNo">
+          <th mat-header-cell *matHeaderCellDef> Item</th>
+          <td mat-cell *matCellDef="let element"> {{element.itemNo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef> Code</th>
+          <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Title</th>
+          <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Description</th>
+          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef> Quantity</th>
+          <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Price</th>
+          <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="options">
+          <th mat-header-cell *matHeaderCellDef> Actions</th>
+          <td mat-cell *matCellDef="let element" class="actions-field">
+            <button mat-raised-button color="primary" class="edit-button">Edit</button>
+            <button mat-raised-button color="primary" class="delete-button">Delete</button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <div class="weight">
+        <h3>Total boxes: 35pcs</h3>
+        <h3>Gross weight: 500kg</h3>
+        <h3>Net weight: 450kg</h3>
+      </div>
+      <div class="financial-info">
+        <h3>Total: 19.500,00</h3>
+        <h3>Shipping fees: 300,00</h3>
+        <h3>Invoice total: 19.800,00</h3>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

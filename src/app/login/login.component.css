@@ -1,19 +1,20 @@
-.main-content{
-  background-color: #16456d;
+.main-content {
+  background-color: #0b2236;
   height: 100%;
   width: 100%;
 }
 
 .login {
+  background-color: #0b2236;
   text-align: center;
   margin: 0 auto;
-  width: 30%;
+  width: 25%;
   padding-left: 50px;
   padding-right: 50px;
   position: absolute;
   top: 30%;
-  left: 32%;
-  border: 2px solid white;
+  left: 35%;
+  border: 2px solid #16446c;
   border-radius: 10px;
   -webkit-box-shadow: 0px 4px 10px 11px rgba(22, 69, 109, 1);
   box-shadow: 0px 4px 10px 11px rgb(14, 43, 68);
@@ -57,20 +58,21 @@
 ::ng-deep .mat-form-field-underline {
   background-color: #ffffff !important;
 }
+
 .material-icons {
   margin-left: 5px;
 }
 
-.title{
+.title {
   margin-top: 20px;
 }
 
-.title h1{
+.title h1 {
   color: white;
   font-size: 2.5rem;
 }
 
-.logo{
+.logo {
   margin-top: 20px;
 }
 

@@ -1,0 +1,8 @@
+mat-tab-group {
+  padding: 20px;
+}
+
+::ng-deep .mat-tab-body-wrapper {
+  height: 100vh !important;
+}
+
