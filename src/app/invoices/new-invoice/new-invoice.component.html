@@ -105,7 +105,7 @@
 <div *ngFor="let input of invoiceInputs; let i = index">
   <mat-list>
     <mat-list-item>
-        <app-new-invoice-fields (method)="checkForm()"></app-new-invoice-fields>
+      <app-new-invoice-fields (method)="checkForm()" [itemNo]="i+1"></app-new-invoice-fields>
     </mat-list-item>
   </mat-list>
 </div>

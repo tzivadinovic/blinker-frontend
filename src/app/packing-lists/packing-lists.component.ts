@@ -3,7 +3,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {EditPackingListDialogComponent} from '../invoices/dialogs/edit-packing-list-dialog/edit-packing-list-dialog.component';
 
 export interface MockPackingList {
-  itemNo: number;
+  boxNo: number;
   code: string;
   title: string;
   description: string;
@@ -14,27 +14,27 @@ export interface MockPackingList {
 }
 
 const elData: MockPackingList[] = [
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00}
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
+  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00}
 ];
 
 @Component({
@@ -44,7 +44,7 @@ const elData: MockPackingList[] = [
 })
 export class PackingListsComponent implements OnInit {
   panelOpenState = false;
-  displayedColumns: string[] = ['itemNo', 'code', 'title', 'description', 'unit', 'quantity', 'price', 'totalValue', 'options'];
+  displayedColumns: string[] = ['boxNo', 'code', 'title', 'description', 'unit', 'quantity', 'price', 'totalValue', 'options'];
   dataSource = elData;
 
   constructor(public dialog: MatDialog) { }
