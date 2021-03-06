@@ -8,12 +8,14 @@ mat-form-field{
 }
 
 .edit-invoice{
-  float: right;
-  margin-right: 10%;
   background-color: #16456d;
 }
 
 .edit-invoice:hover{
   background-color: #226dac !important;
   transition: 250ms;
+}
+
+.date-picker{
+  width: 180px;
 }

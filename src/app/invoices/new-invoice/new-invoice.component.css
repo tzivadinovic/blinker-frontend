@@ -1,0 +1,38 @@
+:host app-new-invoice-fields {
+  display: block;
+  margin-left: 22%;
+}
+
+.invoice-details{
+  margin-left: 10%;
+  margin-bottom: 50px;
+}
+
+.title{
+  margin-bottom: 50px;
+  margin-top: 50px;
+  margin-left: 38%;
+}
+
+.title h3{
+  font-size: 40px;
+}
+
+.invoice-details mat-form-field{
+  margin-right: 10px;
+}
+
+.invoice-details button:hover{
+  background-color: #16446c;
+  color: white;
+  transition: .5s;
+}
+
+.invoice-details button{
+  margin-left: 2px;
+}
+
+.main-content .date-picker{
+  width: 180px;
+}
+

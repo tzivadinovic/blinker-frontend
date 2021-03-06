@@ -143,4 +143,14 @@ mat-panel-title{
   width: 600px;
 }
 
+.new-invoice-btn {
+  margin-left: 46%;
+}
+
+.new-invoice-btn button:hover{
+  background-color: #16446c;
+  color: white;
+  transition: .5s;
+}
+
 

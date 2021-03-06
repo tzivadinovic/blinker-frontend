@@ -37,6 +37,7 @@
 .logo {
   margin-top: 1em;
   width: 75%;
+  cursor: pointer;
 }
 
 ::ng-deep .menu-list .menu-list-item.logout {

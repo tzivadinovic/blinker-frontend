@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {EditInvoiceDialogComponent} from '../invoices/dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
 import {EditPackingListDialogComponent} from '../invoices/dialogs/edit-packing-list-dialog/edit-packing-list-dialog.component';
 
 export interface MockPackingList {

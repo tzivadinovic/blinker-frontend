@@ -1,0 +1,16 @@
+.flex-container{
+
+}
+
+.flex-container form{
+  display: flex !important;
+}
+
+.flex-container mat-form-field{
+  width: 100px;
+  margin-right: 5px;
+}
+
+.flex-container .description-field mat-form-field{
+  width: 500px;
+}

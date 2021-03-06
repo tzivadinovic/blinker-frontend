@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {EditInvoiceDialogComponent} from '../../invoices/dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
 import {CreateProductDialogComponent} from '../../invoices/dialogs/create-product-dialog/create-product-dialog.component';
 import {EditProductDialogComponent} from '../../invoices/dialogs/edit-product-dialog/edit-product-dialog.component';
 import {DeleteProductDialogComponent} from '../../invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
@@ -22,11 +21,11 @@ const elData: MockData[] = [
 ];
 
 @Component({
-  selector: 'app-floats',
-  templateUrl: './floats.component.html',
-  styleUrls: ['./floats.component.css']
+  selector: 'app-cities',
+  templateUrl: './cities.component.html',
+  styleUrls: ['./cities.component.css']
 })
-export class FloatsComponent implements OnInit {
+export class CitiesComponent implements OnInit {
   displayedColumns: string[] = ['code', 'title', 'description', 'category', 'price', 'options'];
   dataSource = elData;
 
@@ -63,4 +62,5 @@ export class FloatsComponent implements OnInit {
       }
     });
   }
+
 }

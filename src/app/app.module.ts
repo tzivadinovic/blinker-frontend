@@ -31,13 +31,24 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { EditProformaInvoiceDialogComponent } from './invoices/dialogs/edit-proforma-invoice-dialog/edit-proforma-invoice-dialog.component';
 import { EditPackingListDialogComponent } from './invoices/dialogs/edit-packing-list-dialog/edit-packing-list-dialog.component';
 import { CreateProductDialogComponent } from './invoices/dialogs/create-product-dialog/create-product-dialog.component';
+import { NewInvoiceComponent } from './invoices/new-invoice/new-invoice.component';
+import { NewInvoiceFieldsComponent } from './invoices/new-invoice/new-invoice-fields/new-invoice-fields.component';
+import { EditProductDialogComponent } from './invoices/dialogs/edit-product-dialog/edit-product-dialog.component';
+import { DeleteProductDialogComponent } from './invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
+import { EmployeesComponent } from './home/employees/employees.component';
+import { CustomersComponent } from './home/customers/customers.component';
+import { StatesComponent } from './home/states/states.component';
+import { CitiesComponent } from './home/cities/cities.component';
+import { TransportTermsComponent } from './home/transport-terms/transport-terms.component';
+import { CurrenciesComponent } from './home/currencies/currencies.component';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'home', component: HomeComponent},
   {path: 'invoices', component: InvoicesComponent},
   {path: 'proforma-invoices', component: ProformaInvoicesComponent},
-  {path: 'packing-lists', component: PackingListsComponent}
+  {path: 'packing-lists', component: PackingListsComponent},
+  {path: 'new-invoice', component: NewInvoiceComponent}
 ];
 
 @NgModule({
@@ -54,6 +65,16 @@ const appRoutes: Routes = [
     EditProformaInvoiceDialogComponent,
     EditPackingListDialogComponent,
     CreateProductDialogComponent,
+    NewInvoiceComponent,
+    NewInvoiceFieldsComponent,
+    EditProductDialogComponent,
+    DeleteProductDialogComponent,
+    EmployeesComponent,
+    CustomersComponent,
+    StatesComponent,
+    CitiesComponent,
+    TransportTermsComponent,
+    CurrenciesComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,7 +102,8 @@ const appRoutes: Routes = [
     EditInvoiceDialogComponent,
     EditPackingListDialogComponent,
     EditProformaInvoiceDialogComponent,
-    CreateProductDialogComponent
+    CreateProductDialogComponent,
+    EditProductDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

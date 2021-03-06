@@ -4,7 +4,7 @@
   </div>
   <form [formGroup]="form">
 
-    <mat-form-field tabindex="2">
+    <mat-form-field tabindex="2" class="date-picker">
       <input [matDatepicker]="picker1" formControlName="date" matInput placeholder="Invoice date">
       <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker1>
@@ -94,7 +94,8 @@
       <mat-label>Shipping Fees</mat-label>
       <input formControlName="shippingFees" matInput type="number">
     </mat-form-field>
-
+  <div>
     <button class="edit-invoice" color="primary" mat-raised-button>Save</button>
+  </div>
   </form>
 </div>
