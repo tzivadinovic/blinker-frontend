@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { ModelAndView } from '../model/models';
 
 
 import { ApiConfiguration }                                     from '../configuration';
@@ -24,45 +25,45 @@ export interface BasicErrorControllerServiceInterface {
     configuration: ApiConfiguration;
 
     /**
-     * error
+     * errorHtml
      * 
      */
-    errorUsingDELETE(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
+    errorHtmlUsingDELETE(extraHttpRequestParams?: any): Observable<ModelAndView>;
 
     /**
-     * error
+     * errorHtml
      * 
      */
-    errorUsingGET(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
+    errorHtmlUsingGET(extraHttpRequestParams?: any): Observable<ModelAndView>;
 
     /**
-     * error
+     * errorHtml
      * 
      */
-    errorUsingHEAD(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
+    errorHtmlUsingHEAD(extraHttpRequestParams?: any): Observable<ModelAndView>;
 
     /**
-     * error
+     * errorHtml
      * 
      */
-    errorUsingOPTIONS(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
+    errorHtmlUsingOPTIONS(extraHttpRequestParams?: any): Observable<ModelAndView>;
 
     /**
-     * error
+     * errorHtml
      * 
      */
-    errorUsingPATCH(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
+    errorHtmlUsingPATCH(extraHttpRequestParams?: any): Observable<ModelAndView>;
 
     /**
-     * error
+     * errorHtml
      * 
      */
-    errorUsingPOST(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
+    errorHtmlUsingPOST(extraHttpRequestParams?: any): Observable<ModelAndView>;
 
     /**
-     * error
+     * errorHtml
      * 
      */
-    errorUsingPUT(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
+    errorHtmlUsingPUT(extraHttpRequestParams?: any): Observable<ModelAndView>;
 
 }

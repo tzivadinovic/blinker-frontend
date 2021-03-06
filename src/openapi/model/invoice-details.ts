@@ -19,13 +19,13 @@ import { TransportTerm } from './transport-term';
 export interface InvoiceDetails { 
     boxNumber?: number;
     createdDate?: string;
-    currencyId?: Currency;
-    customerId?: Customer;
+    currency?: Currency;
+    customer?: Customer;
     date?: string;
-    employeeId?: Employee;
+    employee?: Employee;
     grossWeight?: number;
     id?: number;
-    invoiceId?: Invoice;
+    invoice?: Invoice;
     itemsInfo?: string;
     lastModifiedBy?: string;
     lastModifiedDate?: string;
@@ -37,6 +37,6 @@ export interface InvoiceDetails {
     shippingFees?: number;
     totalBoxes?: number;
     totalPrice?: number;
-    transportTermId?: TransportTerm;
+    transportTerm?: TransportTerm;
 }
 

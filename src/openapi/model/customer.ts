@@ -14,13 +14,13 @@ import { City } from './city';
 
 
 export interface Customer { 
-    cityId?: City;
+    city?: City;
     createdDate?: string;
     id?: number;
     lastModifiedBy?: string;
     lastModifiedDate?: string;
     name?: string;
     recordStatus?: number;
-    stateId?: State;
+    state?: State;
 }
 

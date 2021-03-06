@@ -27,6 +27,6 @@ export interface Employee {
     phoneNumber?: string;
     position?: string;
     recordStatus?: number;
-    userId?: User;
+    user?: User;
 }
 

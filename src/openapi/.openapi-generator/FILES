@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 README.md
 api.module.ts
 api/api.ts
@@ -38,6 +37,7 @@ model/city.ts
 model/currency.ts
 model/customer.ts
 model/employee.ts
+model/granted-authority.ts
 model/invoice-details.ts
 model/invoice.ts
 model/model-and-view.ts

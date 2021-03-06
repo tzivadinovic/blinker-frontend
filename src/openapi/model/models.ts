@@ -3,6 +3,7 @@ export * from './city';
 export * from './currency';
 export * from './customer';
 export * from './employee';
+export * from './granted-authority';
 export * from './invoice';
 export * from './invoice-details';
 export * from './model-and-view';

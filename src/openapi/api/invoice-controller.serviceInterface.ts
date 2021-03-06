@@ -45,11 +45,16 @@ export interface InvoiceControllerServiceInterface {
     getInvoiceById(invoiceId: number, extraHttpRequestParams?: any): Observable<Invoice>;
 
     /**
+     * findLastCreated
+     * 
+     */
+    lastCreated(extraHttpRequestParams?: any): Observable<Invoice>;
+
+    /**
      * saveInvoice
      * 
-     * @param invoice invoice
      */
-    saveInvoice(invoice: Invoice, extraHttpRequestParams?: any): Observable<Invoice>;
+    saveInvoice(extraHttpRequestParams?: any): Observable<Invoice>;
 
     /**
      * updateInvoice

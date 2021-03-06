@@ -1,6 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {Invoice, InvoiceControllerService} from '../../../openapi';
+import {
+  Currency,
+  CurrencyControllerService, Customer,
+  CustomerControllerService, Employee, EmployeeControllerService,
+  Invoice,
+  InvoiceControllerService,
+  InvoiceDetailsControllerService, TransportTerm,
+  TransportTermControllerService
+} from '../../../openapi';
 import {SnackbarService} from '../../../utils/snackbar-handler';
 
 @Component({
@@ -10,14 +18,12 @@ import {SnackbarService} from '../../../utils/snackbar-handler';
 })
 export class NewInvoiceComponent implements OnInit {
   form = new FormGroup({
-    invoiceNumber: new FormControl(null),
+    number: new FormControl(null),
     customer: new FormControl(null),
-    state: new FormControl(null),
-    city: new FormControl(null),
-    transportTerms: new FormControl(null),
+    transportTerm: new FormControl(null),
     currency: new FormControl(null),
     paymentConditions: new FormControl(null),
-    stampSignature: new FormControl(null),
+    employee: new FormControl(null),
     totalBoxes: new FormControl(null),
     grossWeight: new FormControl(null),
     netWeight: new FormControl(null),
@@ -25,15 +31,28 @@ export class NewInvoiceComponent implements OnInit {
     date: new FormControl(null)
   });
   invoiceInputs: any[] = [];
-  invoice: Invoice = null;
+
+  customers: Customer[] = [];
+  transportTerms: TransportTerm[] = [];
+  currencies: Currency[] = [];
+  employees: Employee[] = [];
 
   constructor(private invoiceService: InvoiceControllerService,
-              private snackBarService: SnackbarService) {
+              private snackBarService: SnackbarService,
+              private invoiceDetailsService: InvoiceDetailsControllerService,
+              private customerService: CustomerControllerService,
+              private transportTermsService: TransportTermControllerService,
+              private currencyService: CurrencyControllerService,
+              private employeeService: EmployeeControllerService) {
   }
 
   ngOnInit(): void {
     this.form.get('netWeight').disable();
     this.checkForm();
+    this.getAllCurrencies();
+    this.getAllCustomers();
+    this.getAllEmployees();
+    this.getAllTransportTerms();
   }
 
   public checkForm(): void {
@@ -42,10 +61,40 @@ export class NewInvoiceComponent implements OnInit {
   }
 
   createNewInvoice() {
-      this.invoiceService.saveInvoice(this.invoice).subscribe(() => {
+      this.invoiceService.saveInvoice().subscribe(() => {
         this.snackBarService.showSuccessSnackbar('Successfully created invoice');
       }, error => {
         this.snackBarService.showErrorSnackbar(error.error.message);
       });
+  }
+
+  saveInvoiceDetails(): void {
+    this.invoiceDetailsService.saveInvoiceDetails(this.form.value).subscribe(() => {
+      this.snackBarService.showSuccessSnackbar('Successfully saved invoice details');
+    });
+  }
+
+  getAllCustomers(): void {
+    this.customerService.getAllCustomers().subscribe(data => {
+      this.customers = data;
+    });
+  }
+
+  getAllTransportTerms(): void {
+    this.transportTermsService.getAllTransportTerms().subscribe(data => {
+      this.transportTerms = data;
+    });
+  }
+
+  getAllCurrencies(): void {
+    this.currencyService.getAllCurrencies().subscribe(data => {
+      this.currencies = data;
+    });
+  }
+
+  getAllEmployees(): void {
+    this.employeeService.getAllEmployees().subscribe(data => {
+      this.employees = data;
+    });
   }
 }

@@ -16,10 +16,10 @@ import { Product } from './product';
 export interface ProductInvoice { 
     createdDate?: string;
     id?: number;
-    invoiceId?: Invoice;
+    invoice?: Invoice;
     lastModifiedBy?: string;
     lastModifiedDate?: string;
-    productId?: Product;
+    product?: Product;
     quantity?: number;
     recordStatus?: number;
 }

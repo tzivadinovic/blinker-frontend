@@ -9,12 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Employee } from './employee';
+import { GrantedAuthority } from './granted-authority';
 
 
 export interface User { 
+    accountNonExpired?: boolean;
+    accountNonLocked?: boolean;
+    authorities?: Array<GrantedAuthority>;
     createdDate?: string;
-    employeeId?: Employee;
+    credentialsNonExpired?: boolean;
+    enabled?: boolean;
     id?: number;
     lastModifiedBy?: string;
     lastModifiedDate?: string;
