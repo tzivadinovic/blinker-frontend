@@ -11,7 +11,7 @@
 
     <mat-form-field class="example-full-width">
       <mat-label>Title</mat-label>
-      <input formControlName="title" matInput type="text">
+      <input formControlName="name" matInput type="text">
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
@@ -22,8 +22,8 @@
     <mat-form-field class="example-full-width">
       <mat-label>Category</mat-label>
       <mat-select formControlName="category">
-        <mat-option>
-          Fishing Float
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -33,7 +33,7 @@
       <input formControlName="price" matInput type="number">
     </mat-form-field>
     <div>
-      <button class="edit-invoice" color="primary" mat-raised-button>Save</button>
+      <button class="edit-invoice" color="primary" mat-raised-button (click)="createProduct()">Save</button>
     </div>
   </form>
 </div>

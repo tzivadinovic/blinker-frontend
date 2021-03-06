@@ -2,7 +2,11 @@
   <div class="main-content">
     <div class="title">
       <h3>New Invoice</h3>
+      <div class="add-invoice">
+        <button mat-raised-button (click)="createNewInvoice()">Create new invoice<span class="material-icons">add</span></button>
+      </div>
     </div>
+
     <form [formGroup]="form">
 
       <mat-form-field tabindex="2" class="date-picker">

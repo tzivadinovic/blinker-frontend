@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {Invoice, InvoiceControllerService} from '../../../openapi';
+import {SnackbarService} from '../../../utils/snackbar-handler';
 
 @Component({
   selector: 'app-new-invoice',
@@ -23,8 +25,10 @@ export class NewInvoiceComponent implements OnInit {
     date: new FormControl(null)
   });
   invoiceInputs: any[] = [];
+  invoice: Invoice = null;
 
-  constructor() {
+  constructor(private invoiceService: InvoiceControllerService,
+              private snackBarService: SnackbarService) {
   }
 
   ngOnInit(): void {
@@ -37,4 +41,11 @@ export class NewInvoiceComponent implements OnInit {
     this.invoiceInputs.push(newInput);
   }
 
+  createNewInvoice() {
+      this.invoiceService.saveInvoice(this.invoice).subscribe(() => {
+        this.snackBarService.showSuccessSnackbar('Successfully created invoice');
+      }, error => {
+        this.snackBarService.showErrorSnackbar(error.error.message);
+      });
+  }
 }

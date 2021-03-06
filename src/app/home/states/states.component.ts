@@ -1,39 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {CreateProductDialogComponent} from '../../invoices/dialogs/create-product-dialog/create-product-dialog.component';
 import {EditProductDialogComponent} from '../../invoices/dialogs/edit-product-dialog/edit-product-dialog.component';
 import {DeleteProductDialogComponent} from '../../invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
-
-export interface MockData {
-  code: string;
-  title: string;
-  description: string;
-  category: string;
-  price: number;
-}
-
-const elData: MockData[] = [
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2}
-];
+import {MatTableDataSource} from '@angular/material/table';
+import {State, StateControllerService} from '../../../openapi';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-states',
   templateUrl: './states.component.html',
   styleUrls: ['./states.component.css']
 })
-export class StatesComponent implements OnInit {
+export class StatesComponent implements OnInit, AfterViewInit {
+  states: State[] = [];
+  displayedColumns: string[] = ['name', 'options'];
+  dataSource = new MatTableDataSource<State>([]);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['code', 'title', 'description', 'category', 'price', 'options'];
-  dataSource = elData;
-
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private stateService: StateControllerService) {
   }
 
+  ngAfterViewInit(): void {
+        this.dataSource.paginator = this.paginator;
+    }
+
   ngOnInit(): void {
+    this.getAllStates();
   }
 
   openCreateProductDialog(): void {
@@ -61,6 +54,14 @@ export class StatesComponent implements OnInit {
           this.dialog.closeAll();
         }
       }
+    });
+  }
+
+  getAllStates(): void {
+    this.stateService.getAllStates().subscribe(data => {
+      this.states = data;
+      this.dataSource.data = this.states;
+      this.dataSource.paginator = this.paginator;
     });
   }
 

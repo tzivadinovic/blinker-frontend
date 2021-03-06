@@ -41,6 +41,12 @@ import { StatesComponent } from './home/states/states.component';
 import { CitiesComponent } from './home/cities/cities.component';
 import { TransportTermsComponent } from './home/transport-terms/transport-terms.component';
 import { CurrenciesComponent } from './home/currencies/currencies.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {JwtInterceptor} from '../utils/jwt.interceptor';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {BASE_PATH} from '../openapi';
+import {environment} from '../environments/environment';
+import {SnackbarService} from '../utils/snackbar-handler';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
@@ -96,7 +102,9 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    HttpClientModule,
+    MatSnackBarModule
   ], entryComponents: [
     PrintOptionsDialogComponent,
     EditInvoiceDialogComponent,
@@ -105,7 +113,18 @@ const appRoutes: Routes = [
     CreateProductDialogComponent,
     EditProductDialogComponent
   ],
-  providers: [],
+  providers: [
+    SnackbarService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+    {
+      provide: BASE_PATH,
+      useValue: environment.apiUrl
+    }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
