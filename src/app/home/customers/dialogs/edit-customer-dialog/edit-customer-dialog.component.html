@@ -1,0 +1,34 @@
+<div class="main-content">
+  <div class="invoice-number">
+    <h3>Add new customer</h3>
+  </div>
+  <form [formGroup]="form">
+
+    <mat-form-field class="example-full-width" tabindex="2">
+      <mat-label>Customer name</mat-label>
+      <input formControlName="name" matInput type="text" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>State</mat-label>
+      <mat-select formControlName="state" required [compareWith]="compareState">
+        <mat-option *ngFor="let state of states" [value]="state">
+          {{state.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>City</mat-label>
+      <mat-select formControlName="city" required [compareWith]="compareCity">
+        <mat-option *ngFor="let city of cities" [value]="city">
+          {{city.zipcode}} {{city.city}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div>
+      <button class="edit-invoice" color="primary" mat-raised-button (click)="editCustomer()">Save</button>
+    </div>
+  </form>
+</div>

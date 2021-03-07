@@ -6,6 +6,12 @@ import {DeleteProductDialogComponent} from '../../invoices/dialogs/delete-produc
 import {MatTableDataSource} from '@angular/material/table';
 import {State, StateControllerService} from '../../../openapi';
 import {MatPaginator} from '@angular/material/paginator';
+import {CreateCustomerDialogComponent} from '../customers/dialogs/create-customer-dialog/create-customer-dialog.component';
+import {CreateStateDialogComponent} from './dialogs/create-state-dialog/create-state-dialog.component';
+import {EditCustomerDialogComponent} from '../customers/dialogs/edit-customer-dialog/edit-customer-dialog.component';
+import {SnackbarService} from '../../../utils/snackbar-handler';
+import {EditStateDialogComponent} from './dialogs/edit-state-dialog/edit-state-dialog.component';
+import {filterCustomer, filterState} from '../../../utils/filter';
 
 @Component({
   selector: 'app-states',
@@ -18,7 +24,9 @@ export class StatesComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<State>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(public dialog: MatDialog, private stateService: StateControllerService) {
+  constructor(public dialog: MatDialog,
+              private stateService: StateControllerService,
+              private snackBarService: SnackbarService) {
   }
 
   ngAfterViewInit(): void {
@@ -29,19 +37,25 @@ export class StatesComponent implements OnInit, AfterViewInit {
     this.getAllStates();
   }
 
-  openCreateProductDialog(): void {
+  openCreateStateDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
-    this.dialog.open(CreateProductDialogComponent, dialogConfig).afterClosed();
+    this.dialog.open(CreateStateDialogComponent, dialogConfig).afterClosed().subscribe(() => {
+      this.getAllStates();
+    });
   }
 
-  openEditProductDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px';
-    this.dialog.open(EditProductDialogComponent, dialogConfig).afterClosed();
+  openEditStateDialog(state: State): void {
+    const dialogConfig = this.dialog.open(EditStateDialogComponent, {
+      width: '500px',
+      data: state
+    });
+    dialogConfig.afterClosed().subscribe(() => {
+      this.getAllStates();
+    });
   }
 
-  openDeleteProductDialog(): void {
+  openDeleteProductDialog(id: number): void {
     const dialogRef = this.dialog.open(DeleteProductDialogComponent, {
       width: '400px',
       backdropClass: 'background'
@@ -49,7 +63,10 @@ export class StatesComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if (result === 'yes') {
-
+          this.stateService.deleteStateById(id).subscribe(() => {
+            this.snackBarService.showSuccessSnackbar('Successfully deleted state');
+            this.getAllStates();
+          });
         } else if (result === 'no') {
           this.dialog.closeAll();
         }
@@ -63,6 +80,14 @@ export class StatesComponent implements OnInit, AfterViewInit {
       this.dataSource.data = this.states;
       this.dataSource.paginator = this.paginator;
     });
+  }
+
+  searchState(inputPar: string) {
+    if (inputPar) {
+      this.dataSource.data = this.states.filter(item => filterState(item, inputPar));
+    } else {
+      this.dataSource.data = this.states;
+    }
   }
 
 }

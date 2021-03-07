@@ -15,7 +15,8 @@ export class CreateProductDialogComponent implements OnInit {
     name: new FormControl(null),
     description: new FormControl(null),
     category: new FormControl(null),
-    price: new FormControl(null)
+    price: new FormControl(null),
+    stock: new FormControl(null)
   });
 
   categories: Category[] = [];
@@ -43,12 +44,16 @@ export class CreateProductDialogComponent implements OnInit {
   }
 
   createProduct(): void {
-    this.productService.saveProduct(this.form.value).subscribe(() => {
-      this.snackBarService.showSuccessSnackbar('Successfully created product');
-      this.closeDialog();
-    }, error => {
-      this.snackBarService.showErrorSnackbar(error.error.message);
-    });
+    const formValue = this.form;
+    if (formValue.valid) {
+      this.productService.saveProduct(formValue.value).subscribe(() => {
+        this.snackBarService.showSuccessSnackbar('Successfully created product');
+        this.closeDialog();
+      });
+    } else {
+      this.snackBarService.showErrorSnackbar('Invalid form');
+    }
+
   }
 
 }

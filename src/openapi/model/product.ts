@@ -23,5 +23,6 @@ export interface Product {
     name?: string;
     price?: number;
     recordStatus?: number;
+    stock?: number;
 }
 

@@ -10,7 +10,12 @@
     <div class="code-field">
       <mat-form-field class="example-full-width" tabindex="2">
         <mat-label>Code</mat-label>
-        <input formControlName="code" matInput type="text" (keydown.enter)="handleEnter('codeRef')" #codeRef>
+        <input formControlName="code" [matAutocomplete]="auto" matInput type="text" (keydown.enter)="handleEnter('codeRef')" #codeRef>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let product of filteredProducts | async" [value]="product.code">
+            {{product.code}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
 

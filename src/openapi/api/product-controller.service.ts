@@ -133,13 +133,20 @@ export class ProductControllerService implements ProductControllerServiceInterfa
 
     /**
      * getAllProducts
+     * @param code code
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllProducts(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*'}): Observable<Array<Product>>;
-    public getAllProducts(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*'}): Observable<HttpResponse<Array<Product>>>;
-    public getAllProducts(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*'}): Observable<HttpEvent<Array<Product>>>;
-    public getAllProducts(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*'}): Observable<any> {
+    public getAllProducts(code?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*'}): Observable<Array<Product>>;
+    public getAllProducts(code?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*'}): Observable<HttpResponse<Array<Product>>>;
+    public getAllProducts(code?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*'}): Observable<HttpEvent<Array<Product>>>;
+    public getAllProducts(code?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*'}): Observable<any> {
+
+        let queryParameters = new HttpParams({encoder: this.encoder});
+        if (code !== undefined && code !== null) {
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>code, 'code');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -163,6 +170,7 @@ export class ProductControllerService implements ProductControllerServiceInterfa
 
         return this.httpClient.get<Array<Product>>(`${this.configuration.basePath}/products`,
             {
+                params: queryParameters,
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

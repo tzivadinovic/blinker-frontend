@@ -15,7 +15,8 @@ export class EditProductDialogComponent implements OnInit {
     name: new FormControl(null),
     description: new FormControl(null),
     category: new FormControl(),
-    price: new FormControl(null)
+    price: new FormControl(null),
+    stock: new FormControl(null)
   });
 
   categories: Category[] = [];
@@ -42,6 +43,7 @@ export class EditProductDialogComponent implements OnInit {
     this.form.get('description').setValue(this.product.description);
     this.form.get('category').setValue(this.product.category);
     this.form.get('price').setValue(this.product.price);
+    this.form.get('stock').setValue(this.product.stock);
   }
 
   getAllCategories(): void {
@@ -59,13 +61,15 @@ export class EditProductDialogComponent implements OnInit {
   editProduct(): void {
     const product: Product = this.form.value;
     product.id = this.data.id;
-    this.productService.saveProduct(product).subscribe(() => {
-      this.getAllProducts();
-      this.closeDialog();
-      this.snackBarService.showSuccessSnackbar('Successfully edited product');
-    }, error => {
-      this.snackBarService.showErrorSnackbar(error.error.message);
-    });
+    if (this.form.valid) {
+      this.productService.saveProduct(product).subscribe(() => {
+        this.getAllProducts();
+        this.closeDialog();
+        this.snackBarService.showSuccessSnackbar('Successfully edited product');
+      });
+    } else {
+      this.snackBarService.showErrorSnackbar('Invalid form');
+    }
   }
 
   compareCategory(category1: Category, category2: Category): boolean {

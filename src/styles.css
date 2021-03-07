@@ -1,9 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
 
-.view{
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.view {
   width: 80%;
   margin: 0 auto;
 }
@@ -11,3 +17,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-tooltip {
   font-size: 12px !important;
 }
+
+.snack-bar-error {
+  color: firebrick;
+}
+
+.snack-bar-error button {
+  border: 1px solid firebrick;
+  color: firebrick;
+}
+
+.mat-snack-bar-container{
+  border: 3px solid #16446c;
+  color: #16446c;
+  background-color: white;
+}
+
+.mat-snack-bar-container button{
+  border: 1px solid #16446c;
+  color: #16446c;
+}
+
+

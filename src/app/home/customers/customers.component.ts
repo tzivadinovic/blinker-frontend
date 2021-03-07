@@ -1,24 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {CreateProductDialogComponent} from '../../invoices/dialogs/create-product-dialog/create-product-dialog.component';
-import {EditProductDialogComponent} from '../../invoices/dialogs/edit-product-dialog/edit-product-dialog.component';
 import {DeleteProductDialogComponent} from '../../invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
-
-export interface MockData {
-  code: string;
-  title: string;
-  description: string;
-  category: string;
-  price: number;
-}
-
-const elData: MockData[] = [
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2}
-];
+import {MatTableDataSource} from '@angular/material/table';
+import {Customer, CustomerControllerService, Employee} from '../../../openapi';
+import {MatPaginator} from '@angular/material/paginator';
+import {CreateCustomerDialogComponent} from './dialogs/create-customer-dialog/create-customer-dialog.component';
+import {EditCustomerDialogComponent} from './dialogs/edit-customer-dialog/edit-customer-dialog.component';
+import {SnackbarService} from '../../../utils/snackbar-handler';
+import {filterCustomer, filterEmployee} from '../../../utils/filter';
 
 @Component({
   selector: 'app-customers',
@@ -27,28 +16,40 @@ const elData: MockData[] = [
 })
 export class CustomersComponent implements OnInit {
 
-  displayedColumns: string[] = ['code', 'title', 'description', 'category', 'price', 'options'];
-  dataSource = elData;
+  displayedColumns: string[] = ['name', 'state', 'city', 'options'];
+  dataSource = new MatTableDataSource<Customer>([]);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  customers: Customer[] = [];
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,
+              private customerService: CustomerControllerService,
+              private snackBarService: SnackbarService,
+  ) {
   }
 
   ngOnInit(): void {
+    this.getAllCustomers();
   }
 
-  openCreateProductDialog(): void {
+  openCreateCustomerDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
-    this.dialog.open(CreateProductDialogComponent, dialogConfig).afterClosed();
+    this.dialog.open(CreateCustomerDialogComponent, dialogConfig).afterClosed().subscribe(() => {
+      this.getAllCustomers();
+    });
   }
 
-  openEditProductDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px';
-    this.dialog.open(EditProductDialogComponent, dialogConfig).afterClosed();
+  openEditCustomerDialog(employee: Employee): void {
+    const dialogConfig = this.dialog.open(EditCustomerDialogComponent, {
+      width: '500px',
+      data: employee
+    });
+    dialogConfig.afterClosed().subscribe(() => {
+      this.getAllCustomers();
+    });
   }
 
-  openDeleteProductDialog(): void {
+  openDeleteProductDialog(id: number): void {
     const dialogRef = this.dialog.open(DeleteProductDialogComponent, {
       width: '400px',
       backdropClass: 'background'
@@ -56,7 +57,10 @@ export class CustomersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if (result === 'yes') {
-
+          this.customerService.deleteCustomerById(id).subscribe(() => {
+            this.snackBarService.showSuccessSnackbar('Successfully deleted customer');
+            this.getAllCustomers();
+          });
         } else if (result === 'no') {
           this.dialog.closeAll();
         }
@@ -64,4 +68,19 @@ export class CustomersComponent implements OnInit {
     });
   }
 
+  getAllCustomers(): void {
+    this.customerService.getAllCustomers().subscribe(data => {
+      this.customers = data;
+      this.dataSource.data = this.customers;
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  searchCustomer(inputPar: string) {
+    if (inputPar) {
+      this.dataSource.data = this.customers.filter(item => filterCustomer(item, inputPar));
+    } else {
+      this.dataSource.data = this.customers;
+    }
+  }
 }

@@ -47,6 +47,14 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {BASE_PATH} from '../openapi';
 import {environment} from '../environments/environment';
 import {SnackbarService} from '../utils/snackbar-handler';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { EditEmployeeDialogComponent } from './home/employees/dialogs/edit-employee-dialog/edit-employee-dialog.component';
+import { CreateEmployeeDialogComponent } from './home/employees/dialogs/create-employee-dialog/create-employee-dialog.component';
+import { CreateCustomerDialogComponent } from './home/customers/dialogs/create-customer-dialog/create-customer-dialog.component';
+import { EditCustomerDialogComponent } from './home/customers/dialogs/edit-customer-dialog/edit-customer-dialog.component';
+import { CreateStateDialogComponent } from './home/states/dialogs/create-state-dialog/create-state-dialog.component';
+import { EditStateDialogComponent } from './home/states/dialogs/edit-state-dialog/edit-state-dialog.component';
+import { CreateCityDialogComponent } from './home/cities/dialogs/create-city-dialog/create-city-dialog.component';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
@@ -81,6 +89,13 @@ const appRoutes: Routes = [
     CitiesComponent,
     TransportTermsComponent,
     CurrenciesComponent,
+    EditEmployeeDialogComponent,
+    CreateEmployeeDialogComponent,
+    CreateCustomerDialogComponent,
+    EditCustomerDialogComponent,
+    CreateStateDialogComponent,
+    EditStateDialogComponent,
+    CreateCityDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -104,14 +119,22 @@ const appRoutes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatAutocompleteModule
   ], entryComponents: [
     PrintOptionsDialogComponent,
     EditInvoiceDialogComponent,
     EditPackingListDialogComponent,
     EditProformaInvoiceDialogComponent,
     CreateProductDialogComponent,
-    EditProductDialogComponent
+    EditProductDialogComponent,
+    EditEmployeeDialogComponent,
+    CreateEmployeeDialogComponent,
+    CreateCustomerDialogComponent,
+    EditCustomerDialogComponent,
+    CreateStateDialogComponent,
+    EditStateDialogComponent,
+    CreateCityDialogComponent
   ],
   providers: [
     SnackbarService,

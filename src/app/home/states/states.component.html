@@ -1,6 +1,6 @@
 <mat-form-field class="search-field">
   <mat-label>Search state...</mat-label>
-  <input matInput>
+  <input matInput #inputPar (keyup)="searchState(inputPar.value)" type="text">
 </mat-form-field>
 <div class="main-content">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -13,8 +13,8 @@
     <ng-container matColumnDef="options">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let element" class="actions-field">
-        <button mat-raised-button color="primary" class="edit-button" (click)="openEditProductDialog()">Edit</button>
-        <button mat-raised-button color="primary" class="delete-button" (click)="openDeleteProductDialog()">Delete</button>
+        <button mat-raised-button color="primary" class="edit-button" (click)="openEditStateDialog(element)">Edit</button>
+        <button mat-raised-button color="primary" class="delete-button" (click)="openDeleteProductDialog(element.id)">Delete</button>
       </td>
     </ng-container>
 
@@ -22,7 +22,8 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <mat-paginator [pageSizeOptions]="[10, 15, 25, 100]" class="paginator"></mat-paginator>
-  <button class="color-secondary add-btn" mat-fab matTooltip="Add product" (click)="openCreateProductDialog()">
+  <button class="color-secondary add-btn" mat-fab matTooltip="Add state" (click)="openCreateStateDialog()">
     <mat-icon>add</mat-icon>
   </button>
+  <div *ngIf="dataSource.filteredData.length == 0" class="no-data">State not found</div>
 </div>

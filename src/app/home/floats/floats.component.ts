@@ -16,7 +16,7 @@ import {filterProduct} from '../../../utils/filter';
 })
 export class FloatsComponent implements OnInit, AfterViewInit {
   products: Product[] = [];
-  displayedColumns: string[] = ['code', 'title', 'description', 'category', 'price', 'options'];
+  displayedColumns: string[] = ['code', 'title', 'description', 'category', 'price', 'stock', 'options'];
   dataSource = new MatTableDataSource<Product>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

@@ -34,8 +34,9 @@ export interface ProductControllerServiceInterface {
     /**
      * getAllProducts
      * 
+     * @param code code
      */
-    getAllProducts(extraHttpRequestParams?: any): Observable<Array<Product>>;
+    getAllProducts(code?: string, extraHttpRequestParams?: any): Observable<Array<Product>>;
 
     /**
      * getProductById

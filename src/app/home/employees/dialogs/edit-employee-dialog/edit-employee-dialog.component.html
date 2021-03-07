@@ -1,0 +1,62 @@
+<div class="main-content">
+  <div class="invoice-number">
+    <h3>Edit employee</h3>
+  </div>
+  <form [formGroup]="form">
+
+    <mat-form-field class="example-full-width" tabindex="2">
+      <mat-label>Firstname</mat-label>
+      <input formControlName="firstName" matInput type="text" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Lastname</mat-label>
+      <input formControlName="lastName" matInput type="text" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Position</mat-label>
+      <input formControlName="position" matInput type="text" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Bank</mat-label>
+      <input formControlName="bank" matInput type="text" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Bank account</mat-label>
+      <input formControlName="bankAccount" matInput type="text" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Phone number</mat-label>
+      <input formControlName="phoneNumber" matInput type="text" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Address</mat-label>
+      <input formControlName="address" matInput type="text" required>
+    </mat-form-field>
+
+    <mat-form-field tabindex="2" class="date-picker">
+      <input [matDatepicker]="picker1" formControlName="employmentStartDate" matInput
+             placeholder="Employment start date">
+      <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker1>
+      </mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field tabindex="2" class="date-picker">
+      <input [matDatepicker]="picker2" formControlName="employmentEndDate" matInput
+             placeholder="Employment end date">
+      <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker2>
+      </mat-datepicker>
+    </mat-form-field>
+
+    <div>
+      <button class="edit-invoice" color="primary" mat-raised-button (click)="editEmployee()">Save</button>
+    </div>
+  </form>
+</div>

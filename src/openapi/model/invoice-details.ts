@@ -26,6 +26,7 @@ export interface InvoiceDetails {
     grossWeight?: number;
     id?: number;
     invoice?: Invoice;
+    itemNumber?: number;
     itemsInfo?: string;
     lastModifiedBy?: string;
     lastModifiedDate?: string;

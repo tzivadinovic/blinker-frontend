@@ -1,40 +1,24 @@
 <mat-form-field class="search-field">
   <mat-label>Search city...</mat-label>
-  <input matInput>
+  <input matInput #inputPar (keyup)="searchCity(inputPar.value)" type="text">
 </mat-form-field>
 <div class="main-content">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="code">
-      <th mat-header-cell *matHeaderCellDef> Code </th>
-      <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef> City name </th>
+      <td mat-cell *matCellDef="let element"> {{element.city}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef> Title </th>
-      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef> Description </th>
-      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef> Category </th>
-      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Price </th>
-      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+    <ng-container matColumnDef="zipcode">
+      <th mat-header-cell *matHeaderCellDef> Zip code </th>
+      <td mat-cell *matCellDef="let element"> {{element.zipcode}} </td>
     </ng-container>
 
     <ng-container matColumnDef="options">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let element" class="actions-field">
-        <button mat-raised-button color="primary" class="edit-button" (click)="openEditProductDialog()">Edit</button>
-        <button mat-raised-button color="primary" class="delete-button" (click)="openDeleteProductDialog()">Delete</button>
+        <button mat-raised-button color="primary" class="delete-button" (click)="openDeleteProductDialog(element.id)">Delete</button>
       </td>
     </ng-container>
 
@@ -42,7 +26,8 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <mat-paginator [pageSizeOptions]="[10, 15, 25, 100]" class="paginator"></mat-paginator>
-  <button class="color-secondary add-btn" mat-fab matTooltip="Add product" (click)="openCreateProductDialog()">
+  <button class="color-secondary add-btn" mat-fab matTooltip="Add city" (click)="openCreateCityDialog()">
     <mat-icon>add</mat-icon>
   </button>
+  <div *ngIf="dataSource.filteredData.length == 0" class="no-data">City not found</div>
 </div>

@@ -1,53 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {CreateProductDialogComponent} from '../../invoices/dialogs/create-product-dialog/create-product-dialog.component';
 import {EditProductDialogComponent} from '../../invoices/dialogs/edit-product-dialog/edit-product-dialog.component';
 import {DeleteProductDialogComponent} from '../../invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
-
-export interface MockData {
-  code: string;
-  title: string;
-  description: string;
-  category: string;
-  price: number;
-}
-
-const elData: MockData[] = [
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2}
-];
+import {MatTableDataSource} from '@angular/material/table';
+import {Employee, EmployeeControllerService} from '../../../openapi';
+import {MatPaginator} from '@angular/material/paginator';
+import {SnackbarService} from '../../../utils/snackbar-handler';
+import {CreateEmployeeDialogComponent} from './dialogs/create-employee-dialog/create-employee-dialog.component';
+import {EditEmployeeDialogComponent} from './dialogs/edit-employee-dialog/edit-employee-dialog.component';
+import {filterEmployee, filterProduct} from '../../../utils/filter';
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.css']
 })
-export class EmployeesComponent implements OnInit {
-  displayedColumns: string[] = ['code', 'title', 'description', 'category', 'price', 'options'];
-  dataSource = elData;
+export class EmployeesComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['firstName', 'lastName', 'position', 'bank', 'bankAccount', 'phoneNumber', 'address', 'employmentPeriod', 'options'];
+  dataSource = new MatTableDataSource<Employee>([]);
+  employees: Employee[] = [];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(public dialog: MatDialog) {
+
+  constructor(public dialog: MatDialog,
+              private employeeService: EmployeeControllerService,
+              private snackBarService: SnackbarService) {
   }
 
   ngOnInit(): void {
+    this.getAllEmployees();
   }
 
-  openCreateProductDialog(): void {
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  openCreateEmployeeDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
-    this.dialog.open(CreateProductDialogComponent, dialogConfig).afterClosed();
+    this.dialog.open(CreateEmployeeDialogComponent, dialogConfig).afterClosed().subscribe(() => {
+      this.getAllEmployees();
+    });
   }
 
-  openEditProductDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px';
-    this.dialog.open(EditProductDialogComponent, dialogConfig).afterClosed();
+  openEditEmployeeDialog(employee: Employee): void {
+    const dialogConfig = this.dialog.open(EditEmployeeDialogComponent, {
+      width: '500px',
+      data: employee
+    });
+    dialogConfig.afterClosed().subscribe(() => {
+      this.getAllEmployees();
+    });
   }
 
-  openDeleteProductDialog(): void {
+  openDeleteEmployeeDialog(id: number): void {
     const dialogRef = this.dialog.open(DeleteProductDialogComponent, {
       width: '400px',
       backdropClass: 'background'
@@ -55,7 +62,10 @@ export class EmployeesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if (result === 'yes') {
-
+            this.employeeService.deleteEmployeeById(id).subscribe(() => {
+              this.snackBarService.showSuccessSnackbar('Successfully deleted employee');
+              this.getAllEmployees();
+            });
         } else if (result === 'no') {
           this.dialog.closeAll();
         }
@@ -63,4 +73,19 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
+  getAllEmployees(): void {
+    this.employeeService.getAllEmployees().subscribe(data => {
+      this.employees = data;
+      this.dataSource.data = this.employees;
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  searchEmployee(inputPar: string) {
+    if (inputPar) {
+      this.dataSource.data = this.employees.filter(item => filterEmployee(item, inputPar));
+    } else {
+      this.dataSource.data = this.employees;
+    }
+  }
 }

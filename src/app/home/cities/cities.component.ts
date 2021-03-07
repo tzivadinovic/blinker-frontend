@@ -1,24 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {CreateProductDialogComponent} from '../../invoices/dialogs/create-product-dialog/create-product-dialog.component';
-import {EditProductDialogComponent} from '../../invoices/dialogs/edit-product-dialog/edit-product-dialog.component';
 import {DeleteProductDialogComponent} from '../../invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
+import {CreateCityDialogComponent} from './dialogs/create-city-dialog/create-city-dialog.component';
+import {MatTableDataSource} from '@angular/material/table';
+import {City, CityControllerService} from '../../../openapi';
+import {MatPaginator} from '@angular/material/paginator';
+import {SnackbarService} from '../../../utils/snackbar-handler';
+import {filterCity, filterState} from '../../../utils/filter';
 
-export interface MockData {
-  code: string;
-  title: string;
-  description: string;
-  category: string;
-  price: number;
-}
-
-const elData: MockData[] = [
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2}
-];
 
 @Component({
   selector: 'app-cities',
@@ -26,28 +15,29 @@ const elData: MockData[] = [
   styleUrls: ['./cities.component.css']
 })
 export class CitiesComponent implements OnInit {
-  displayedColumns: string[] = ['code', 'title', 'description', 'category', 'price', 'options'];
-  dataSource = elData;
+  displayedColumns: string[] = ['city', 'zipcode', 'options'];
+  dataSource = new MatTableDataSource<City>([]);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  cities: City[] = [];
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,
+              private cityService: CityControllerService,
+              private snackBarService: SnackbarService) {
   }
 
   ngOnInit(): void {
+    this.getAllCities();
   }
 
-  openCreateProductDialog(): void {
+  openCreateCityDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
-    this.dialog.open(CreateProductDialogComponent, dialogConfig).afterClosed();
+    this.dialog.open(CreateCityDialogComponent, dialogConfig).afterClosed().subscribe(() => {
+      this.getAllCities();
+    });
   }
 
-  openEditProductDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px';
-    this.dialog.open(EditProductDialogComponent, dialogConfig).afterClosed();
-  }
-
-  openDeleteProductDialog(): void {
+  openDeleteProductDialog(id: number): void {
     const dialogRef = this.dialog.open(DeleteProductDialogComponent, {
       width: '400px',
       backdropClass: 'background'
@@ -55,12 +45,31 @@ export class CitiesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if (result === 'yes') {
-
+          this.cityService.deleteCityById(id).subscribe(() => {
+            this.snackBarService.showSuccessSnackbar('Successfully deleted city');
+            this.getAllCities();
+          });
         } else if (result === 'no') {
           this.dialog.closeAll();
         }
       }
     });
+  }
+
+  getAllCities(): void {
+    this.cityService.getAllCities().subscribe(data => {
+      this.cities = data;
+      this.dataSource.data = this.cities;
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  searchCity(inputPar: string) {
+    if (inputPar) {
+      this.dataSource.data = this.cities.filter(item => filterCity(item, inputPar));
+    } else {
+      this.dataSource.data = this.cities;
+    }
   }
 
 }

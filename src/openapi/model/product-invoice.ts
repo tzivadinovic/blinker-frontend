@@ -17,6 +17,7 @@ export interface ProductInvoice {
     createdDate?: string;
     id?: number;
     invoice?: Invoice;
+    itemNumber?: number;
     lastModifiedBy?: string;
     lastModifiedDate?: string;
     product?: Product;

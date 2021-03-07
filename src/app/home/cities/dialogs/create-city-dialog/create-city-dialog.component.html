@@ -1,0 +1,21 @@
+<div class="main-content">
+  <div class="invoice-number">
+    <h3>Add new city</h3>
+  </div>
+  <form [formGroup]="form">
+
+    <mat-form-field class="example-full-width" tabindex="2">
+      <mat-label>City name</mat-label>
+      <input formControlName="city" matInput type="text" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" tabindex="2">
+      <mat-label>Zip code</mat-label>
+      <input formControlName="zipcode" matInput type="text" required>
+    </mat-form-field>
+
+    <div>
+      <button class="edit-invoice" color="primary" mat-raised-button (click)="createCity()">Save</button>
+    </div>
+  </form>
+</div>

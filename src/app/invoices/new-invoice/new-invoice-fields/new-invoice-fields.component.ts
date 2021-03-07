@@ -1,6 +1,9 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {InvoiceInputs} from '../../../../@types/InvoiceInputs';
+import {Product, ProductControllerService} from '../../../../openapi';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-invoice-fields',
@@ -9,7 +12,7 @@ import {InvoiceInputs} from '../../../../@types/InvoiceInputs';
 })
 export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
 
-  constructor() {
+  constructor(private productService: ProductControllerService) {
   }
 
   @ViewChild('itemNoRef') itemNoRef: ElementRef;
@@ -44,9 +47,25 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
   totalPrice: number;
   invoiceInputs: any[] = [];
 
+  products: Product[] = [];
+  filteredProducts: Observable<Product[]>;
+
 
   ngOnInit(): void {
+    this.getAllProducts();
     this.form.get('itemNo').setValue(this.itemNo);
+    this.filteredProducts = this.form.get('code').valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+
+    console.log(this.testProduct());
+  }
+
+  private _filter(value: string): Product[] {
+    const filterValue = value.toLowerCase();
+    return this.products.filter(product => product.code.toString().toLowerCase().includes(filterValue));
   }
 
   public inputEmit(): void {
@@ -89,5 +108,17 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.itemNoRef.nativeElement.focus();
+  }
+
+  getAllProducts(): void {
+    this.productService.getAllProducts().subscribe(data => {
+      this.products = data;
+    });
+  }
+
+  testProduct(): void {
+    this.productService.getAllProducts(this.form.get('code').value).subscribe(data => {
+      this.products = data;
+    });
   }
 }
