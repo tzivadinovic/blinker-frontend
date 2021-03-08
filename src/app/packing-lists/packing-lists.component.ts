@@ -1,41 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {EditPackingListDialogComponent} from '../invoices/dialogs/edit-packing-list-dialog/edit-packing-list-dialog.component';
+import {Invoice, InvoiceControllerService, InvoiceDetails, Product, ProductInvoice, ProductInvoiceControllerService} from '../../openapi';
+import {SnackbarService} from '../../utils/snackbar-handler';
+import {PrintOptionsDialogComponent} from '../invoices/dialogs/print-options-dialog/print-options-dialog.component';
+import {EditInvoiceDialogComponent} from '../invoices/dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
+import {filterInvoice} from '../../utils/filter';
+import {EditProductInvoiceDialogComponent} from '../invoices/dialogs/edit-product-invoice-dialog/edit-product-invoice-dialog.component';
+import {DeleteProductDialogComponent} from '../invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
 
-export interface MockPackingList {
-  boxNo: number;
-  code: string;
-  title: string;
-  description: string;
-  unit: string;
-  quantity: number;
-  price: number;
-  totalValue: number;
-}
-
-const elData: MockPackingList[] = [
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {boxNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00}
-];
 
 @Component({
   selector: 'app-packing-lists',
@@ -44,17 +16,78 @@ const elData: MockPackingList[] = [
 })
 export class PackingListsComponent implements OnInit {
   panelOpenState = false;
-  displayedColumns: string[] = ['boxNo', 'code', 'title', 'description', 'unit', 'quantity', 'price', 'totalValue', 'options'];
-  dataSource = elData;
+  displayedColumns: string[] = ['boxNumber', 'code', 'title', 'description', 'unit', 'quantity', 'price', 'totalValue', 'options'];
+  invoices: Invoice[] = [];
+  productInvoices: ProductInvoice[] = [];
 
-  constructor(public dialog: MatDialog) { }
-
-  ngOnInit(): void {
+  constructor(public dialog: MatDialog,
+              private invoiceService: InvoiceControllerService,
+              private productInvoiceService: ProductInvoiceControllerService,
+              private snackBarService: SnackbarService) {
   }
 
-  openEditPackingListDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px';
-    this.dialog.open(EditPackingListDialogComponent, dialogConfig).afterClosed();
+  ngOnInit(): void {
+    this.getAllInvoices();
+  }
+
+  openEditInvoiceDialog(invoiceDetails: InvoiceDetails): void {
+    const dialogConfig = this.dialog.open(EditInvoiceDialogComponent, {
+      width: '500px',
+      data: invoiceDetails
+    });
+    dialogConfig.afterClosed().subscribe(() => {
+      this.getAllInvoices();
+    });
+  }
+
+  getAllInvoices(): void {
+    this.invoiceService.getAllInvoices().subscribe(data => {
+      this.invoices = data;
+    });
+  }
+
+  getProductInvoicesForInvoiceId(invoiceId: number) {
+    this.productInvoiceService.findByInvoiceId(invoiceId).subscribe(data => {
+      this.productInvoices = data;
+    });
+  }
+
+  searchInvoice(inputPar: string) {
+    if (inputPar) {
+      this.invoices = this.invoices.filter(item => filterInvoice(item, inputPar));
+    } else {
+      this.getAllInvoices();
+    }
+  }
+
+  openEditRecordDialog(productInvoice: ProductInvoice, product: Product) {
+    const dialogConfig = this.dialog.open(EditProductInvoiceDialogComponent, {
+      width: '500px',
+      data: [
+        product, productInvoice
+      ]
+
+    });
+    dialogConfig.afterClosed().subscribe(() => {
+    });
+  }
+
+  openDeleteRecordDialog(id: number) {
+    const dialogRef = this.dialog.open(DeleteProductDialogComponent, {
+      width: '400px',
+      backdropClass: 'background'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if (result === 'yes') {
+          this.productInvoiceService.deleteProductInvoiceById(id).subscribe(() => {
+            this.snackBarService.showSuccessSnackbar('Successfully deleted record');
+            this.getProductInvoicesForInvoiceId(id);
+          });
+        } else if (result === 'no') {
+          this.dialog.closeAll();
+        }
+      }
+    });
   }
 }

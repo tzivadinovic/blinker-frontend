@@ -1,42 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {EditInvoiceDialogComponent} from '../invoices/dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
-import {EditProformaInvoiceDialogComponent} from '../invoices/dialogs/edit-proforma-invoice-dialog/edit-proforma-invoice-dialog.component';
-
-export interface MockProforma {
-  itemNo: number;
-  code: string;
-  title: string;
-  description: string;
-  unit: string;
-  quantity: number;
-  price: number;
-  totalValue: number;
-}
-
-const elData: MockProforma[] = [
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00},
-  {itemNo: 1, code: '4620010', title: 'Keta', description: 'Test text', unit: 'pc', quantity: 500, price: 0.2, totalValue: 180.00}
-];
+import {Invoice, InvoiceControllerService, InvoiceDetails, Product, ProductInvoice, ProductInvoiceControllerService} from '../../openapi';
+import {SnackbarService} from '../../utils/snackbar-handler';
+import {PrintOptionsDialogComponent} from '../invoices/dialogs/print-options-dialog/print-options-dialog.component';
+import {filterInvoice} from '../../utils/filter';
+import {EditProductInvoiceDialogComponent} from '../invoices/dialogs/edit-product-invoice-dialog/edit-product-invoice-dialog.component';
+import {DeleteProductDialogComponent} from '../invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
 
 @Component({
   selector: 'app-proforma-invoices',
@@ -46,17 +16,83 @@ const elData: MockProforma[] = [
 export class ProformaInvoicesComponent implements OnInit {
   panelOpenState = false;
   displayedColumns: string[] = ['itemNo', 'code', 'title', 'description', 'unit', 'quantity', 'price', 'totalValue', 'options'];
-  dataSource = elData;
+  invoices: Invoice[] = [];
+  productInvoices: ProductInvoice[] = [];
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,
+              private invoiceService: InvoiceControllerService,
+              private productInvoiceService: ProductInvoiceControllerService,
+              private snackBarService: SnackbarService) {
   }
 
   ngOnInit(): void {
+    this.getAllInvoices();
   }
 
-  openEditProformaInvoiceDialog(): void {
+  openPrintOptionsDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
-    this.dialog.open(EditProformaInvoiceDialogComponent, dialogConfig).afterClosed();
+    this.dialog.open(PrintOptionsDialogComponent, dialogConfig).afterClosed();
+  }
+
+  openEditInvoiceDialog(invoiceDetails: InvoiceDetails): void {
+    const dialogConfig = this.dialog.open(EditInvoiceDialogComponent, {
+      width: '500px',
+      data: invoiceDetails
+    });
+    dialogConfig.afterClosed().subscribe(() => {
+      this.getAllInvoices();
+    });
+  }
+
+  getAllInvoices(): void {
+    this.invoiceService.getAllInvoices().subscribe(data => {
+      this.invoices = data;
+    });
+  }
+
+  getProductInvoicesForInvoiceId(invoiceId: number) {
+    this.productInvoiceService.findByInvoiceId(invoiceId).subscribe(data => {
+      this.productInvoices = data;
+    });
+  }
+
+  searchInvoice(inputPar: string) {
+    if (inputPar) {
+      this.invoices = this.invoices.filter(item => filterInvoice(item, inputPar));
+    } else {
+      this.getAllInvoices();
+    }
+  }
+
+  openEditRecordDialog(productInvoice: ProductInvoice, product: Product) {
+    const dialogConfig = this.dialog.open(EditProductInvoiceDialogComponent, {
+      width: '500px',
+      data: [
+        product, productInvoice
+      ]
+
+    });
+    dialogConfig.afterClosed().subscribe(() => {
+    });
+  }
+
+  openDeleteRecordDialog(id: number) {
+    const dialogRef = this.dialog.open(DeleteProductDialogComponent, {
+      width: '400px',
+      backdropClass: 'background'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if (result === 'yes') {
+          this.productInvoiceService.deleteProductInvoiceById(id).subscribe(() => {
+            this.snackBarService.showSuccessSnackbar('Successfully deleted record');
+            this.getProductInvoicesForInvoiceId(id);
+          });
+        } else if (result === 'no') {
+          this.dialog.closeAll();
+        }
+      }
+    });
   }
 }

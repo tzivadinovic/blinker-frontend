@@ -28,7 +28,9 @@ export class EditInvoiceDialogComponent implements OnInit {
     totalBoxes: new FormControl(null),
     grossWeight: new FormControl(null),
     shippingFees: new FormControl(null),
-    date: new FormControl(null)
+    date: new FormControl(null),
+    remarks: new FormControl(null),
+    attn: new FormControl(null)
   });
 
   customers: Customer[] = [];
@@ -66,6 +68,8 @@ export class EditInvoiceDialogComponent implements OnInit {
     this.form.get('grossWeight').setValue(this.invoiceDetails?.grossWeight);
     this.form.get('shippingFees').setValue(this.invoiceDetails?.shippingFees);
     this.form.get('date').setValue(this.invoiceDetails?.date);
+    this.form.get('remarks').setValue(this.invoiceDetails?.remarks);
+    this.form.get('attn').setValue(this.invoiceDetails?.attn);
   }
 
   getInvoiceDetailsById(id: number) {
@@ -129,6 +133,7 @@ export class EditInvoiceDialogComponent implements OnInit {
   editInvoiceDetails() {
     const invoiceDetails: InvoiceDetails = this.form.value;
     invoiceDetails.id = this.data.id;
+    invoiceDetails.invoice = this.data.invoice;
     if (this.form.valid) {
       this.invoiceDetailsService.saveInvoiceDetails(invoiceDetails).subscribe(() => {
         this.closeDialog();

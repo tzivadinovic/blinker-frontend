@@ -15,3 +15,7 @@ mat-form-field{
   background-color: #226dac !important;
   transition: 250ms;
 }
+
+.unit-price{
+  width: 180px;
+}

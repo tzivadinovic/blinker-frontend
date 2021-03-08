@@ -28,9 +28,11 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width unit-price">
       <mat-label>Unit Price</mat-label>
       <input formControlName="price" matInput type="number" required>
+      <span matPrefix>€&nbsp;</span>
+      <span matSuffix>.00</span>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">

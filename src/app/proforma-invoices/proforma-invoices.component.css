@@ -12,12 +12,12 @@
   color: #16446c;
 }
 
-.search-invoice{
+.search-invoice {
   margin-left: 41.5%;
   width: 300px;
 }
 
-.search-field{
+.search-field {
   width: 300px;
 }
 
@@ -40,7 +40,7 @@ th {
   color: #16446c;
 }
 
-tr{
+tr {
   height: 30% !important;
 }
 
@@ -85,27 +85,47 @@ tr:hover {
   margin-left: 75%;
 }
 
-mat-panel-title{
+mat-panel-title {
   font-size: 20px;
   font-weight: 500;
 }
 
-.invoice-date{
+mat-panel-description {
+  width: 100%;
+}
+
+
+.invoice-date {
   font-weight: 500;
+  width: 100%;
 }
 
 .weight {
   margin-top: 20px;
 }
 
+
 .stamp-signature {
   float: right;
 }
 
+.print-btn {
+  float: right;
+  margin-top: -200px;
+  font-size: 80px;
+  margin-right: 200px;
+}
+
+.print-btn:hover {
+  color: #16446c;
+  cursor: pointer;
+  transition: .2s;
+
+}
 
 .edit-btn {
   float: right;
-  margin-top: -200px;
+  margin-top: -150px;
   font-size: 80px;
   margin-right: 100px;
   transition: .2s;
@@ -116,9 +136,39 @@ mat-panel-title{
   cursor: pointer;
 }
 
-.flex-container{
+.flex-container {
   display: flex;
 }
 
+.items-box {
+  margin-top: 20px;
+  margin-left: 10%;
+  width: 50%;
+}
 
+.textarea-field {
+  width: 600px;
+}
+
+.new-invoice-btn {
+  margin-left: 46%;
+}
+
+.new-invoice-btn button:hover {
+  background-color: #16446c;
+  color: white;
+  transition: .5s;
+}
+
+mat-expansion-panel {
+  margin-bottom: 2px;
+}
+
+.total-boxes {
+  width: 100%;
+}
+
+.total-price {
+  width: 100%;
+}
 

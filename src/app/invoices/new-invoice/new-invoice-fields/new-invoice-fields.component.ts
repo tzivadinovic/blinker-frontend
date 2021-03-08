@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {InvoiceInputs} from '../../../../@types/InvoiceInputs';
 import {Product, ProductControllerService} from '../../../../openapi';
 import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-invoice-fields',
@@ -24,6 +23,8 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
 
   @Input()
   inputs: InvoiceInputs;
+
+  @Input() test: string;
 
   @Output() method: EventEmitter<any> = new EventEmitter<any>();
 
@@ -54,17 +55,18 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getAllProducts();
     this.form.get('itemNo').setValue(this.itemNo);
-    this.filteredProducts = this.form.get('code').valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
+    // this.filteredProducts = this.form.get('code').valueChanges
+    //   .pipe(
+    //     startWith(''),
+    //     map(value => this._filter(value))
+    //   );
   }
 
-  private _filter(value: string): Product[] {
-    const filterValue = value.toLowerCase();
-    return this.products.filter(product => product.code.toString().toLowerCase().startsWith(filterValue));
-  }
+  // private _filter(value: string): Product[] {
+  //   const filterValue = value.toLowerCase();
+  //   return this.products.filter(product => product.code.toString().toLowerCase().startsWith(filterValue));
+  // }
+
 
   public inputEmit(): void {
     const form: InvoiceInputs = {
@@ -112,5 +114,10 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
     this.productService.getAllProducts().subscribe(data => {
       this.products = data;
     });
+  }
+
+  onChange(product: Product) {
+    this.form.get('description').setValue(product.description);
+    this.form.get('unitPrice').setValue(product.price);
   }
 }

@@ -7,15 +7,11 @@
       </mat-form-field>
     </div>
 
-    <div class="code-field">
+    <div class="code-field" *ngFor="let product of products; index as i;">
       <mat-form-field class="example-full-width" tabindex="2">
         <mat-label>Code</mat-label>
-        <input formControlName="code" [matAutocomplete]="auto" matInput type="text" (keydown.enter)="handleEnter('codeRef')" #codeRef>
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let product of filteredProducts | async" [value]="product.code">
-            {{product.code}}
-          </mat-option>
-        </mat-autocomplete>
+        <input formControlName="code" matInput type="text" (keydown.enter)="handleEnter('codeRef')"
+               #codeRef [value]="products[i].code" (focusout)="onChange(product)">
       </mat-form-field>
     </div>
 
