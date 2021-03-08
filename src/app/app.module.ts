@@ -21,26 +21,26 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {InvoicesComponent} from './invoices/invoices.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { ProformaInvoicesComponent } from './proforma-invoices/proforma-invoices.component';
-import { PackingListsComponent } from './packing-lists/packing-lists.component';
-import { PrintOptionsDialogComponent } from './invoices/dialogs/print-options-dialog/print-options-dialog.component';
+import {ProformaInvoicesComponent} from './proforma-invoices/proforma-invoices.component';
+import {PackingListsComponent} from './packing-lists/packing-lists.component';
+import {PrintOptionsDialogComponent} from './invoices/dialogs/print-options-dialog/print-options-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { EditInvoiceDialogComponent } from './invoices/dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
+import {EditInvoiceDialogComponent} from './invoices/dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { EditProformaInvoiceDialogComponent } from './invoices/dialogs/edit-proforma-invoice-dialog/edit-proforma-invoice-dialog.component';
-import { EditPackingListDialogComponent } from './invoices/dialogs/edit-packing-list-dialog/edit-packing-list-dialog.component';
-import { CreateProductDialogComponent } from './invoices/dialogs/create-product-dialog/create-product-dialog.component';
-import { NewInvoiceComponent } from './invoices/new-invoice/new-invoice.component';
-import { NewInvoiceFieldsComponent } from './invoices/new-invoice/new-invoice-fields/new-invoice-fields.component';
-import { EditProductDialogComponent } from './invoices/dialogs/edit-product-dialog/edit-product-dialog.component';
-import { DeleteProductDialogComponent } from './invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
-import { EmployeesComponent } from './home/employees/employees.component';
-import { CustomersComponent } from './home/customers/customers.component';
-import { StatesComponent } from './home/states/states.component';
-import { CitiesComponent } from './home/cities/cities.component';
-import { TransportTermsComponent } from './home/transport-terms/transport-terms.component';
-import { CurrenciesComponent } from './home/currencies/currencies.component';
+import {EditProformaInvoiceDialogComponent} from './invoices/dialogs/edit-proforma-invoice-dialog/edit-proforma-invoice-dialog.component';
+import {EditPackingListDialogComponent} from './invoices/dialogs/edit-packing-list-dialog/edit-packing-list-dialog.component';
+import {CreateProductDialogComponent} from './invoices/dialogs/create-product-dialog/create-product-dialog.component';
+import {NewInvoiceComponent} from './invoices/new-invoice/new-invoice.component';
+import {NewInvoiceFieldsComponent} from './invoices/new-invoice/new-invoice-fields/new-invoice-fields.component';
+import {EditProductDialogComponent} from './invoices/dialogs/edit-product-dialog/edit-product-dialog.component';
+import {DeleteProductDialogComponent} from './invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
+import {EmployeesComponent} from './home/employees/employees.component';
+import {CustomersComponent} from './home/customers/customers.component';
+import {StatesComponent} from './home/states/states.component';
+import {CitiesComponent} from './home/cities/cities.component';
+import {TransportTermsComponent} from './home/transport-terms/transport-terms.component';
+import {CurrenciesComponent} from './home/currencies/currencies.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {JwtInterceptor} from '../utils/jwt.interceptor';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -48,13 +48,18 @@ import {BASE_PATH} from '../openapi';
 import {environment} from '../environments/environment';
 import {SnackbarService} from '../utils/snackbar-handler';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { EditEmployeeDialogComponent } from './home/employees/dialogs/edit-employee-dialog/edit-employee-dialog.component';
-import { CreateEmployeeDialogComponent } from './home/employees/dialogs/create-employee-dialog/create-employee-dialog.component';
-import { CreateCustomerDialogComponent } from './home/customers/dialogs/create-customer-dialog/create-customer-dialog.component';
-import { EditCustomerDialogComponent } from './home/customers/dialogs/edit-customer-dialog/edit-customer-dialog.component';
-import { CreateStateDialogComponent } from './home/states/dialogs/create-state-dialog/create-state-dialog.component';
-import { EditStateDialogComponent } from './home/states/dialogs/edit-state-dialog/edit-state-dialog.component';
-import { CreateCityDialogComponent } from './home/cities/dialogs/create-city-dialog/create-city-dialog.component';
+import {EditEmployeeDialogComponent} from './home/employees/dialogs/edit-employee-dialog/edit-employee-dialog.component';
+import {CreateEmployeeDialogComponent} from './home/employees/dialogs/create-employee-dialog/create-employee-dialog.component';
+import {CreateCustomerDialogComponent} from './home/customers/dialogs/create-customer-dialog/create-customer-dialog.component';
+import {EditCustomerDialogComponent} from './home/customers/dialogs/edit-customer-dialog/edit-customer-dialog.component';
+import {CreateStateDialogComponent} from './home/states/dialogs/create-state-dialog/create-state-dialog.component';
+import {EditStateDialogComponent} from './home/states/dialogs/edit-state-dialog/edit-state-dialog.component';
+import {CreateCityDialogComponent} from './home/cities/dialogs/create-city-dialog/create-city-dialog.component';
+import {EditProductInvoiceDialogComponent} from './invoices/dialogs/edit-product-invoice-dialog/edit-product-invoice-dialog.component';
+import { CreateTransportTermDialogComponent } from './home/transport-terms/dialogs/create-transport-term-dialog/create-transport-term-dialog.component';
+import { EditTransportTermDialogComponent } from './home/transport-terms/dialogs/edit-transport-term-dialog/edit-transport-term-dialog.component';
+import { EditCurrencyDialogComponent } from './home/currencies/dialogs/edit-currency-dialog/edit-currency-dialog.component';
+import { CreateCurrencyDialogComponent } from './home/currencies/dialogs/create-currency-dialog/create-currency-dialog.component';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
@@ -95,7 +100,12 @@ const appRoutes: Routes = [
     EditCustomerDialogComponent,
     CreateStateDialogComponent,
     EditStateDialogComponent,
-    CreateCityDialogComponent
+    CreateCityDialogComponent,
+    EditProductInvoiceDialogComponent,
+    CreateTransportTermDialogComponent,
+    EditTransportTermDialogComponent,
+    EditCurrencyDialogComponent,
+    CreateCurrencyDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -134,7 +144,10 @@ const appRoutes: Routes = [
     EditCustomerDialogComponent,
     CreateStateDialogComponent,
     EditStateDialogComponent,
-    CreateCityDialogComponent
+    CreateCityDialogComponent,
+    EditProductInvoiceDialogComponent,
+    CreateTransportTermDialogComponent,
+    EditTransportTermDialogComponent
   ],
   providers: [
     SnackbarService,
@@ -147,7 +160,7 @@ const appRoutes: Routes = [
       provide: BASE_PATH,
       useValue: environment.apiUrl
     }
-    ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,0 +1,16 @@
+<div class="main-content">
+  <div class="invoice-number">
+    <h3>Add new currency</h3>
+  </div>
+  <form [formGroup]="form">
+
+    <mat-form-field class="example-full-width" tabindex="2">
+      <mat-label>Currency</mat-label>
+      <input formControlName="currency" matInput type="text" required>
+    </mat-form-field>
+
+    <div>
+      <button class="edit-invoice" color="primary" mat-raised-button (click)="createCurrency()">Save</button>
+    </div>
+  </form>
+</div>

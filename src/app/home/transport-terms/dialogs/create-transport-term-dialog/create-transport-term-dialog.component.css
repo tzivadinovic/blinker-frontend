@@ -1,0 +1,17 @@
+mat-form-field{
+  margin-right: 20px;
+}
+
+.main-content{
+  margin: 0 auto;
+  text-align: center;
+}
+
+.edit-invoice{
+  background-color: #16456d;
+}
+
+.edit-invoice:hover{
+  background-color: #226dac !important;
+  transition: 250ms;
+}

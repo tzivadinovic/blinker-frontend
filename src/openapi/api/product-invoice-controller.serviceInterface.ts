@@ -32,6 +32,13 @@ export interface ProductInvoiceControllerServiceInterface {
     deleteProductInvoiceById(productInvoiceId: number, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
+     * findByInvoiceId
+     * 
+     * @param invoiceId invoiceId
+     */
+    findByInvoiceId(invoiceId: number, extraHttpRequestParams?: any): Observable<Array<ProductInvoice>>;
+
+    /**
      * getAllProductInvoices
      * 
      */

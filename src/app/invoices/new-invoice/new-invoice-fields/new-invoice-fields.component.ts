@@ -59,13 +59,11 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
         startWith(''),
         map(value => this._filter(value))
       );
-
-    console.log(this.testProduct());
   }
 
   private _filter(value: string): Product[] {
     const filterValue = value.toLowerCase();
-    return this.products.filter(product => product.code.toString().toLowerCase().includes(filterValue));
+    return this.products.filter(product => product.code.toString().toLowerCase().startsWith(filterValue));
   }
 
   public inputEmit(): void {
@@ -112,12 +110,6 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
 
   getAllProducts(): void {
     this.productService.getAllProducts().subscribe(data => {
-      this.products = data;
-    });
-  }
-
-  testProduct(): void {
-    this.productService.getAllProducts(this.form.get('code').value).subscribe(data => {
       this.products = data;
     });
   }

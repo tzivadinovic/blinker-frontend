@@ -1,5 +1,5 @@
 table {
-  width: 70%;
+  width: 30%;
   margin: 0 auto 0;
 }
 
@@ -51,12 +51,12 @@ tr:hover {
 }
 
 .paginator {
-  width: 69.99%;
-  margin-left: 15.05%;
+  width: 29.99%;
+  margin-left: 35.05%;
 }
 
 .add-btn {
-  margin-left: 81%;
+  margin-left: 60%;
   margin-top: 20px;
   outline: none;
   background-color: #16456d;
@@ -69,11 +69,15 @@ tr:hover {
 
 .search-field{
   margin-top: 50px;
-  margin-left: 65%;
+  margin-left: 40%;
   width: 20%;
 }
 
 .search-field mat-label{
   font-weight: 500;
   color: #16446c;
+}
+
+.no-data{
+  margin-left: 47%;
 }

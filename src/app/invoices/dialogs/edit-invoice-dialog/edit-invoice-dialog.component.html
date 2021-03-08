@@ -1,6 +1,6 @@
 <div class="main-content">
   <div class="invoice-number">
-    <h3>Invoice No.  0001/IT/21</h3>
+    <h3>Edit invoice details</h3>
   </div>
   <form [formGroup]="form">
 
@@ -13,50 +13,32 @@
 
     <mat-form-field class="example-full-width">
       <mat-label>Invoice number</mat-label>
-      <input formControlName="invoiceNumber" matInput type="text">
+      <input formControlName="number" matInput type="text">
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Customer</mat-label>
-      <mat-select formControlName="customer">
-        <mat-option>
-          LINEAEFFE SpA
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <mat-label>State</mat-label>
-      <mat-select formControlName="state">
-        <mat-option>
-          Italy
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <mat-label>City</mat-label>
-      <mat-select formControlName="city">
-        <mat-option>
-          40018 San Pietro in Casale
+      <mat-select formControlName="customer" [compareWith]="compareCustomer">
+        <mat-option *ngFor="let customer of customers" [value]="customer">
+          {{customer.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Transport terms</mat-label>
-      <mat-select formControlName="transportTerms">
-        <mat-option>
-          DAP San Pietro in Casale
+      <mat-select formControlName="transportTerm" [compareWith]="compareTransportTerm">
+        <mat-option *ngFor="let transportTerm of transportTerms" [value]="transportTerm">
+          {{transportTerm.term}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Currency</mat-label>
-      <mat-select formControlName="currency">
-        <mat-option>
-          EUR Export
+      <mat-select formControlName="currency" [compareWith]="compareCurrency">
+        <mat-option *ngFor="let currency of currencies" [value]="currency">
+          {{currency.currency}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -68,9 +50,9 @@
 
     <mat-form-field class="example-full-width">
       <mat-label>Stamp and signature</mat-label>
-      <mat-select formControlName="stampSignature">
-        <mat-option>
-          Maja Živadinović
+      <mat-select formControlName="employee" [compareWith]="compareEmployee">
+        <mat-option *ngFor="let employee of employees" [value]="employee">
+          {{employee.firstName}} {{employee.lastName}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -86,16 +68,11 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <mat-label>Net Weight</mat-label>
-      <input formControlName="netWeight" matInput type="number" disabled>
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
       <mat-label>Shipping Fees</mat-label>
       <input formControlName="shippingFees" matInput type="number">
     </mat-form-field>
   <div>
-    <button class="edit-invoice" color="primary" mat-raised-button>Save</button>
+    <button class="edit-invoice" color="primary" mat-raised-button (click)="editInvoiceDetails()">Save</button>
   </div>
   </form>
 </div>

@@ -22,7 +22,6 @@ export interface User {
     id?: number;
     lastModifiedBy?: string;
     lastModifiedDate?: string;
-    password?: string;
     recordStatus?: number;
     username?: string;
 }

@@ -1,24 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {CreateProductDialogComponent} from '../../invoices/dialogs/create-product-dialog/create-product-dialog.component';
-import {EditProductDialogComponent} from '../../invoices/dialogs/edit-product-dialog/edit-product-dialog.component';
 import {DeleteProductDialogComponent} from '../../invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
-
-export interface MockData {
-  code: string;
-  title: string;
-  description: string;
-  category: string;
-  price: number;
-}
-
-const elData: MockData[] = [
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2},
-  {code: '4620010', title: 'Keta', description: 'Test text', category: 'Fishing Float', price: 0.2}
-];
+import {Currency, CurrencyControllerService} from '../../../openapi';
+import {MatTableDataSource} from '@angular/material/table';
+import {SnackbarService} from '../../../utils/snackbar-handler';
+import {filterCurrency, filterTransportTerm} from '../../../utils/filter';
+import {CreateCurrencyDialogComponent} from './dialogs/create-currency-dialog/create-currency-dialog.component';
+import {EditCurrencyDialogComponent} from './dialogs/edit-currency-dialog/edit-currency-dialog.component';
 
 @Component({
   selector: 'app-currencies',
@@ -26,28 +14,39 @@ const elData: MockData[] = [
   styleUrls: ['./currencies.component.css']
 })
 export class CurrenciesComponent implements OnInit {
-  displayedColumns: string[] = ['code', 'title', 'description', 'category', 'price', 'options'];
-  dataSource = elData;
+  currencies: Currency[] = [];
+  displayedColumns: string[] = ['currency', 'options'];
+  dataSource = new MatTableDataSource<Currency>([]);
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,
+              private snackBarService: SnackbarService,
+              private currencyService: CurrencyControllerService) {
   }
+
 
   ngOnInit(): void {
+    this.getAllCurrencies();
   }
 
-  openCreateProductDialog(): void {
+  openCreateCurrencyDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
-    this.dialog.open(CreateProductDialogComponent, dialogConfig).afterClosed();
+    this.dialog.open(CreateCurrencyDialogComponent, dialogConfig).afterClosed().subscribe(() => {
+      this.getAllCurrencies();
+    });
   }
 
-  openEditProductDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px';
-    this.dialog.open(EditProductDialogComponent, dialogConfig).afterClosed();
+  openEditCurrencyDialog(currency: Currency): void {
+    const dialogConfig = this.dialog.open(EditCurrencyDialogComponent, {
+      width: '500px',
+      data: currency
+    });
+    dialogConfig.afterClosed().subscribe(() => {
+      this.getAllCurrencies();
+    });
   }
 
-  openDeleteProductDialog(): void {
+  openDeleteProductDialog(id: number): void {
     const dialogRef = this.dialog.open(DeleteProductDialogComponent, {
       width: '400px',
       backdropClass: 'background'
@@ -55,12 +54,30 @@ export class CurrenciesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if (result === 'yes') {
-
+          this.currencyService.deleteCurrencyById(id).subscribe(() => {
+            this.snackBarService.showSuccessSnackbar('Successfully deleted currency');
+            this.getAllCurrencies();
+          });
         } else if (result === 'no') {
           this.dialog.closeAll();
         }
       }
     });
+  }
+
+  getAllCurrencies(): void {
+    this.currencyService.getAllCurrencies().subscribe(data => {
+      this.currencies = data;
+      this.dataSource.data = this.currencies;
+    });
+  }
+
+  searchCurrency(inputPar: string) {
+    if (inputPar) {
+      this.dataSource.data = this.currencies.filter(item => filterCurrency(item, inputPar));
+    } else {
+      this.dataSource.data = this.currencies;
+    }
   }
 
 }

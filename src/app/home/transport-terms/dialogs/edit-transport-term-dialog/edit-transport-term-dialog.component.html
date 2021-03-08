@@ -1,0 +1,16 @@
+<div class="main-content">
+  <div class="invoice-number">
+    <h3>Edit transport term</h3>
+  </div>
+  <form [formGroup]="form">
+
+    <mat-form-field class="example-full-width" tabindex="2">
+      <mat-label>State</mat-label>
+      <input formControlName="term" matInput type="text" required>
+    </mat-form-field>
+
+    <div>
+      <button class="edit-invoice" color="primary" mat-raised-button (click)="editTransportTerm()">Save</button>
+    </div>
+  </form>
+</div>

@@ -1,17 +1,13 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {CreateProductDialogComponent} from '../../invoices/dialogs/create-product-dialog/create-product-dialog.component';
-import {EditProductDialogComponent} from '../../invoices/dialogs/edit-product-dialog/edit-product-dialog.component';
 import {DeleteProductDialogComponent} from '../../invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
 import {MatTableDataSource} from '@angular/material/table';
 import {State, StateControllerService} from '../../../openapi';
 import {MatPaginator} from '@angular/material/paginator';
-import {CreateCustomerDialogComponent} from '../customers/dialogs/create-customer-dialog/create-customer-dialog.component';
 import {CreateStateDialogComponent} from './dialogs/create-state-dialog/create-state-dialog.component';
-import {EditCustomerDialogComponent} from '../customers/dialogs/edit-customer-dialog/edit-customer-dialog.component';
 import {SnackbarService} from '../../../utils/snackbar-handler';
 import {EditStateDialogComponent} from './dialogs/edit-state-dialog/edit-state-dialog.component';
-import {filterCustomer, filterState} from '../../../utils/filter';
+import {filterState} from '../../../utils/filter';
 
 @Component({
   selector: 'app-states',

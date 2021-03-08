@@ -1,0 +1,35 @@
+<div class="main-content">
+  <div class="invoice-number">
+    <h3>Edit record</h3>
+  </div>
+  <form [formGroup]="form">
+
+    <mat-form-field class="example-full-width" tabindex="2">
+      <mat-label>Item number</mat-label>
+      <input formControlName="itemNumber" matInput type="number" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Product</mat-label>
+      <mat-select formControlName="product" required [compareWith]="compareProduct">
+        <mat-option *ngFor="let product of products" [value]="product">
+          {{product?.code}} {{product?.name}} - {{product?.price}}€
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Unit</mat-label>
+      <input formControlName="unit" matInput type="text">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Quantity</mat-label>
+      <input formControlName="quantity" matInput type="number" required>
+    </mat-form-field>
+
+    <div>
+      <button class="edit-invoice" color="primary" mat-raised-button (click)="editRecord()">Save</button>
+    </div>
+  </form>
+</div>

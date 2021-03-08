@@ -1,34 +1,34 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {StateControllerService} from '../../../../../openapi';
+import {CurrencyControllerService, StateControllerService} from '../../../../../openapi';
 import {SnackbarService} from '../../../../../utils/snackbar-handler';
 
 @Component({
-  selector: 'app-create-state-dialog',
-  templateUrl: './create-state-dialog.component.html',
-  styleUrls: ['./create-state-dialog.component.css']
+  selector: 'app-create-currency-dialog',
+  templateUrl: './create-currency-dialog.component.html',
+  styleUrls: ['./create-currency-dialog.component.css']
 })
-export class CreateStateDialogComponent implements OnInit {
+export class CreateCurrencyDialogComponent implements OnInit {
   form = new FormGroup({
-    name: new FormControl(null)
+    currency: new FormControl(null)
   });
 
   constructor(public dialog: MatDialog,
-              private stateService: StateControllerService,
+              private currencyService: CurrencyControllerService,
               private snackBarService: SnackbarService,
-              private dialogRef: MatDialogRef<CreateStateDialogComponent>,
+              private dialogRef: MatDialogRef<CreateCurrencyDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit(): void {
   }
 
-  createState() {
+  createCurrency() {
     const formValue = this.form;
     console.log(formValue.value);
     if (formValue.valid) {
-      this.stateService.saveState(formValue.value).subscribe(() => {
-        this.snackBarService.showSuccessSnackbar('Successfully created state');
+      this.currencyService.saveCurrency(formValue.value).subscribe(() => {
+        this.snackBarService.showSuccessSnackbar('Successfully created currency');
         this.closeDialog();
       });
     } else {
