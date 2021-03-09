@@ -19,6 +19,7 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
   }
 
   @ViewChild('itemNoRef') itemNoRef: ElementRef;
+  @ViewChild('boxNoRef') boxNoRef: ElementRef;
   @ViewChild('codeRef') codeRef: ElementRef;
   @ViewChild('descriptionRef') descriptionRef: ElementRef;
   @ViewChild('quantityRef') quantityRef: ElementRef;
@@ -27,16 +28,13 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
 
   @Input()
   inputs: InvoiceInputs;
-
-  @Input() test: string;
-
   @Output() method: EventEmitter<any> = new EventEmitter<any>();
-
   @Output()
   inputEmitter: EventEmitter<InvoiceInputs> = new EventEmitter<InvoiceInputs>();
 
   form = new FormGroup({
     itemNo: new FormControl(null, [Validators.required]),
+    boxNo: new FormControl(null, [Validators.required]),
     code: new FormControl(null, [Validators.required]),
     description: new FormControl(null, [Validators.required]),
     quantity: new FormControl(null, [Validators.required]),
@@ -45,6 +43,7 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
   });
   @Input()
   itemNo = 1;
+  boxNo = 1;
   code: string;
   description: string;
   quantity: number;
@@ -76,6 +75,7 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
   public inputEmit(): void {
     const form: InvoiceInputs = {
       itemNo: this.itemNo,
+      boxNo: this.boxNo,
       code: this.code,
       description: this.description,
       quantity: this.quantity,
@@ -94,6 +94,9 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
   handleEnter(controlName: string): void {
     switch (controlName) {
       case 'itemNoRef':
+        this.boxNoRef.nativeElement.focus();
+        break;
+      case 'boxNoRef':
         this.codeRef.nativeElement.focus();
         break;
       case 'codeRef':
@@ -125,11 +128,13 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
     const code: string = this.form.get('code').value;
     const quantity: number = this.form.get('quantity').value;
     const itemNumber: number = this.form.get('itemNo').value;
+    const boxNumber: number = this.form.get('boxNo').value;
     this.productService.findByCode(code).subscribe(data => {
       const productInvoice: ProductInvoice = {
         product: data,
         quantity: quantity,
-        itemNumber: itemNumber
+        itemNumber: itemNumber,
+        boxNumber: boxNumber
       };
       this.productInvoiceService.saveProductInvoice(productInvoice).subscribe(() => {
         console.log(productInvoice);

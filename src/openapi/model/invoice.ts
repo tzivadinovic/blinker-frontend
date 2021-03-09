@@ -13,11 +13,7 @@ import { InvoiceDetails } from './invoice-details';
 
 
 export interface Invoice { 
-    createdDate?: string;
     id?: number;
     invoiceDetail?: InvoiceDetails;
-    lastModifiedBy?: string;
-    lastModifiedDate?: string;
-    recordStatus?: number;
 }
 

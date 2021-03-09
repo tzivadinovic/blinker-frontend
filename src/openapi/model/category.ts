@@ -12,11 +12,7 @@
 
 
 export interface Category { 
-    createdDate?: string;
     id?: number;
-    lastModifiedBy?: string;
-    lastModifiedDate?: string;
     name?: string;
-    recordStatus?: number;
 }
 

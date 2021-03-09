@@ -12,11 +12,7 @@
 
 
 export interface TransportTerm { 
-    createdDate?: string;
     id?: number;
-    lastModifiedBy?: string;
-    lastModifiedDate?: string;
-    recordStatus?: number;
     term?: string;
 }
 

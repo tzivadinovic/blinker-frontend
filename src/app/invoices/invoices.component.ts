@@ -2,11 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {PrintOptionsDialogComponent} from './dialogs/print-options-dialog/print-options-dialog.component';
 import {EditInvoiceDialogComponent} from './dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
-import {Invoice, InvoiceControllerService, InvoiceDetails, Product, ProductInvoice, ProductInvoiceControllerService} from '../../openapi';
+import {
+  Invoice,
+  InvoiceControllerService,
+  InvoiceDetails,
+  ProductInvoice,
+  ProductInvoiceControllerService,
+} from '../../openapi';
 import {filterInvoice} from '../../utils/filter';
 import {DeleteProductDialogComponent} from './dialogs/delete-product-dialog/delete-product-dialog.component';
 import {SnackbarService} from '../../utils/snackbar-handler';
 import {EditProductInvoiceDialogComponent} from './dialogs/edit-product-invoice-dialog/edit-product-invoice-dialog.component';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-invoices',
@@ -18,6 +25,9 @@ export class InvoicesComponent implements OnInit {
   displayedColumns: string[] = ['itemNo', 'code', 'title', 'description', 'unit', 'quantity', 'price', 'totalValue', 'options'];
   invoices: Invoice[] = [];
   productInvoices: ProductInvoice[] = [];
+  dataSource = new MatTableDataSource<ProductInvoice>([]);
+  invoiceTotalValue: number;
+  totalBoxes: number;
 
   constructor(public dialog: MatDialog,
               private invoiceService: InvoiceControllerService,
@@ -65,15 +75,13 @@ export class InvoicesComponent implements OnInit {
     }
   }
 
-  openEditRecordDialog(productInvoice: ProductInvoice, product: Product) {
+  openEditRecordDialog(productInvoice: ProductInvoice) {
     const dialogConfig = this.dialog.open(EditProductInvoiceDialogComponent, {
       width: '500px',
-      data: [
-        product, productInvoice
-      ]
-
-    });
+      data: productInvoice
+      });
     dialogConfig.afterClosed().subscribe(() => {
+      this.getProductInvoicesForInvoiceId(productInvoice.invoice.id);
     });
   }
 
@@ -93,6 +101,18 @@ export class InvoicesComponent implements OnInit {
           this.dialog.closeAll();
         }
       }
+    });
+  }
+
+  getInvoiceTotalValue(invoiceId: number) {
+    this.productInvoiceService.totalValue(invoiceId).subscribe(data => {
+      this.invoiceTotalValue = data;
+    });
+  }
+
+  getInvoiceTotalBoxes(invoiceId: number) {
+    this.productInvoiceService.totalBoxes(invoiceId).subscribe(data => {
+        this.totalBoxes = data['value'];
     });
   }
 }

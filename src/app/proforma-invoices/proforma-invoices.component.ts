@@ -29,12 +29,6 @@ export class ProformaInvoicesComponent implements OnInit {
     this.getAllInvoices();
   }
 
-  openPrintOptionsDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px';
-    this.dialog.open(PrintOptionsDialogComponent, dialogConfig).afterClosed();
-  }
-
   openEditInvoiceDialog(invoiceDetails: InvoiceDetails): void {
     const dialogConfig = this.dialog.open(EditInvoiceDialogComponent, {
       width: '500px',

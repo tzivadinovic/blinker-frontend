@@ -4,7 +4,7 @@
 <div class="search-invoice">
   <mat-form-field class="search-field">
     <mat-label>Search packing list...</mat-label>
-    <input matInput>
+    <input matInput #inputPar (keyup)="searchInvoice(inputPar.value)" type="text">
   </mat-form-field>
 </div>
 <div class="main-content">
@@ -22,7 +22,7 @@
           {{invoice.invoiceDetail.date}}
         </mat-panel-description>
         <mat-panel-description class="total-price">
-          {{invoice.invoiceDetail.totalPrice}}€
+          {{invoice.invoiceDetail.totalPrice | number}}€
         </mat-panel-description>
         <mat-panel-description class="total-boxes">
           {{invoice.invoiceDetail.totalBoxes}} boxes
@@ -106,7 +106,7 @@
           </mat-form-field>
         </div>
         <div class="financial-info">
-          <h3>Total: {{invoice.invoiceDetail.totalPrice}}€</h3>
+          <h3>Total: {{invoice.invoiceDetail.totalPrice | number}}€</h3>
         </div>
       </div>
     </mat-expansion-panel>

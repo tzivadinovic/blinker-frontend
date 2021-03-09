@@ -2,6 +2,7 @@ import {Component, DoCheck, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {menu} from '../utils/pageMenuItems';
 import {Router} from '@angular/router';
+import {AuthenticationService} from '../utils/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -24,13 +25,14 @@ export class AppComponent implements OnInit, DoCheck {
     }
   }
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private authService: AuthenticationService) {
   }
 
   ngOnInit(): void {
   }
 
   logout(): void {
-    this.router.navigate(['']);
+    this.authService.logout();
   }
 }

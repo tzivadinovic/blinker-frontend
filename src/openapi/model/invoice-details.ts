@@ -18,7 +18,6 @@ import { TransportTerm } from './transport-term';
 
 export interface InvoiceDetails { 
     attn?: string;
-    createdDate?: string;
     currency?: Currency;
     customer?: Customer;
     date?: string;
@@ -27,12 +26,9 @@ export interface InvoiceDetails {
     id?: number;
     invoice?: Invoice;
     itemsInfo?: string;
-    lastModifiedBy?: string;
-    lastModifiedDate?: string;
     netWeight?: number;
     number?: string;
     paymentConditions?: string;
-    recordStatus?: number;
     remarks?: string;
     shippingFees?: number;
     totalBoxes?: number;

@@ -15,14 +15,10 @@ import { Category } from './category';
 export interface Product { 
     category?: Category;
     code?: string;
-    createdDate?: string;
     description?: string;
     id?: number;
-    lastModifiedBy?: string;
-    lastModifiedDate?: string;
     name?: string;
     price?: number;
-    recordStatus?: number;
     stock?: number;
 }
 

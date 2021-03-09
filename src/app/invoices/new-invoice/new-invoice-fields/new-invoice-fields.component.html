@@ -7,6 +7,13 @@
       </mat-form-field>
     </div>
 
+    <div class="itemNo-field">
+      <mat-form-field class="example-full-width" tabindex="2">
+        <mat-label>Box No.</mat-label>
+        <input formControlName="boxNo" matInput type="number" (keydown.enter)="handleEnter('boxNoRef')" #boxNoRef>
+      </mat-form-field>
+    </div>
+
     <div class="code-field">
       <mat-form-field class="example-full-width" tabindex="2">
         <mat-label>Code</mat-label>

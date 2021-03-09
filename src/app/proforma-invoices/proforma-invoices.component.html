@@ -4,7 +4,7 @@
 <div class="search-invoice">
   <mat-form-field class="search-field">
     <mat-label>Search proforma-invoice...</mat-label>
-    <input matInput>
+    <input matInput #inputPar (keyup)="searchInvoice(inputPar.value)" type="text">
   </mat-form-field>
 </div>
 <div class="main-content">

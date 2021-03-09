@@ -15,12 +15,8 @@ import { City } from './city';
 
 export interface Customer { 
     city?: City;
-    createdDate?: string;
     id?: number;
-    lastModifiedBy?: string;
-    lastModifiedDate?: string;
     name?: string;
-    recordStatus?: number;
     state?: State;
 }
 

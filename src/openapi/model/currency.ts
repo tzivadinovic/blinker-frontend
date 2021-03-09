@@ -12,11 +12,7 @@
 
 
 export interface Currency { 
-    createdDate?: string;
     currency?: string;
     id?: number;
-    lastModifiedBy?: string;
-    lastModifiedDate?: string;
-    recordStatus?: number;
 }
 

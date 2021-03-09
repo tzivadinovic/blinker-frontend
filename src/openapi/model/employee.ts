@@ -16,17 +16,13 @@ export interface Employee {
     address?: string;
     bank?: string;
     bankAccount?: string;
-    createdDate?: string;
     employmentEndDate?: string;
     employmentStartDate?: string;
     firstName?: string;
     id?: number;
-    lastModifiedBy?: string;
-    lastModifiedDate?: string;
     lastName?: string;
     phoneNumber?: string;
     position?: string;
-    recordStatus?: number;
     user?: User;
 }
 

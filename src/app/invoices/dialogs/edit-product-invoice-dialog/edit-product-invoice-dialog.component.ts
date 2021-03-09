@@ -26,6 +26,7 @@ export class EditProductInvoiceDialogComponent implements OnInit {
 
   productInvoice: ProductInvoice;
   products: Product[] = [];
+  productInvoices: ProductInvoice[] = [];
 
   constructor(private dialogRef: MatDialogRef<EditProductInvoiceDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data,
@@ -45,14 +46,22 @@ export class EditProductInvoiceDialogComponent implements OnInit {
   editRecord() {
     const productInvoice: ProductInvoice = this.form.value;
     productInvoice.id = this.data.id;
+    productInvoice.invoice = this.data.invoice;
     if (this.form.valid) {
-      this.productInvoiceService.saveProductInvoice(productInvoice).subscribe(() => {
+      this.productInvoiceService.updateProductInvoice(productInvoice).subscribe(() => {
         this.closeDialog();
         this.snackBarService.showSuccessSnackbar('Successfully edited record');
+        this.getAllProductInvoice();
       });
     } else {
       this.snackBarService.showErrorSnackbar('Invalid form');
     }
+  }
+
+  getAllProductInvoice(): void {
+    this.productInvoiceService.findByInvoiceId(this.data.invoice.id).subscribe(data => {
+      this.productInvoices = data;
+    });
   }
 
   closeDialog() {
@@ -69,6 +78,6 @@ export class EditProductInvoiceDialogComponent implements OnInit {
     if (!product1 || !product1) {
       return false;
     }
-    return product1.id === product1.id;
+    return product1.id === product2.id;
   }
 }

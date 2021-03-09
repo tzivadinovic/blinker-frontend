@@ -16,13 +16,9 @@ export interface User {
     accountNonExpired?: boolean;
     accountNonLocked?: boolean;
     authorities?: Array<GrantedAuthority>;
-    createdDate?: string;
     credentialsNonExpired?: boolean;
     enabled?: boolean;
     id?: number;
-    lastModifiedBy?: string;
-    lastModifiedDate?: string;
-    recordStatus?: number;
     username?: string;
 }
 

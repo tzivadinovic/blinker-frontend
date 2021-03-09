@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {Invoice, InvoiceControllerService, InvoiceDetails, Product, ProductInvoice, ProductInvoiceControllerService} from '../../openapi';
 import {SnackbarService} from '../../utils/snackbar-handler';
-import {PrintOptionsDialogComponent} from '../invoices/dialogs/print-options-dialog/print-options-dialog.component';
 import {EditInvoiceDialogComponent} from '../invoices/dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
 import {filterInvoice} from '../../utils/filter';
 import {EditProductInvoiceDialogComponent} from '../invoices/dialogs/edit-product-invoice-dialog/edit-product-invoice-dialog.component';

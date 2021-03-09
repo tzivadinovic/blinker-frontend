@@ -18,11 +18,6 @@ export class AuthenticationService {
       console.error('Not logged in.');
     }
   }
-
-  get userRoles(): string[] {
-    return this.userToken.roles;
-  }
-
   get userJwtToken(): string {
     return this.token;
   }
@@ -37,10 +32,10 @@ export class AuthenticationService {
         this.userToken = jwt_decode(token);
         this.token = token;
         localStorage.setItem('userToken', token);
-        this.router.navigate(['upis-sati']);
+        this.router.navigate(['home']);
       }
     }, error => {
-      this.openSnackBar(error.error, 'Zatvori');
+      this.openSnackBar(error.error, 'Close');
     });
 
 
@@ -51,18 +46,6 @@ export class AuthenticationService {
     this.token = '';
     localStorage.removeItem('userToken');
     this.router.navigate(['']);
-  }
-
-  isCEO(): boolean {
-    return this.userRoles.includes('ROLE_CEO');
-  }
-
-  isScholar(): boolean {
-    return this.userRoles.includes('ROLE_SCHOLAR');
-  }
-
-  isProjectManager(): boolean {
-    return this.userRoles.includes('ROLE_PROJECT_MANAGER');
   }
 
   openSnackBar(message: string, action: string): void {

@@ -13,11 +13,7 @@
 
 export interface City { 
     city?: string;
-    createdDate?: string;
     id?: number;
-    lastModifiedBy?: string;
-    lastModifiedDate?: string;
-    recordStatus?: number;
     zipcode?: string;
 }
 

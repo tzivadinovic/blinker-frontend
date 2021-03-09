@@ -12,11 +12,7 @@
 
 
 export interface State { 
-    createdDate?: string;
     id?: number;
-    lastModifiedBy?: string;
-    lastModifiedDate?: string;
     name?: string;
-    recordStatus?: number;
 }
 

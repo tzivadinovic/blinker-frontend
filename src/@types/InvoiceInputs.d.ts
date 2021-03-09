@@ -1,5 +1,6 @@
-export interface InvoiceInputs{
+export interface InvoiceInputs {
   itemNo: number;
+  boxNo: number;
   code: string;
   description: string;
   quantity: number;
