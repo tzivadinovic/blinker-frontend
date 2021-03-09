@@ -32,6 +32,13 @@ export interface ProductControllerServiceInterface {
     deleteProductById(productId: number, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
+     * findProductByCode
+     * 
+     * @param code code
+     */
+    findByCode(code: string, extraHttpRequestParams?: any): Observable<Product>;
+
+    /**
      * getAllProducts
      * 
      * @param code code

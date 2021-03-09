@@ -18,7 +18,6 @@ import { TransportTerm } from './transport-term';
 
 export interface InvoiceDetails { 
     attn?: string;
-    boxNumber?: number;
     createdDate?: string;
     currency?: Currency;
     customer?: Customer;

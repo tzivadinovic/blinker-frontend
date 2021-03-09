@@ -9,6 +9,7 @@ export * from './invoice-details';
 export * from './model-and-view';
 export * from './product';
 export * from './product-invoice';
+export * from './response-valueint';
 export * from './state';
 export * from './transport-term';
 export * from './user';

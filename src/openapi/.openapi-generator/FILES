@@ -44,6 +44,7 @@ model/model-and-view.ts
 model/models.ts
 model/product-invoice.ts
 model/product.ts
+model/response-valueint.ts
 model/state.ts
 model/transport-term.ts
 model/user.ts

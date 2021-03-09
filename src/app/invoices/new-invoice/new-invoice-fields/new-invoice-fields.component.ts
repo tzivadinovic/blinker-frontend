@@ -1,8 +1,10 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {InvoiceInputs} from '../../../../@types/InvoiceInputs';
-import {Product, ProductControllerService} from '../../../../openapi';
+import {Product, ProductControllerService, ProductInvoice, ProductInvoiceControllerService} from '../../../../openapi';
 import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import {SnackbarService} from '../../../../utils/snackbar-handler';
 
 @Component({
   selector: 'app-new-invoice-fields',
@@ -11,7 +13,9 @@ import {Observable} from 'rxjs';
 })
 export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
 
-  constructor(private productService: ProductControllerService) {
+  constructor(private productService: ProductControllerService,
+              private snackBarService: SnackbarService,
+              private productInvoiceService: ProductInvoiceControllerService) {
   }
 
   @ViewChild('itemNoRef') itemNoRef: ElementRef;
@@ -49,23 +53,24 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
   invoiceInputs: any[] = [];
 
   products: Product[] = [];
+  productInvoice: ProductInvoice;
   filteredProducts: Observable<Product[]>;
 
 
   ngOnInit(): void {
     this.getAllProducts();
     this.form.get('itemNo').setValue(this.itemNo);
-    // this.filteredProducts = this.form.get('code').valueChanges
-    //   .pipe(
-    //     startWith(''),
-    //     map(value => this._filter(value))
-    //   );
+    this.filteredProducts = this.form.get('code').valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
   }
 
-  // private _filter(value: string): Product[] {
-  //   const filterValue = value.toLowerCase();
-  //   return this.products.filter(product => product.code.toString().toLowerCase().startsWith(filterValue));
-  // }
+  private _filter(value: string): Product[] {
+    const filterValue = value.toLowerCase();
+    return this.products.filter(product => product.code.toString().toLowerCase().startsWith(filterValue));
+  }
 
 
   public inputEmit(): void {
@@ -107,7 +112,7 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.itemNoRef.nativeElement.focus();
+    Promise.resolve().then(() => this.itemNoRef.nativeElement.focus());
   }
 
   getAllProducts(): void {
@@ -116,8 +121,31 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onChange(product: Product) {
-    this.form.get('description').setValue(product.description);
-    this.form.get('unitPrice').setValue(product.price);
+  saveProductInvoice() {
+    const code: string = this.form.get('code').value;
+    const quantity: number = this.form.get('quantity').value;
+    const itemNumber: number = this.form.get('itemNo').value;
+    this.productService.findByCode(code).subscribe(data => {
+      const productInvoice: ProductInvoice = {
+        product: data,
+        quantity: quantity,
+        itemNumber: itemNumber
+      };
+      this.productInvoiceService.saveProductInvoice(productInvoice).subscribe(() => {
+        console.log(productInvoice);
+      });
+    });
+  }
+
+
+  fillOtherFieldsByCode() {
+    let product: Product = null;
+    this.productService.findByCode(this.form.get('code').value).subscribe(data => {
+      product = data;
+      this.form.get('description').setValue(product.description);
+      this.form.get('unitPrice').setValue(product.price);
+    }, error => {
+      this.snackBarService.showErrorSnackbar(error.error.message);
+    });
   }
 }

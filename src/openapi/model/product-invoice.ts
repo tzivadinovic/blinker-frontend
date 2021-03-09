@@ -14,6 +14,7 @@ import { Product } from './product';
 
 
 export interface ProductInvoice { 
+    boxNumber?: number;
     createdDate?: string;
     id?: number;
     invoice?: Invoice;

@@ -26,7 +26,7 @@ export class NewInvoiceComponent implements OnInit {
     employee: new FormControl(null),
     totalBoxes: new FormControl(null),
     grossWeight: new FormControl(null),
-    netWeight: new FormControl(null),
+    netWeight: new FormControl({disabled: true}),
     shippingFees: new FormControl(null),
     date: new FormControl(null)
   });

@@ -18,11 +18,12 @@ body {
   font-size: 12px !important;
 }
 
-.snack-bar-error {
+.snackbar-container-error {
   color: firebrick;
+  background-color: firebrick;
 }
 
-.snack-bar-error button {
+.snackbar-container-error button {
   border: 1px solid firebrick;
   color: firebrick;
 }

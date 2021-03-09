@@ -7,11 +7,11 @@
       </mat-form-field>
     </div>
 
-    <div class="code-field" *ngFor="let product of products; index as i;">
+    <div class="code-field">
       <mat-form-field class="example-full-width" tabindex="2">
         <mat-label>Code</mat-label>
-        <input formControlName="code" matInput type="text" (keydown.enter)="handleEnter('codeRef')"
-               #codeRef [value]="products[i].code" (focusout)="onChange(product)">
+        <input formControlName="code" matInput type="text"
+               (keydown.enter)="handleEnter('codeRef')" #codeRef (change)="fillOtherFieldsByCode()">
       </mat-form-field>
     </div>
 
@@ -25,7 +25,7 @@
     <div class="quantity-field">
       <mat-form-field class="example-full-width" tabindex="2">
         <mat-label>Quantity</mat-label>
-        <input formControlName="quantity" matInput type="text" (keydown.enter)="handleEnter('quantityRef')" #quantityRef>
+        <input formControlName="quantity" matInput type="number" (keydown.enter)="handleEnter('quantityRef')" #quantityRef>
       </mat-form-field>
     </div>
 
@@ -39,7 +39,7 @@
     <div class="total-price-field">
       <mat-form-field class="example-full-width" tabindex="2">
         <mat-label>Total price</mat-label>
-        <input formControlName="totalPrice" matInput type="number" (keyup.enter)="checkForm()" #totalPriceRef>
+        <input formControlName="totalPrice" matInput type="number" (keyup.enter)="checkForm()" #totalPriceRef (focusout)="saveProductInvoice()">
       </mat-form-field>
     </div>
   </form>

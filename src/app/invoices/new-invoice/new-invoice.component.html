@@ -9,16 +9,16 @@
 
     <form [formGroup]="form">
 
+      <mat-form-field class="example-full-width">
+        <mat-label>Invoice number</mat-label>
+        <input formControlName="number" matInput type="text">
+      </mat-form-field>
+
       <mat-form-field tabindex="2" class="date-picker">
         <input [matDatepicker]="picker1" formControlName="date" matInput placeholder="Invoice date">
         <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker1>
         </mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field class="example-full-width">
-        <mat-label>Invoice number</mat-label>
-        <input formControlName="number" matInput type="text">
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
@@ -74,7 +74,7 @@
 
       <mat-form-field class="example-full-width">
         <mat-label>Net Weight</mat-label>
-        <input formControlName="netWeight" matInput type="number" disabled>
+        <input formControlName="netWeight" matInput type="number">
       </mat-form-field>
 
       <mat-form-field class="example-full-width">

@@ -14,6 +14,7 @@ import { HttpHeaders }                                       from '@angular/comm
 import { Observable }                                        from 'rxjs';
 
 import { ProductInvoice } from '../model/models';
+import { ResponseValueint } from '../model/models';
 
 
 import { ApiConfiguration }                                     from '../configuration';
@@ -57,6 +58,20 @@ export interface ProductInvoiceControllerServiceInterface {
      * @param productInvoice productInvoice
      */
     saveProductInvoice(productInvoice: ProductInvoice, extraHttpRequestParams?: any): Observable<ProductInvoice>;
+
+    /**
+     * getTotalBoxes
+     * 
+     * @param invoiceId invoiceId
+     */
+    totalBoxes(invoiceId: number, extraHttpRequestParams?: any): Observable<ResponseValueint>;
+
+    /**
+     * getInvoiceTotalValue
+     * 
+     * @param invoiceId invoiceId
+     */
+    totalValue(invoiceId: number, extraHttpRequestParams?: any): Observable<number>;
 
     /**
      * updateProductInvoice
