@@ -3,6 +3,7 @@
   <input matInput #inputPar (keyup)="searchProduct(inputPar.value)" type="text">
 </mat-form-field>
 <div class="main-content">
+  <div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="code">
@@ -45,6 +46,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <mat-paginator [pageSizeOptions]="[10, 15, 25, 100]" class="paginator"></mat-paginator>
+  </div>
   <button class="color-secondary add-btn" mat-fab matTooltip="Add product" (click)="openCreateProductDialog()">
     <mat-icon>add</mat-icon>
   </button>
