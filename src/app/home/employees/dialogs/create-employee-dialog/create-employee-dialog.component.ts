@@ -25,7 +25,8 @@ export class CreateEmployeeDialogComponent implements OnInit {
   constructor(private employeeService: EmployeeControllerService,
               private snackBarService: SnackbarService,
               private dialogRef: MatDialogRef<CreateEmployeeDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) { }
+              @Inject(MAT_DIALOG_DATA) public data) {
+  }
 
   ngOnInit(): void {
   }

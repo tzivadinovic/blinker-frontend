@@ -1,17 +1,46 @@
-mat-form-field{
+mat-form-field {
   margin-right: 20px;
 }
 
-.main-content{
+.main-content {
   margin: 0 auto;
   text-align: center;
 }
 
-.edit-invoice{
+.edit-invoice {
   background-color: #16456d;
 }
 
-.edit-invoice:hover{
+.edit-invoice:hover {
   background-color: #226dac !important;
   transition: 250ms;
+}
+
+mat-list-option{
+  width: 600px;
+}
+
+mat-form-field{
+  width: 600px;
+}
+
+::ng-deep::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::ng-deep::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
+
+/* Handle */
+::ng-deep::-webkit-scrollbar-thumb {
+  background: #16446c;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::ng-deep::-webkit-scrollbar-thumb:hover {
+  background: #16446c;
 }

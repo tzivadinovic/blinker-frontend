@@ -25,28 +25,39 @@
     <div class="description-field">
       <mat-form-field class="example-full-width" tabindex="2">
         <mat-label>Description</mat-label>
-        <input formControlName="description" matInput type="text" (keydown.enter)="handleEnter('descriptionRef')" #descriptionRef>
+        <input formControlName="description" matInput type="text" (keydown.enter)="handleEnter('descriptionRef')"
+               #descriptionRef>
+      </mat-form-field>
+    </div>
+
+    <div class="itemNo-field">
+      <mat-form-field class="example-full-width" tabindex="2">
+        <mat-label>Unit</mat-label>
+        <input formControlName="unit" matInput type="text" (keydown.enter)="handleEnter('unitRef')" #unitRef>
       </mat-form-field>
     </div>
 
     <div class="quantity-field">
       <mat-form-field class="example-full-width" tabindex="2">
         <mat-label>Quantity</mat-label>
-        <input formControlName="quantity" matInput type="number" (keydown.enter)="handleEnter('quantityRef')" #quantityRef>
+        <input formControlName="quantity" matInput type="number" (keydown.enter)="handleEnter('quantityRef')"
+               #quantityRef (focusout)="fillTotalPrice()">
       </mat-form-field>
     </div>
 
     <div class="unit-price-field">
       <mat-form-field class="example-full-width" tabindex="2">
         <mat-label>Unit price</mat-label>
-        <input formControlName="unitPrice" matInput type="number" (keydown.enter)="handleEnter('unitPriceRef')" #unitPriceRef>
+        <input formControlName="unitPrice" matInput type="number" (keydown.enter)="handleEnter('unitPriceRef')"
+               #unitPriceRef>
       </mat-form-field>
     </div>
 
     <div class="total-price-field">
       <mat-form-field class="example-full-width" tabindex="2">
         <mat-label>Total price</mat-label>
-        <input formControlName="totalPrice" matInput type="number" (keyup.enter)="checkForm()" #totalPriceRef (focusout)="saveProductInvoice()">
+        <input formControlName="totalPrice" matInput type="number" (keyup.enter)="checkForm()" #totalPriceRef
+               (focusout)="saveProductInvoice()">
       </mat-form-field>
     </div>
   </form>

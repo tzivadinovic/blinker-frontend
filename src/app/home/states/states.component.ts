@@ -26,8 +26,8 @@ export class StatesComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-        this.dataSource.paginator = this.paginator;
-    }
+    this.dataSource.paginator = this.paginator;
+  }
 
   ngOnInit(): void {
     this.getAllStates();

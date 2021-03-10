@@ -22,6 +22,7 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
   @ViewChild('boxNoRef') boxNoRef: ElementRef;
   @ViewChild('codeRef') codeRef: ElementRef;
   @ViewChild('descriptionRef') descriptionRef: ElementRef;
+  @ViewChild('unitRef') unitRef: ElementRef;
   @ViewChild('quantityRef') quantityRef: ElementRef;
   @ViewChild('unitPriceRef') unitPriceRef: ElementRef;
   @ViewChild('totalPriceRef') totalPriceRef: ElementRef;
@@ -37,6 +38,7 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
     boxNo: new FormControl(null, [Validators.required]),
     code: new FormControl(null, [Validators.required]),
     description: new FormControl(null, [Validators.required]),
+    unit: new FormControl(null, [Validators.required]),
     quantity: new FormControl(null, [Validators.required]),
     unitPrice: new FormControl(null, [Validators.required]),
     totalPrice: new FormControl(null, [Validators.required])
@@ -46,6 +48,7 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
   boxNo = 1;
   code: string;
   description: string;
+  unit: string;
   quantity: number;
   unitPrice: number;
   totalPrice: number;
@@ -59,6 +62,7 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getAllProducts();
     this.form.get('itemNo').setValue(this.itemNo);
+    this.form.get('unit').setValue(this.unit);
     this.filteredProducts = this.form.get('code').valueChanges
       .pipe(
         startWith(''),
@@ -78,6 +82,7 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
       boxNo: this.boxNo,
       code: this.code,
       description: this.description,
+      unit: this.unit,
       quantity: this.quantity,
       unitPrice: this.unitPrice,
       totalPrice: this.totalPrice
@@ -103,12 +108,12 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
         this.descriptionRef.nativeElement.focus();
         break;
       case 'descriptionRef':
+        this.unitRef.nativeElement.focus();
+        break;
+      case 'unitRef':
         this.quantityRef.nativeElement.focus();
         break;
       case 'quantityRef':
-        this.unitPriceRef.nativeElement.focus();
-        break;
-      case 'unitPriceRef':
         this.totalPriceRef.nativeElement.focus();
         break;
     }
@@ -148,7 +153,19 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
     this.productService.findByCode(this.form.get('code').value).subscribe(data => {
       product = data;
       this.form.get('description').setValue(product.description);
+      this.form.get('unit').setValue(product.unit);
       this.form.get('unitPrice').setValue(product.price);
+      this.form.get('totalPrice').setValue(this.form.get('quantity').value * product.price);
+    }, error => {
+      this.snackBarService.showErrorSnackbar(error.error.message);
+    });
+  }
+
+  fillTotalPrice() {
+    let product: Product = null;
+    this.productService.findByCode(this.form.get('code').value).subscribe(data => {
+      product = data;
+      this.form.get('totalPrice').setValue(this.form.get('quantity').value * product.price);
     }, error => {
       this.snackBarService.showErrorSnackbar(error.error.message);
     });

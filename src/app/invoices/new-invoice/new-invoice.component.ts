@@ -2,11 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {
   Currency,
-  CurrencyControllerService, Customer,
-  CustomerControllerService, Employee, EmployeeControllerService,
-  Invoice,
+  CurrencyControllerService,
+  Customer,
+  CustomerControllerService,
+  Employee,
+  EmployeeControllerService,
   InvoiceControllerService,
-  InvoiceDetailsControllerService, TransportTerm,
+  InvoiceDetailsControllerService,
+  TransportTerm,
   TransportTermControllerService
 } from '../../../openapi';
 import {SnackbarService} from '../../../utils/snackbar-handler';
@@ -61,11 +64,11 @@ export class NewInvoiceComponent implements OnInit {
   }
 
   createNewInvoice() {
-      this.invoiceService.saveInvoice().subscribe(() => {
-        this.snackBarService.showSuccessSnackbar('Successfully created invoice');
-      }, error => {
-        this.snackBarService.showErrorSnackbar(error.error.message);
-      });
+    this.invoiceService.saveInvoice().subscribe(() => {
+      this.snackBarService.showSuccessSnackbar('Successfully created invoice');
+    }, error => {
+      this.snackBarService.showErrorSnackbar(error.error.message);
+    });
   }
 
   saveInvoiceDetails(): void {

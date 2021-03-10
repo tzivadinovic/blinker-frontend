@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {Employee, EmployeeControllerService, Product} from '../../../../../openapi';
+import {Employee, EmployeeControllerService} from '../../../../../openapi';
 import {SnackbarService} from '../../../../../utils/snackbar-handler';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 

@@ -1,16 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {SnackbarService} from '../../../../../utils/snackbar-handler';
-import {
-  Category,
-  City,
-  CityControllerService,
-  Customer,
-  CustomerControllerService,
-  Product,
-  State,
-  StateControllerService
-} from '../../../../../openapi';
+import {City, CityControllerService, Customer, CustomerControllerService, State, StateControllerService} from '../../../../../openapi';
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({

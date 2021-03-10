@@ -12,7 +12,7 @@ import {SnackbarService} from '../../../../utils/snackbar-handler';
 export class EditProductDialogComponent implements OnInit {
   form = new FormGroup({
     code: new FormControl(null),
-    name: new FormControl(null),
+    unit: new FormControl(null),
     description: new FormControl(null),
     category: new FormControl(),
     price: new FormControl(null),
@@ -39,7 +39,7 @@ export class EditProductDialogComponent implements OnInit {
   ngOnInit(): void {
     this.getAllCategories();
     this.form.get('code').setValue(this.product.code);
-    this.form.get('name').setValue(this.product.name);
+    this.form.get('unit').setValue(this.product.unit);
     this.form.get('description').setValue(this.product.description);
     this.form.get('category').setValue(this.product.category);
     this.form.get('price').setValue(this.product.price);

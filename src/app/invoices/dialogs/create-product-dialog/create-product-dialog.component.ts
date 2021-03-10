@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Category, CategoryControllerService, Product, ProductControllerService} from '../../../../openapi';
@@ -12,7 +12,7 @@ import {SnackbarService} from '../../../../utils/snackbar-handler';
 export class CreateProductDialogComponent implements OnInit {
   form = new FormGroup({
     code: new FormControl(null),
-    name: new FormControl(null),
+    unit: new FormControl(null),
     description: new FormControl(null),
     category: new FormControl(null),
     price: new FormControl(null),

@@ -4,21 +4,28 @@
   </div>
   <form [formGroup]="form">
 
+    <div>
     <mat-form-field class="example-full-width" tabindex="2">
       <mat-label>Product code</mat-label>
       <input formControlName="code" matInput type="text" required>
     </mat-form-field>
+    </div>
 
+    <div>
     <mat-form-field class="example-full-width">
-      <mat-label>Title</mat-label>
-      <input formControlName="name" matInput type="text" required>
+      <mat-label>Unit</mat-label>
+      <input formControlName="unit" matInput type="text" required>
     </mat-form-field>
+    </div>
 
-    <mat-form-field class="example-full-width">
+    <div>
+    <mat-form-field class="example-full-width description-field">
       <mat-label>Description</mat-label>
       <input formControlName="description" matInput type="text" required>
     </mat-form-field>
+    </div>
 
+    <div>
     <mat-form-field class="example-full-width">
       <mat-label>Category</mat-label>
       <mat-select formControlName="category" required>
@@ -27,19 +34,24 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    </div>
 
+    <div>
     <mat-form-field class="example-full-width unit-price">
       <mat-label>Unit Price</mat-label>
       <input formControlName="price" matInput type="number" required>
       <span matPrefix>€&nbsp;</span>
       <span matSuffix>.00</span>
     </mat-form-field>
+    </div>
 
+    <div>
     <mat-form-field class="example-full-width">
       <mat-label>On stock</mat-label>
       <input formControlName="stock" matInput type="number" required>
     </mat-form-field>
-    <div>
+    </div>
+      <div>
       <button class="edit-invoice" color="primary" mat-raised-button (click)="createProduct()">Save</button>
     </div>
   </form>

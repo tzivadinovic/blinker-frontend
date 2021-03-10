@@ -4,7 +4,7 @@ import {DeleteProductDialogComponent} from '../../invoices/dialogs/delete-produc
 import {Currency, CurrencyControllerService} from '../../../openapi';
 import {MatTableDataSource} from '@angular/material/table';
 import {SnackbarService} from '../../../utils/snackbar-handler';
-import {filterCurrency, filterTransportTerm} from '../../../utils/filter';
+import {filterCurrency} from '../../../utils/filter';
 import {CreateCurrencyDialogComponent} from './dialogs/create-currency-dialog/create-currency-dialog.component';
 import {EditCurrencyDialogComponent} from './dialogs/edit-currency-dialog/edit-currency-dialog.component';
 

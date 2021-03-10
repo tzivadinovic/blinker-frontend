@@ -9,7 +9,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 export class DeleteProductDialogComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<DeleteProductDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) { }
+              @Inject(MAT_DIALOG_DATA) public data) {
+  }
 
   ngOnInit(): void {
   }

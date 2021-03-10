@@ -23,7 +23,8 @@ export class CreateCustomerDialogComponent implements OnInit {
               private customerService: CustomerControllerService,
               private snackBarService: SnackbarService,
               private dialogRef: MatDialogRef<CreateCustomerDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) { }
+              @Inject(MAT_DIALOG_DATA) public data) {
+  }
 
   ngOnInit(): void {
     this.getAllCities();

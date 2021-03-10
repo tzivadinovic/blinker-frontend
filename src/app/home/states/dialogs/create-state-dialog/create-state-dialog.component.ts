@@ -18,7 +18,8 @@ export class CreateStateDialogComponent implements OnInit {
               private stateService: StateControllerService,
               private snackBarService: SnackbarService,
               private dialogRef: MatDialogRef<CreateStateDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) { }
+              @Inject(MAT_DIALOG_DATA) public data) {
+  }
 
   ngOnInit(): void {
   }

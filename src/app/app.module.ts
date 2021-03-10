@@ -56,10 +56,11 @@ import {CreateStateDialogComponent} from './home/states/dialogs/create-state-dia
 import {EditStateDialogComponent} from './home/states/dialogs/edit-state-dialog/edit-state-dialog.component';
 import {CreateCityDialogComponent} from './home/cities/dialogs/create-city-dialog/create-city-dialog.component';
 import {EditProductInvoiceDialogComponent} from './invoices/dialogs/edit-product-invoice-dialog/edit-product-invoice-dialog.component';
-import { CreateTransportTermDialogComponent } from './home/transport-terms/dialogs/create-transport-term-dialog/create-transport-term-dialog.component';
-import { EditTransportTermDialogComponent } from './home/transport-terms/dialogs/edit-transport-term-dialog/edit-transport-term-dialog.component';
-import { EditCurrencyDialogComponent } from './home/currencies/dialogs/edit-currency-dialog/edit-currency-dialog.component';
-import { CreateCurrencyDialogComponent } from './home/currencies/dialogs/create-currency-dialog/create-currency-dialog.component';
+import {CreateTransportTermDialogComponent} from './home/transport-terms/dialogs/create-transport-term-dialog/create-transport-term-dialog.component';
+import {EditTransportTermDialogComponent} from './home/transport-terms/dialogs/edit-transport-term-dialog/edit-transport-term-dialog.component';
+import {EditCurrencyDialogComponent} from './home/currencies/dialogs/edit-currency-dialog/edit-currency-dialog.component';
+import {CreateCurrencyDialogComponent} from './home/currencies/dialogs/create-currency-dialog/create-currency-dialog.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
@@ -105,34 +106,35 @@ const appRoutes: Routes = [
     CreateTransportTermDialogComponent,
     EditTransportTermDialogComponent,
     EditCurrencyDialogComponent,
-    CreateCurrencyDialogComponent
+    CreateCurrencyDialogComponent,
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatLineModule,
-        RouterModule.forRoot(appRoutes),
-        MatSidenavModule,
-        MatListModule,
-        MatIconModule,
-        MatTabsModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatTooltipModule,
-        MatExpansionModule,
-        MatDialogModule,
-        MatSelectModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        HttpClientModule,
-        MatSnackBarModule,
-        MatAutocompleteModule,
-        FormsModule
-    ], entryComponents: [
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatLineModule,
+    RouterModule.forRoot(appRoutes),
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatTooltipModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    MatAutocompleteModule,
+    FormsModule,
+    MatProgressSpinnerModule
+  ], entryComponents: [
     PrintOptionsDialogComponent,
     EditInvoiceDialogComponent,
     EditPackingListDialogComponent,
@@ -148,7 +150,7 @@ const appRoutes: Routes = [
     CreateCityDialogComponent,
     EditProductInvoiceDialogComponent,
     CreateTransportTermDialogComponent,
-    EditTransportTermDialogComponent
+    EditTransportTermDialogComponent,
   ],
   providers: [
     SnackbarService,

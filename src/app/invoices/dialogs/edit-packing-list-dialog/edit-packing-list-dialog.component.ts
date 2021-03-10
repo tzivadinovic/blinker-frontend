@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -21,7 +21,9 @@ export class EditPackingListDialogComponent implements OnInit {
     shippingFees: new FormControl(null),
     date: new FormControl(null)
   });
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

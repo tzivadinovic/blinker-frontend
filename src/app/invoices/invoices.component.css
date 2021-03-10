@@ -1,6 +1,6 @@
 .main-content {
   width: 70%;
-  margin: 2% auto 0;
+  margin: 2% 22% 0 auto;
 }
 
 .title-content {
@@ -82,7 +82,7 @@ tr:hover {
 
 .financial-info {
   margin-top: 20px;
-  margin-left: 12%;
+  margin-left: 9%;
 }
 
 mat-panel-title {
@@ -141,7 +141,7 @@ mat-panel-description {
 
 .items-box {
   margin-top: 20px;
-  margin-left: 10%;
+  margin-left: 16%;
   width: 50%;
 }
 
@@ -169,5 +169,33 @@ mat-expansion-panel {
 
 .total-price {
   width: 100%;
+}
+
+.edit-product-invoices {
+  font-size: 40px;
+}
+
+.edit-product-invoices:hover {
+  color: #16446c;
+  cursor: pointer;
+}
+
+.mat-column-description{
+  width: 300px;
+}
+
+.invoice-total{
+  color: #03ac03;
+  font-weight: 800;
+}
+
+mat-expansion-panel{
+  width: 120%;
+}
+
+.items-info-btn:hover{
+  background-color: #16446c;
+  color: white;
+  transition: .5s;
 }
 

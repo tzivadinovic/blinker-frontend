@@ -7,7 +7,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {CreateCustomerDialogComponent} from './dialogs/create-customer-dialog/create-customer-dialog.component';
 import {EditCustomerDialogComponent} from './dialogs/edit-customer-dialog/edit-customer-dialog.component';
 import {SnackbarService} from '../../../utils/snackbar-handler';
-import {filterCustomer, filterEmployee} from '../../../utils/filter';
+import {filterCustomer} from '../../../utils/filter';
 
 @Component({
   selector: 'app-customers',

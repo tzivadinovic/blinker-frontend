@@ -9,13 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { GrantedAuthority } from './granted-authority';
 
 
 export interface User { 
     accountNonExpired?: boolean;
     accountNonLocked?: boolean;
-    authorities?: Array<GrantedAuthority>;
     credentialsNonExpired?: boolean;
     enabled?: boolean;
     id?: number;

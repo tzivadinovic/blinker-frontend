@@ -6,7 +6,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {City, CityControllerService} from '../../../openapi';
 import {MatPaginator} from '@angular/material/paginator';
 import {SnackbarService} from '../../../utils/snackbar-handler';
-import {filterCity, filterState} from '../../../utils/filter';
+import {filterCity} from '../../../utils/filter';
 
 
 @Component({

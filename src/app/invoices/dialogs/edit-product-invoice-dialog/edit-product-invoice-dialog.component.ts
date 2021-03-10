@@ -1,12 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {
-  Customer,
-  InvoiceDetails,
-  Product,
-  ProductControllerService,
-  ProductInvoice,
-  ProductInvoiceControllerService
-} from '../../../../openapi';
+import {Product, ProductControllerService, ProductInvoice, ProductInvoiceControllerService} from '../../../../openapi';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {SnackbarService} from '../../../../utils/snackbar-handler';
@@ -39,6 +32,7 @@ export class EditProductInvoiceDialogComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProducts();
     this.form.get('itemNumber').setValue(this.productInvoice.itemNumber);
+    this.form.get('unit').setValue(this.productInvoice.product.unit);
     this.form.get('product').setValue(this.productInvoice.product);
     this.form.get('quantity').setValue(this.productInvoice.quantity);
   }
@@ -75,7 +69,7 @@ export class EditProductInvoiceDialogComponent implements OnInit {
   }
 
   compareProduct(product1: Product, product2: Product): boolean {
-    if (!product1 || !product1) {
+    if (!product1 || !product2) {
       return false;
     }
     return product1.id === product2.id;

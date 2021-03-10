@@ -39,4 +39,25 @@ body {
   color: #16446c;
 }
 
+::ng-deep::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::ng-deep::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
+
+/* Handle */
+::ng-deep::-webkit-scrollbar-thumb {
+  background: #16446c;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::ng-deep::-webkit-scrollbar-thumb:hover {
+  background: #16446c;
+}
+
 

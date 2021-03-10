@@ -1,13 +1,18 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {
-  City,
-  CityControllerService, Currency, CurrencyControllerService,
+  CityControllerService,
+  Currency,
+  CurrencyControllerService,
   Customer,
   CustomerControllerService,
-  Employee, EmployeeControllerService, InvoiceDetails, InvoiceDetailsControllerService,
-  State,
-  StateControllerService, TransportTerm, TransportTermControllerService
+  Employee,
+  EmployeeControllerService,
+  InvoiceDetails,
+  InvoiceDetailsControllerService,
+  StateControllerService,
+  TransportTerm,
+  TransportTermControllerService
 } from '../../../../openapi';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {SnackbarService} from '../../../../utils/snackbar-handler';
@@ -133,7 +138,8 @@ export class EditInvoiceDialogComponent implements OnInit {
   editInvoiceDetails() {
     const invoiceDetails: InvoiceDetails = this.form.value;
     invoiceDetails.id = this.data.id;
-    invoiceDetails.invoice = this.data.invoice;
+    invoiceDetails.totalPrice = this.data.totalPrice;
+    // invoiceDetails.invoice = this.data.invoice;
     if (this.form.valid) {
       this.invoiceDetailsService.saveInvoiceDetails(invoiceDetails).subscribe(() => {
         this.closeDialog();

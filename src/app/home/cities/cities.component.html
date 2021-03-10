@@ -6,19 +6,21 @@
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="city">
-      <th mat-header-cell *matHeaderCellDef> City name </th>
+      <th mat-header-cell *matHeaderCellDef> City name</th>
       <td mat-cell *matCellDef="let element"> {{element.city}} </td>
     </ng-container>
 
     <ng-container matColumnDef="zipcode">
-      <th mat-header-cell *matHeaderCellDef> Zip code </th>
+      <th mat-header-cell *matHeaderCellDef> Zip code</th>
       <td mat-cell *matCellDef="let element"> {{element.zipcode}} </td>
     </ng-container>
 
     <ng-container matColumnDef="options">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <th mat-header-cell *matHeaderCellDef> Actions</th>
       <td mat-cell *matCellDef="let element" class="actions-field">
-        <button mat-raised-button color="primary" class="delete-button" (click)="openDeleteProductDialog(element.id)">Delete</button>
+        <button mat-raised-button color="primary" class="delete-button" (click)="openDeleteProductDialog(element.id)">
+          Delete
+        </button>
       </td>
     </ng-container>
 

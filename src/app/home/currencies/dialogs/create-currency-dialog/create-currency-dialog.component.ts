@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {CurrencyControllerService, StateControllerService} from '../../../../../openapi';
+import {CurrencyControllerService} from '../../../../../openapi';
 import {SnackbarService} from '../../../../../utils/snackbar-handler';
 
 @Component({
@@ -18,7 +18,8 @@ export class CreateCurrencyDialogComponent implements OnInit {
               private currencyService: CurrencyControllerService,
               private snackBarService: SnackbarService,
               private dialogRef: MatDialogRef<CreateCurrencyDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) { }
+              @Inject(MAT_DIALOG_DATA) public data) {
+  }
 
   ngOnInit(): void {
   }

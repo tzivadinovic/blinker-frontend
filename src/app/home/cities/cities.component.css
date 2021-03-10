@@ -67,17 +67,17 @@ tr:hover {
   transition: 250ms;
 }
 
-.search-field{
+.search-field {
   margin-top: 50px;
   margin-left: 65%;
   width: 20%;
 }
 
-.search-field mat-label{
+.search-field mat-label {
   font-weight: 500;
   color: #16446c;
 }
 
-.no-data{
+.no-data {
   margin-left: 45%;
 }

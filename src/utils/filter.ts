@@ -1,7 +1,7 @@
 import {City, Currency, Customer, Employee, Invoice, Product, State, TransportTerm} from '../openapi';
 
 export const filterProduct = (product: Product, inputPar: string) => {
-  return [product.code, product.name, product.description, product.category.name].some(prop => prop.toLowerCase().startsWith(inputPar.toLowerCase()));
+  return [product.code, product.description, product.category.name].some(prop => prop.toLowerCase().startsWith(inputPar.toLowerCase()));
 };
 
 export const filterEmployee = (employee: Employee, inputPar: string) => {

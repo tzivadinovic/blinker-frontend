@@ -6,14 +6,16 @@ import {
   Invoice,
   InvoiceControllerService,
   InvoiceDetails,
+  InvoiceDetailsControllerService,
   ProductInvoice,
-  ProductInvoiceControllerService,
+  ProductInvoiceControllerService
 } from '../../openapi';
 import {filterInvoice} from '../../utils/filter';
 import {DeleteProductDialogComponent} from './dialogs/delete-product-dialog/delete-product-dialog.component';
 import {SnackbarService} from '../../utils/snackbar-handler';
 import {EditProductInvoiceDialogComponent} from './dialogs/edit-product-invoice-dialog/edit-product-invoice-dialog.component';
 import {MatTableDataSource} from '@angular/material/table';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-invoices',
@@ -22,17 +24,22 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class InvoicesComponent implements OnInit {
   panelOpenState = false;
-  displayedColumns: string[] = ['itemNo', 'code', 'title', 'description', 'unit', 'quantity', 'price', 'totalValue', 'options'];
+  displayedColumns: string[] = ['itemNo', 'code', 'description', 'unit', 'quantity', 'price', 'totalValue', 'options'];
   invoices: Invoice[] = [];
   productInvoices: ProductInvoice[] = [];
   dataSource = new MatTableDataSource<ProductInvoice>([]);
   invoiceTotalValue: number;
   totalBoxes: number;
 
+  form = new FormGroup({
+    itemsInfo: new FormControl(null, [Validators.required])
+  });
+
   constructor(public dialog: MatDialog,
               private invoiceService: InvoiceControllerService,
               private productInvoiceService: ProductInvoiceControllerService,
-              private snackBarService: SnackbarService) {
+              private snackBarService: SnackbarService,
+              private invoiceDetailsService: InvoiceDetailsControllerService) {
   }
 
   ngOnInit(): void {
@@ -77,9 +84,9 @@ export class InvoicesComponent implements OnInit {
 
   openEditRecordDialog(productInvoice: ProductInvoice) {
     const dialogConfig = this.dialog.open(EditProductInvoiceDialogComponent, {
-      width: '500px',
+      width: '800px',
       data: productInvoice
-      });
+    });
     dialogConfig.afterClosed().subscribe(() => {
       this.getProductInvoicesForInvoiceId(productInvoice.invoice.id);
     });
@@ -96,6 +103,7 @@ export class InvoicesComponent implements OnInit {
           this.productInvoiceService.deleteProductInvoiceById(id).subscribe(() => {
             this.snackBarService.showSuccessSnackbar('Successfully deleted record');
             this.getProductInvoicesForInvoiceId(id);
+            this.panelOpenState = false;
           });
         } else if (result === 'no') {
           this.dialog.closeAll();
@@ -112,7 +120,15 @@ export class InvoicesComponent implements OnInit {
 
   getInvoiceTotalBoxes(invoiceId: number) {
     this.productInvoiceService.totalBoxes(invoiceId).subscribe(data => {
-        this.totalBoxes = data['value'];
+      this.totalBoxes = data['value'];
     });
+  }
+
+  setItemsInfo(invoice: Invoice) {
+    invoice.invoiceDetail.itemsInfo = this.form.get('itemsInfo').value;
+    this.invoiceDetailsService.setItemsInfo(invoice.invoiceDetail.id).subscribe(() => {
+      console.log('success');
+    });
+
   }
 }

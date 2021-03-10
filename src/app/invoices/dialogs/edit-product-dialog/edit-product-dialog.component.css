@@ -1,21 +1,26 @@
-mat-form-field{
-  margin-right: 20px;
+mat-form-field {
+  width: 350px;
 }
 
-.main-content{
+.main-content {
   margin: 0 auto;
   text-align: center;
 }
 
-.edit-invoice{
+.edit-invoice {
   background-color: #16456d;
 }
 
-.edit-invoice:hover{
+.edit-invoice:hover {
   background-color: #226dac !important;
   transition: 250ms;
 }
 
-.unit-price{
-  width: 180px;
+.unit-price {
+  width: 350px;
+}
+
+
+.description-field{
+  width: 350px;
 }

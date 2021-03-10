@@ -52,6 +52,13 @@ export interface InvoiceDetailsControllerServiceInterface {
     saveInvoiceDetails(invoiceDetails: InvoiceDetails, extraHttpRequestParams?: any): Observable<InvoiceDetails>;
 
     /**
+     * setItemsInfo
+     * 
+     * @param invoiceDetailId invoiceDetailId
+     */
+    setItemsInfo(invoiceDetailId: number, extraHttpRequestParams?: any): Observable<InvoiceDetails>;
+
+    /**
      * updateInvoiceDetails
      * 
      * @param invoiceDetails invoiceDetails

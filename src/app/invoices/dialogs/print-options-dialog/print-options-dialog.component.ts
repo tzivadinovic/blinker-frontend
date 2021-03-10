@@ -9,12 +9,13 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 export class PrintOptionsDialogComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<PrintOptionsDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) { }
+              @Inject(MAT_DIALOG_DATA) public data) {
+  }
 
   ngOnInit(): void {
   }
 
-  closeDialog(): void{
+  closeDialog(): void {
     this.dialogRef.close(true);
   }
 

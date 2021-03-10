@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {CityControllerService, StateControllerService} from '../../../../../openapi';
+import {CityControllerService} from '../../../../../openapi';
 import {SnackbarService} from '../../../../../utils/snackbar-handler';
 
 @Component({
@@ -20,7 +20,8 @@ export class CreateCityDialogComponent implements OnInit {
               private cityService: CityControllerService,
               private snackBarService: SnackbarService,
               private dialogRef: MatDialogRef<CreateCityDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) { }
+              @Inject(MAT_DIALOG_DATA) public data) {
+  }
 
   ngOnInit(): void {
   }

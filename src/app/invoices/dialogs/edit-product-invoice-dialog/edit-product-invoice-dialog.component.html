@@ -9,20 +9,23 @@
       <input formControlName="itemNumber" matInput type="number" required>
     </mat-form-field>
 
+    <div>
     <mat-form-field class="example-full-width">
       <mat-label>Product</mat-label>
       <mat-select formControlName="product" required [compareWith]="compareProduct">
         <mat-option *ngFor="let product of products" [value]="product">
-          {{product?.code}} {{product?.name}} - {{product?.price}}€
+          {{product?.code}} - {{product?.description}} - <b>{{product?.price}}€</b>
         </mat-option>
       </mat-select>
     </mat-form-field>
+    </div>
 
+    <div>
     <mat-form-field class="example-full-width">
       <mat-label>Unit</mat-label>
       <input formControlName="unit" matInput type="text">
     </mat-form-field>
-
+    </div>
     <mat-form-field class="example-full-width">
       <mat-label>Quantity</mat-label>
       <input formControlName="quantity" matInput type="number" required>

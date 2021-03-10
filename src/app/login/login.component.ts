@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../utils/authentication.service';
@@ -17,17 +17,13 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
               private authService: AuthenticationService,
-              private snackBarService: SnackbarService) { }
+              private snackBarService: SnackbarService) {
+  }
 
   ngOnInit(): void {
   }
 
   login(): void {
-    // this.authService.login(this.form.value.username.trim(), this.form.value.password);
-    if (this.form.get('username').value === 'maja.zivadinovic' && this.form.get('password').value === 'maja') {
-      this.router.navigate(['home']);
-    } else {
-      this.snackBarService.showErrorSnackbar('Invalid credentials');
-    }
+    this.authService.login(this.form.value.username.trim(), this.form.value.password);
   }
 }

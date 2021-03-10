@@ -1,6 +1,7 @@
 table {
   width: 70%;
   margin: 0 auto 0;
+  height: 100%;
 }
 
 td {
@@ -67,17 +68,22 @@ tr:hover {
   transition: 250ms;
 }
 
-.search-field{
+.search-field {
   margin-top: 50px;
   margin-left: 65%;
   width: 20%;
 }
 
-.search-field mat-label{
+.search-field mat-label {
   font-weight: 500;
   color: #16446c;
 }
 
-.no-data{
+.no-data {
   margin-left: 45%;
 }
+
+.mat-column-description{
+  width: 300px;
+}
+

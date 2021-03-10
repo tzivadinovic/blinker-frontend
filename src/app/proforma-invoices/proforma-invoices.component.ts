@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {EditInvoiceDialogComponent} from '../invoices/dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
 import {Invoice, InvoiceControllerService, InvoiceDetails, Product, ProductInvoice, ProductInvoiceControllerService} from '../../openapi';
 import {SnackbarService} from '../../utils/snackbar-handler';
-import {PrintOptionsDialogComponent} from '../invoices/dialogs/print-options-dialog/print-options-dialog.component';
 import {filterInvoice} from '../../utils/filter';
 import {EditProductInvoiceDialogComponent} from '../invoices/dialogs/edit-product-invoice-dialog/edit-product-invoice-dialog.component';
 import {DeleteProductDialogComponent} from '../invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
@@ -15,7 +14,7 @@ import {DeleteProductDialogComponent} from '../invoices/dialogs/delete-product-d
 })
 export class ProformaInvoicesComponent implements OnInit {
   panelOpenState = false;
-  displayedColumns: string[] = ['itemNo', 'code', 'title', 'description', 'unit', 'quantity', 'price', 'totalValue', 'options'];
+  displayedColumns: string[] = ['itemNo', 'code', 'description', 'unit', 'quantity', 'price', 'totalValue'];
   invoices: Invoice[] = [];
   productInvoices: ProductInvoice[] = [];
 

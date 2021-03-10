@@ -16,7 +16,7 @@ import {filterProduct} from '../../../utils/filter';
 })
 export class FloatsComponent implements OnInit, AfterViewInit {
   products: Product[] = [];
-  displayedColumns: string[] = ['code', 'title', 'description', 'category', 'price', 'stock', 'options'];
+  displayedColumns: string[] = ['code', 'description', 'category', 'price', 'stock', 'options'];
   dataSource = new MatTableDataSource<Product>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -32,7 +32,7 @@ export class FloatsComponent implements OnInit, AfterViewInit {
 
   openCreateProductDialog(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px';
+    dialogConfig.width = '550px';
     this.dialog.open(CreateProductDialogComponent, dialogConfig).afterClosed().subscribe(() => {
       this.getAllProducts();
     });
@@ -40,7 +40,7 @@ export class FloatsComponent implements OnInit, AfterViewInit {
 
   openEditProductDialog(product: Product): void {
     const dialogConfig = this.dialog.open(EditProductDialogComponent, {
-      width: '500px',
+      width: '550px',
       data: product
     });
     dialogConfig.afterClosed().subscribe(() => {

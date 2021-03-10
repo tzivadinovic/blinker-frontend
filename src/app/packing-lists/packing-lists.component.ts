@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {Invoice, InvoiceControllerService, InvoiceDetails, Product, ProductInvoice, ProductInvoiceControllerService} from '../../openapi';
 import {SnackbarService} from '../../utils/snackbar-handler';
@@ -15,7 +15,7 @@ import {DeleteProductDialogComponent} from '../invoices/dialogs/delete-product-d
 })
 export class PackingListsComponent implements OnInit {
   panelOpenState = false;
-  displayedColumns: string[] = ['boxNumber', 'code', 'title', 'description', 'unit', 'quantity', 'price', 'totalValue', 'options'];
+  displayedColumns: string[] = ['boxNumber', 'code', 'description', 'unit', 'quantity', 'price', 'totalValue'];
   invoices: Invoice[] = [];
   productInvoices: ProductInvoice[] = [];
 

@@ -55,11 +55,6 @@
           <td mat-cell *matCellDef="let element"> {{element.product?.code}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef> Title</th>
-          <td mat-cell *matCellDef="let element"> {{element.product?.name}} </td>
-        </ng-container>
-
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef> Description</th>
           <td mat-cell *matCellDef="let element"> {{element.product?.description}} </td>
@@ -67,7 +62,7 @@
 
         <ng-container matColumnDef="unit">
           <th mat-header-cell *matHeaderCellDef> Unit</th>
-          <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.product?.unit}} </td>
         </ng-container>
 
         <ng-container matColumnDef="quantity">
@@ -83,16 +78,7 @@
         <ng-container matColumnDef="totalValue">
           <th mat-header-cell *matHeaderCellDef> Total Value</th>
           <!--Trebalo bi da se ukupna cena racuna pri unosu novih proizvoda u fakturu-->
-          <td mat-cell *matCellDef="let element"> {{element.quantity * element.product?.price}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="options">
-          <th mat-header-cell *matHeaderCellDef> Actions</th>
-          <td mat-cell *matCellDef="let element" class="actions-field">
-            <i class="material-icons edit-button" matTooltip="Edit product" (click)="openEditRecordDialog(element, element.product)">create</i>
-            <i class="material-icons delete-button" matTooltip="Delete product"
-               (click)="openDeleteRecordDialog(element.id)">delete</i>
-          </td>
+          <td mat-cell *matCellDef="let element"> {{element.quantity * element.product?.price | number}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -106,7 +92,7 @@
           </mat-form-field>
         </div>
         <div class="financial-info">
-          <h3>Total: {{invoice.invoiceDetail.totalPrice | number}}€</h3>
+          <h3 class="invoice-total">Total: <b>{{invoice.invoiceDetail.totalPrice | number}}€</b></h3>
         </div>
       </div>
     </mat-expansion-panel>

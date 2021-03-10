@@ -1,7 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {CreateProductDialogComponent} from '../../invoices/dialogs/create-product-dialog/create-product-dialog.component';
-import {EditProductDialogComponent} from '../../invoices/dialogs/edit-product-dialog/edit-product-dialog.component';
 import {DeleteProductDialogComponent} from '../../invoices/dialogs/delete-product-dialog/delete-product-dialog.component';
 import {MatTableDataSource} from '@angular/material/table';
 import {Employee, EmployeeControllerService} from '../../../openapi';
@@ -9,7 +7,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {SnackbarService} from '../../../utils/snackbar-handler';
 import {CreateEmployeeDialogComponent} from './dialogs/create-employee-dialog/create-employee-dialog.component';
 import {EditEmployeeDialogComponent} from './dialogs/edit-employee-dialog/edit-employee-dialog.component';
-import {filterEmployee, filterProduct} from '../../../utils/filter';
+import {filterEmployee} from '../../../utils/filter';
 
 @Component({
   selector: 'app-employees',
@@ -62,10 +60,10 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if (result === 'yes') {
-            this.employeeService.deleteEmployeeById(id).subscribe(() => {
-              this.snackBarService.showSuccessSnackbar('Successfully deleted employee');
-              this.getAllEmployees();
-            });
+          this.employeeService.deleteEmployeeById(id).subscribe(() => {
+            this.snackBarService.showSuccessSnackbar('Successfully deleted employee');
+            this.getAllEmployees();
+          });
         } else if (result === 'no') {
           this.dialog.closeAll();
         }

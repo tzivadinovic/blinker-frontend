@@ -18,6 +18,7 @@ export class AuthenticationService {
       console.error('Not logged in.');
     }
   }
+
   get userJwtToken(): string {
     return this.token;
   }

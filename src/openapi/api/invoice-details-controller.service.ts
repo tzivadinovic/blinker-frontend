@@ -273,6 +273,52 @@ export class InvoiceDetailsControllerService implements InvoiceDetailsController
     }
 
     /**
+     * setItemsInfo
+     * @param invoiceDetailId invoiceDetailId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public setItemsInfo(invoiceDetailId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*'}): Observable<InvoiceDetails>;
+    public setItemsInfo(invoiceDetailId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*'}): Observable<HttpResponse<InvoiceDetails>>;
+    public setItemsInfo(invoiceDetailId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*'}): Observable<HttpEvent<InvoiceDetails>>;
+    public setItemsInfo(invoiceDetailId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*'}): Observable<any> {
+        if (invoiceDetailId === null || invoiceDetailId === undefined) {
+            throw new Error('Required parameter invoiceDetailId was null or undefined when calling setItemsInfo.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        let httpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (httpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                '*/*'
+            ];
+            httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        let responseType: 'text' | 'json' = 'json';
+        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+            responseType = 'text';
+        }
+
+        return this.httpClient.put<InvoiceDetails>(`${this.configuration.basePath}/invoice-detailses/${encodeURIComponent(String(invoiceDetailId))}/setItemsInfo`,
+            null,
+            {
+                responseType: <any>responseType,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * updateInvoiceDetails
      * @param invoiceDetails invoiceDetails
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
