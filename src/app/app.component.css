@@ -57,7 +57,7 @@
     width: 80% !important;
   }
 
-  ::ng-deep mat-paginator{
+  ::ng-deep mat-paginator {
     width: 79.99% !important;
     margin-left: 10.01% !important;
   }
@@ -68,32 +68,25 @@
 
   }
 
-  ::ng-deep .flex-container .description-field mat-form-field{
+  ::ng-deep .flex-container .description-field mat-form-field {
     width: 200px !important;
     margin-right: 5px;
   }
 
-  ::ng-deep app-new-invoice-fields mat-form-field{
+  ::ng-deep app-new-invoice-fields mat-form-field {
     width: 130px !important;
   }
 
-  ::ng-deep .main-content{
+  ::ng-deep .main-content {
     margin-right: 10% !important;
     margin-left: 10% !important;
   }
 
-  ::ng-deep .main-content table{
+  ::ng-deep .main-content table {
     width: 100% !important;
   }
 
-  ::ng-deep .items-box mat-form-field{
-    width: 70% !important;
-  }
 
-  ::ng-deep .main-content .proforma{
-    margin-left: 500px !important;
-    width: 100% !important;
-  }
 }
 
 @media only screen and (max-width: 1560px) {
@@ -103,23 +96,13 @@
     font-size: 15px;
   }
 
-  ::ng-deep table {
-    margin: 0 auto;
-    width: 80% !important;
-  }
-
-  ::ng-deep .flex-container .description-field mat-form-field{
+  ::ng-deep .flex-container .description-field mat-form-field {
     width: 150px !important;
     margin-right: 5px;
   }
 
-  ::ng-deep app-new-invoice-fields mat-form-field{
+  ::ng-deep app-new-invoice-fields mat-form-field {
     width: 120px !important;
-  }
-
-  ::ng-deep mat-paginator{
-    width: 79.99% !important;
-    margin-left: 10.01% !important;
   }
 }
 
@@ -130,23 +113,13 @@
     font-size: 15px;
   }
 
-  ::ng-deep table {
-    margin: 0 auto;
-    width: 80% !important;
-  }
-
-  ::ng-deep .flex-container .description-field mat-form-field{
+  ::ng-deep .flex-container .description-field mat-form-field {
     width: 120px !important;
     margin-right: 5px;
   }
 
-  ::ng-deep app-new-invoice-fields mat-form-field{
+  ::ng-deep app-new-invoice-fields mat-form-field {
     width: 100px !important;
-  }
-
-  ::ng-deep mat-paginator{
-    width: 79.99% !important;
-    margin-left: 10.01% !important;
   }
 }
 
