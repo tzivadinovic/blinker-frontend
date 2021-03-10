@@ -6,7 +6,6 @@ import {
   Invoice,
   InvoiceControllerService,
   InvoiceDetails,
-  InvoiceDetailsControllerService,
   ProductInvoice,
   ProductInvoiceControllerService
 } from '../../openapi';
@@ -38,8 +37,7 @@ export class InvoicesComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private invoiceService: InvoiceControllerService,
               private productInvoiceService: ProductInvoiceControllerService,
-              private snackBarService: SnackbarService,
-              private invoiceDetailsService: InvoiceDetailsControllerService) {
+              private snackBarService: SnackbarService) {
   }
 
   ngOnInit(): void {
@@ -122,13 +120,5 @@ export class InvoicesComponent implements OnInit {
     this.productInvoiceService.totalBoxes(invoiceId).subscribe(data => {
       this.totalBoxes = data['value'];
     });
-  }
-
-  setItemsInfo(invoice: Invoice) {
-    invoice.invoiceDetail.itemsInfo = this.form.get('itemsInfo').value;
-    this.invoiceDetailsService.setItemsInfo(invoice.invoiceDetail.id).subscribe(() => {
-      console.log('success');
-    });
-
   }
 }

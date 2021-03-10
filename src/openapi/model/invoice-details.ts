@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { Employee } from './employee';
+import { Invoice } from './invoice';
 import { Customer } from './customer';
 import { Currency } from './currency';
 import { TransportTerm } from './transport-term';
@@ -17,12 +18,14 @@ import { TransportTerm } from './transport-term';
 
 export interface InvoiceDetails { 
     attn?: string;
+    boxesInfo?: string;
     currency?: Currency;
     customer?: Customer;
     date?: string;
     employee?: Employee;
     grossWeight?: number;
     id?: number;
+    invoice?: Invoice;
     itemsInfo?: string;
     netWeight?: number;
     number?: string;

@@ -81,6 +81,16 @@
       <mat-label>Attn</mat-label>
       <input formControlName="attn" matInput type="text">
     </mat-form-field>
+
+    <mat-form-field class="example-full-width itemsInfo">
+      <mat-label>Items info</mat-label>
+      <textarea formControlName="itemsInfo" rows="5" matInput></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width itemsInfo">
+      <mat-label>Boxes info</mat-label>
+      <textarea formControlName="boxesInfo" rows="5" matInput></textarea>
+    </mat-form-field>
     <div>
       <button class="edit-invoice" color="primary" mat-raised-button (click)="editInvoiceDetails()">Save</button>
     </div>

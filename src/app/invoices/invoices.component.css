@@ -82,7 +82,7 @@ tr:hover {
 
 .financial-info {
   margin-top: 20px;
-  margin-left: 9%;
+  margin-left: 75%;
 }
 
 mat-panel-title {
@@ -139,12 +139,6 @@ mat-panel-description {
   display: flex;
 }
 
-.items-box {
-  margin-top: 20px;
-  margin-left: 16%;
-  width: 50%;
-}
-
 .textarea-field {
   width: 600px;
 }
@@ -191,11 +185,5 @@ mat-expansion-panel {
 
 mat-expansion-panel{
   width: 120%;
-}
-
-.items-info-btn:hover{
-  background-color: #16446c;
-  color: white;
-  transition: .5s;
 }
 

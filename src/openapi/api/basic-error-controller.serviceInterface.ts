@@ -13,7 +13,6 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
-import { ModelAndView } from '../model/models';
 
 
 import { ApiConfiguration }                                     from '../configuration';
@@ -25,45 +24,45 @@ export interface BasicErrorControllerServiceInterface {
     configuration: ApiConfiguration;
 
     /**
-     * errorHtml
+     * error
      * 
      */
-    errorHtmlUsingDELETE(extraHttpRequestParams?: any): Observable<ModelAndView>;
+    errorUsingDELETE(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
 
     /**
-     * errorHtml
+     * error
      * 
      */
-    errorHtmlUsingGET(extraHttpRequestParams?: any): Observable<ModelAndView>;
+    errorUsingGET(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
 
     /**
-     * errorHtml
+     * error
      * 
      */
-    errorHtmlUsingHEAD(extraHttpRequestParams?: any): Observable<ModelAndView>;
+    errorUsingHEAD(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
 
     /**
-     * errorHtml
+     * error
      * 
      */
-    errorHtmlUsingOPTIONS(extraHttpRequestParams?: any): Observable<ModelAndView>;
+    errorUsingOPTIONS(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
 
     /**
-     * errorHtml
+     * error
      * 
      */
-    errorHtmlUsingPATCH(extraHttpRequestParams?: any): Observable<ModelAndView>;
+    errorUsingPATCH(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
 
     /**
-     * errorHtml
+     * error
      * 
      */
-    errorHtmlUsingPOST(extraHttpRequestParams?: any): Observable<ModelAndView>;
+    errorUsingPOST(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
 
     /**
-     * errorHtml
+     * error
      * 
      */
-    errorHtmlUsingPUT(extraHttpRequestParams?: any): Observable<ModelAndView>;
+    errorUsingPUT(extraHttpRequestParams?: any): Observable<{ [key: string]: object; }>;
 
 }

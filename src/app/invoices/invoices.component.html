@@ -26,7 +26,7 @@
           {{invoice.invoiceDetail.date}}
         </mat-panel-description>
         <mat-panel-description class="total-price">
-          {{invoiceTotalValue | number}}€
+          <span *ngIf="!invoiceTotalValue">Click for total price</span>{{invoiceTotalValue | number}}<span *ngIf="invoiceTotalValue">€</span>
         </mat-panel-description>
         <mat-panel-description class="total-boxes">
           {{invoice.invoiceDetail.totalBoxes}} boxes
@@ -105,15 +105,6 @@
           <h3>Total boxes: <b>{{totalBoxes}}</b></h3>
           <h3>Gross weight: <b>{{invoice.invoiceDetail.grossWeight}} kg</b></h3>
           <h3>Net weight: <b>{{invoice.invoiceDetail.grossWeight - (totalBoxes * 0.5)}} kg</b></h3>
-        </div>
-        <div class="items-box">
-          <form [formGroup]="form">
-          <mat-form-field appearance="outline" class="textarea-field">
-            <mat-label>Total items</mat-label>
-            <input matInput formControlName="itemsInfo" type="text">
-          </mat-form-field>
-          <button mat-raised-button (click)="setItemsInfo(invoice)" class="items-info-btn">Save Info<span class="material-icons">done</span></button>
-          </form>
         </div>
         <div class="financial-info">
           <h3>Total: <b>{{invoiceTotalValue | number}}€</b></h3>

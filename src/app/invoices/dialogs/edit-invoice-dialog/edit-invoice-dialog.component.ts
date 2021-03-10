@@ -16,6 +16,7 @@ import {
 } from '../../../../openapi';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {SnackbarService} from '../../../../utils/snackbar-handler';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-edit-invoice-dialog',
@@ -35,7 +36,9 @@ export class EditInvoiceDialogComponent implements OnInit {
     shippingFees: new FormControl(null),
     date: new FormControl(null),
     remarks: new FormControl(null),
-    attn: new FormControl(null)
+    attn: new FormControl(null),
+    itemsInfo: new FormControl(null),
+    boxesInfo: new FormControl(null)
   });
 
   customers: Customer[] = [];
@@ -75,6 +78,8 @@ export class EditInvoiceDialogComponent implements OnInit {
     this.form.get('date').setValue(this.invoiceDetails?.date);
     this.form.get('remarks').setValue(this.invoiceDetails?.remarks);
     this.form.get('attn').setValue(this.invoiceDetails?.attn);
+    this.form.get('itemsInfo').setValue(this.invoiceDetails?.itemsInfo);
+    this.form.get('boxesInfo').setValue(this.invoiceDetails?.boxesInfo);
   }
 
   getInvoiceDetailsById(id: number) {
