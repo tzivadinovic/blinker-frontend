@@ -51,77 +51,97 @@
   background: #16446c;
 }
 
-@media only screen and (max-width: 1674px) {
-  ::ng-deep table {
-    margin: 0 auto;
-    width: 80% !important;
-  }
-
-  ::ng-deep mat-paginator {
-    width: 79.99% !important;
-    margin-left: 10.01% !important;
-  }
-
-  ::ng-deep app-new-invoice-fields {
-    display: block !important;
-    font-size: 15px;
-
-  }
-
-  ::ng-deep .flex-container .description-field mat-form-field {
+@media only screen and (max-width: 1674px){
+  ::ng-deep app-new-invoice-fields .description-field mat-form-field{
     width: 200px !important;
-    margin-right: 5px;
   }
 
-  ::ng-deep app-new-invoice-fields mat-form-field {
-    width: 130px !important;
+  ::ng-deep table{
+    width: 95% !important;
   }
 
-  ::ng-deep .main-content {
-    margin-right: 10% !important;
-    margin-left: 10% !important;
+  ::ng-deep mat-paginator{
+    width: 95% !important;
+    margin-left: 2.5% !important;
   }
 
-  ::ng-deep .main-content table {
-    width: 100% !important;
+  ::ng-deep #button2 {
+    margin-left: 90%;
   }
-
-
+  ::ng-deep .mat-tab-body-content { overflow: hidden!important}
 }
 
-@media only screen and (max-width: 1560px) {
+/*@media only screen and (max-width: 1674px) {*/
+/*  ::ng-deep table {*/
+/*    margin: 0 auto;*/
+/*    width: 80% !important;*/
+/*  }*/
 
-  ::ng-deep app-new-invoice-fields {
-    display: block !important;
-    font-size: 15px;
-  }
+/*  ::ng-deep mat-paginator {*/
+/*    width: 79.99% !important;*/
+/*    margin-left: 10.01% !important;*/
+/*  }*/
 
-  ::ng-deep .flex-container .description-field mat-form-field {
-    width: 150px !important;
-    margin-right: 5px;
-  }
+/*  ::ng-deep app-new-invoice-fields {*/
+/*    display: block !important;*/
+/*    font-size: 15px;*/
 
-  ::ng-deep app-new-invoice-fields mat-form-field {
-    width: 120px !important;
-  }
-}
+/*  }*/
 
-@media only screen and (max-width: 1430px) {
+/*  ::ng-deep .flex-container .description-field mat-form-field {*/
+/*    width: 200px !important;*/
+/*    margin-right: 5px;*/
+/*  }*/
 
-  ::ng-deep app-new-invoice-fields {
-    display: block !important;
-    font-size: 15px;
-  }
+/*  ::ng-deep app-new-invoice-fields mat-form-field {*/
+/*    width: 130px !important;*/
+/*  }*/
 
-  ::ng-deep .flex-container .description-field mat-form-field {
-    width: 120px !important;
-    margin-right: 5px;
-  }
+/*  ::ng-deep .main-content {*/
+/*    margin-right: 10% !important;*/
+/*    margin-left: 10% !important;*/
+/*  }*/
 
-  ::ng-deep app-new-invoice-fields mat-form-field {
-    width: 100px !important;
-  }
-}
+/*  ::ng-deep .main-content table {*/
+/*    width: 100% !important;*/
+/*  }*/
+
+
+/*}*/
+
+/*@media only screen and (max-width: 1560px) {*/
+
+/*  ::ng-deep app-new-invoice-fields {*/
+/*    display: block !important;*/
+/*    font-size: 15px;*/
+/*  }*/
+
+/*  ::ng-deep .flex-container .description-field mat-form-field {*/
+/*    width: 150px !important;*/
+/*    margin-right: 5px;*/
+/*  }*/
+
+/*  ::ng-deep app-new-invoice-fields mat-form-field {*/
+/*    width: 120px !important;*/
+/*  }*/
+/*}*/
+
+/*@media only screen and (max-width: 1430px) {*/
+
+/*  ::ng-deep app-new-invoice-fields {*/
+/*    display: block !important;*/
+/*    font-size: 15px;*/
+/*  }*/
+
+/*  ::ng-deep .flex-container .description-field mat-form-field {*/
+/*    width: 120px !important;*/
+/*    margin-right: 5px;*/
+/*  }*/
+
+/*  ::ng-deep app-new-invoice-fields mat-form-field {*/
+/*    width: 100px !important;*/
+/*  }*/
+/*}*/
 
 /*@media only screen and (min-width: 1495px) {*/
 /*  ::ng-deep table {*/

@@ -87,5 +87,17 @@ tr:hover {
   width: 300px;
 }
 
+@media only screen and (max-width: 1674px) {
+  #button2 {
 
+  }
+
+  .search-field {
+    margin-top: 3%;
+  }
+
+  table {
+    height: 85%;
+  }
+}
 

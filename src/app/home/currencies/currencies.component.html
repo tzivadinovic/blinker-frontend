@@ -24,7 +24,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <button class="color-secondary add-btn" mat-fab matTooltip="Add currency" (click)="openCreateCurrencyDialog()">
+  <button class="color-secondary add-btn" mat-fab matTooltip="Add currency" id="button1" (click)="openCreateCurrencyDialog()">
     <mat-icon>add</mat-icon>
   </button>
   <div *ngIf="dataSource.filteredData.length == 0" class="no-data">Currency not found</div>

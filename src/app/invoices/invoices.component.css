@@ -186,4 +186,24 @@ mat-expansion-panel {
 mat-expansion-panel{
   width: 120%;
 }
+@media only screen and (max-width: 1674px) {
+  .search-invoice {
+    margin-left: 39%;
+  }
+
+  .title-content{
+    margin-left: 41%;
+  }
+
+  .weight{
+      margin-left: 3%;
+  }
+  .financial-info{
+    margin-left: 60%;
+  }
+
+  .stamp-signature{
+    margin-right: 5%;
+  }
+}
 

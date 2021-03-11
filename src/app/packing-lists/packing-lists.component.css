@@ -185,3 +185,26 @@ mat-expansion-panel {
   font-weight: 800;
 }
 
+@media only screen and (max-width: 1674px){
+  .main-content{
+    width: 95% !important;
+    margin-left: 2.5%;
+  }
+
+  .title-content{
+    margin-left: 38%;
+  }
+
+  .search-invoice{
+    margin-left: 38%;
+  }
+
+  .stamp-signature{
+    margin-right: 5%;
+  }
+
+  .invoice-info{
+    margin-left: 2%;
+  }
+}
+

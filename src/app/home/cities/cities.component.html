@@ -28,7 +28,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <mat-paginator [pageSizeOptions]="[10, 15, 25, 100]" class="paginator"></mat-paginator>
-  <button class="color-secondary add-btn" mat-fab matTooltip="Add city" (click)="openCreateCityDialog()">
+  <button class="color-secondary add-btn" mat-fab matTooltip="Add city" id="button1" (click)="openCreateCityDialog()">
     <mat-icon>add</mat-icon>
   </button>
   <div *ngIf="dataSource.filteredData.length == 0" class="no-data">City not found</div>

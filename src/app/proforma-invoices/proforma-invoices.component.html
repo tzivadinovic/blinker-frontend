@@ -8,7 +8,7 @@
   </mat-form-field>
 </div>
 <div class="main-content">
-  <mat-accordion>
+  <mat-accordion  class="proforma-expansion-panel">
     <mat-expansion-panel (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false" *ngFor="let invoice of invoices">
       <mat-expansion-panel-header (click)="getProductInvoicesForInvoiceId(invoice.id)">

@@ -45,9 +45,9 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[10, 15, 25, 100]" class="paginator"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[8, 15, 25, 100]" class="paginator"></mat-paginator>
   </div>
-  <button class="color-secondary add-btn" mat-fab matTooltip="Add product" (click)="openCreateProductDialog()">
+  <button class="color-secondary add-btn" mat-fab matTooltip="Add product" id="button2" (click)="openCreateProductDialog()">
     <mat-icon>add</mat-icon>
   </button>
   <div *ngIf="dataSource.filteredData.length == 0" class="no-data">Product not found</div>
