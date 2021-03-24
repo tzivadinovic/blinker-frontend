@@ -15,6 +15,11 @@ import {SnackbarService} from '../../utils/snackbar-handler';
 import {EditProductInvoiceDialogComponent} from './dialogs/edit-product-invoice-dialog/edit-product-invoice-dialog.component';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
+import {$} from 'protractor';
+import {formatNumber} from '@angular/common';
 
 @Component({
   selector: 'app-invoices',
@@ -22,10 +27,17 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./invoices.component.css']
 })
 export class InvoicesComponent implements OnInit {
+
+  constructor(public dialog: MatDialog,
+              private invoiceService: InvoiceControllerService,
+              private productInvoiceService: ProductInvoiceControllerService,
+              private snackBarService: SnackbarService) {
+  }
   panelOpenState = false;
   displayedColumns: string[] = ['itemNo', 'code', 'description', 'unit', 'quantity', 'price', 'totalValue', 'options'];
   invoices: Invoice[] = [];
   productInvoices: ProductInvoice[] = [];
+  productInvoicesr: ProductInvoice[] = [];
   dataSource = new MatTableDataSource<ProductInvoice>([]);
   invoiceTotalValue: number;
   totalBoxes: number;
@@ -34,14 +46,10 @@ export class InvoicesComponent implements OnInit {
     itemsInfo: new FormControl(null, [Validators.required])
   });
 
-  constructor(public dialog: MatDialog,
-              private invoiceService: InvoiceControllerService,
-              private productInvoiceService: ProductInvoiceControllerService,
-              private snackBarService: SnackbarService) {
-  }
-
   ngOnInit(): void {
     this.getAllInvoices();
+    this.getProductInvoicesForInvoiceIdr();
+    console.log(this.productInvoicesr);
   }
 
   openPrintOptionsDialog(): void {
@@ -69,6 +77,12 @@ export class InvoicesComponent implements OnInit {
   getProductInvoicesForInvoiceId(invoiceId: number) {
     this.productInvoiceService.findByInvoiceId(invoiceId).subscribe(data => {
       this.productInvoices = data;
+    });
+  }
+
+  getProductInvoicesForInvoiceIdr() {
+    this.productInvoiceService.findByInvoiceId(12).subscribe(data => {
+      this.productInvoicesr = data;
     });
   }
 
@@ -121,4 +135,25 @@ export class InvoicesComponent implements OnInit {
       this.totalBoxes = data['value'];
     });
   }
+  async downloadPdf() {
+      let prepare = [];
+      this.productInvoicesr.forEach(pi => {
+        let tempObj = [];
+        tempObj.push(pi.itemNumber);
+        tempObj.push(pi.product.code);
+        tempObj.push(pi.product.description);
+        tempObj.push(pi.product.unit);
+        tempObj.push(pi.quantity);
+        tempObj.push(pi.product.price);
+        tempObj.push(pi.product.price * pi.quantity).toLocaleString();
+        prepare.push(tempObj);
+      });
+      const doc = new jsPDF();
+     autoTable(doc, {
+        head: [['Item number', 'Code', 'Description', 'Unit', 'Quantity', 'Price', 'Total Value']],
+        body: prepare
+
+     });
+      doc.save('test' + '.pdf');
+    }
 }
