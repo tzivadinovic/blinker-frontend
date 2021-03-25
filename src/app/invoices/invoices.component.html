@@ -26,7 +26,8 @@
           {{invoice.invoiceDetail.date}}
         </mat-panel-description>
         <mat-panel-description class="total-price">
-          <span *ngIf="!invoiceTotalValue">Click for total price</span>{{invoiceTotalValue | number}}<span *ngIf="invoiceTotalValue">€</span>
+          <span *ngIf="!invoiceTotalValue">Click for total price</span>{{invoiceTotalValue | number}}<span
+          *ngIf="invoiceTotalValue">€</span>
         </mat-panel-description>
         <mat-panel-description class="total-boxes">
           {{invoice.invoiceDetail.totalBoxes}} boxes
@@ -42,7 +43,13 @@
         <h3>Payment conditions: <b>{{invoice.invoiceDetail.paymentConditions}}</b></h3>
       </div>
 
-      <i class="large material-icons print-btn" matTooltip="Print invoice" (click)="openPrintOptionsDialog()">print</i>
+<!--      <i class="large material-icons print-btn" matTooltip="Print invoice" (click)="printInvoiceToPDF()">print</i>-->
+      <i class="large material-icons print-btn" [matMenuTriggerFor]="menu">print</i>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="printInvoiceToPDF()">Invoice</button>
+        <button mat-menu-item>Proforma Invoice</button>
+        <button mat-menu-item>Packing List</button>
+      </mat-menu>
       <i class="large material-icons edit-btn" matTooltip="Edit invoice"
          (click)="openEditInvoiceDialog(invoice.invoiceDetail)">edit</i>
 

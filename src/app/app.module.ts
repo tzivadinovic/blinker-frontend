@@ -61,6 +61,7 @@ import {EditTransportTermDialogComponent} from './home/transport-terms/dialogs/e
 import {EditCurrencyDialogComponent} from './home/currencies/dialogs/edit-currency-dialog/edit-currency-dialog.component';
 import {CreateCurrencyDialogComponent} from './home/currencies/dialogs/create-currency-dialog/create-currency-dialog.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatMenuModule} from '@angular/material/menu';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
@@ -133,7 +134,8 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatAutocompleteModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatMenuModule
   ], entryComponents: [
     PrintOptionsDialogComponent,
     EditInvoiceDialogComponent,
