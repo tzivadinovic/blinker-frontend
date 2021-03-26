@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {PrintOptionsDialogComponent} from './dialogs/print-options-dialog/print-options-dialog.component';
 import {EditInvoiceDialogComponent} from './dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
 import {Invoice, InvoiceControllerService, InvoiceDetails, ProductInvoice, ProductInvoiceControllerService} from '../../openapi';
 import {filterInvoice} from '../../utils/filter';
@@ -40,12 +39,6 @@ export class InvoicesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllInvoices();
-  }
-
-  openPrintOptionsDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px';
-    this.dialog.open(PrintOptionsDialogComponent, dialogConfig).afterClosed();
   }
 
   openEditInvoiceDialog(invoiceDetails: InvoiceDetails): void {
@@ -120,6 +113,8 @@ export class InvoicesComponent implements OnInit {
     });
   }
 
+                                /* P R I N T I N G */
+
   async printInvoiceToPDF() {
     /*Customer info*/
     const customer: string = this.productInvoices[0].invoice.invoiceDetail.customer.name;
@@ -131,7 +126,7 @@ export class InvoicesComponent implements OnInit {
     const invoiceNumber: string = this.productInvoices[0].invoice.invoiceDetail.number;
 
     /*Normalizacija zbog naziva dokumenta*/
-    const invoiceNumberForPDF: string = invoiceNumber.replace('/', '-');
+    const invoiceNumberForPDF: string = invoiceNumber.replace(/\//g, '-');
 
     const place = 'Niš';
     const date: string = this.productInvoices[0].invoice.invoiceDetail.date;
@@ -146,8 +141,11 @@ export class InvoicesComponent implements OnInit {
     const totalBoxes: number = this.productInvoices[0].invoice.invoiceDetail.totalBoxes;
     const employee: string = this.productInvoices[0].invoice.invoiceDetail.employee.firstName + ' '
       + this.productInvoices[0].invoice.invoiceDetail.employee.lastName;
-    const totalPrice: number = this.productInvoices[0].invoice.invoiceDetail.totalPrice;
-    const shippingFees: number = this.productInvoices[0].invoice.invoiceDetail.shippingFees;
+    const totalPrice: string = new Intl.NumberFormat('sr', {minimumFractionDigits: 2}).format(this.productInvoices[0].invoice.invoiceDetail.totalPrice);
+    const shippingFees: string = new Intl.NumberFormat('sr', {minimumFractionDigits: 2}).format(this.productInvoices[0].invoice.invoiceDetail.shippingFees);
+    const formattedPrice: string = totalPrice.replace(/\./g, '').replace(/,/g, '.');
+    // TODO formatirati
+    const invoiceTotal: number = parseFloat(formattedPrice) + parseFloat(shippingFees);
 
     const logo = new Image();
     logo.src = '../../assets/blinker-logo.png';
@@ -176,7 +174,6 @@ export class InvoicesComponent implements OnInit {
     doc.text('Payment Conditions: ' + paymentConditions, 15, 50);
     doc.text('Transport Terms: ' + transportTerms, 80, 50);
     doc.text('Currency: ' + currency, 165, 50);
-    const pageWidth = doc.internal.pageSize.width || doc.internal.pageSize.getWidth();
 
     const prepare = [];
     this.productInvoices.forEach(pi => {
@@ -197,14 +194,13 @@ export class InvoicesComponent implements OnInit {
       startY: 55
     });
 
-    // doc.text(this.productInvoices[0].invoice.invoiceDetail.number, pageWidth / 2, 5);
     doc.setFontSize(10);
-    doc.text('Total EUR: ' + totalPrice, 130, 130);
-    doc.text('Discount (advance payment) 0 %: 0.00', 130, 135);
-    doc.text('Insurance cost EUR: 0.00', 130, 140);
-    doc.text('Shipping fees EUR: ' + shippingFees, 130, 145);
-    doc.text('_________________________________', 130, 150);
-    doc.text('Invoice total EUR: ' + (totalPrice + shippingFees), 130, 155);
+    doc.text('Total EUR: ' + totalPrice, 130, 180);
+    doc.text('Discount (advance payment) 0 %: 0.00', 130, 185);
+    doc.text('Insurance cost EUR: 0.00', 130, 190);
+    doc.text('Shipping fees EUR: ' + shippingFees, 130, 195);
+    doc.text('_________________________________', 130, 200);
+    doc.text('Invoice total EUR: ' + invoiceTotal, 130, 205);
 
     doc.setFontSize(9);
     doc.text('Total items: ' + totalItems, 10, 235);
@@ -228,7 +224,159 @@ export class InvoicesComponent implements OnInit {
     doc.text(employee, 160, 270);
     doc.text('_________________________', 160, 280);
 
-
     doc.save('Invoice ' + invoiceNumberForPDF + '.pdf');
+  }
+
+  async printProformaInvoiceToPDF() {
+    /*Customer info*/
+    const customer: string = this.productInvoices[0].invoice.invoiceDetail.customer.name;
+    const zipCode: string = this.productInvoices[0].invoice.invoiceDetail.customer.city.zipcode;
+    const city: string = this.productInvoices[0].invoice.invoiceDetail.customer.city.city;
+    const state: string = this.productInvoices[0].invoice.invoiceDetail.customer.state.name.toUpperCase();
+    const attn: string = this.productInvoices[0].invoice.invoiceDetail.attn;
+
+    /*Invoice info*/
+    const invoiceNumber: string = this.productInvoices[0].invoice.invoiceDetail.number;
+    const date: string = this.productInvoices[0].invoice.invoiceDetail.date;
+    const remarks: string = this.productInvoices[0].invoice.invoiceDetail.remarks;
+
+    /*Normalizacija zbog naziva dokumenta*/
+    const invoiceNumberForPDF: string = invoiceNumber.replace(/\//g, '-');
+
+    /*Financial Info*/
+    const employee: string = this.productInvoices[0].invoice.invoiceDetail.employee.firstName + ' '
+      + this.productInvoices[0].invoice.invoiceDetail.employee.lastName;
+    const totalPrice: string = new Intl.NumberFormat('sr', {minimumFractionDigits: 2}).format(this.productInvoices[0].invoice.invoiceDetail.totalPrice);
+    const shippingFees: string = new Intl.NumberFormat('sr', {minimumFractionDigits: 2}).format(this.productInvoices[0].invoice.invoiceDetail.shippingFees);
+    const formattedPrice: string = totalPrice.replace(/\./g, '').replace(/,/g, '.');
+    const invoiceTotal: number = parseFloat(formattedPrice) + parseFloat(shippingFees);
+
+    const logo = new Image();
+    logo.src = '../../assets/blinker-logo.png';
+
+    const doc = new jsPDF();
+    doc.addImage(logo, 'png', 35, 5, 45, 20);
+    doc.setFontSize(8);
+    doc.setTextColor('#1b10e8');
+    doc.text('Blinker Co. doo - Serbia - 18000 Niš - Vojvode Putnika 50a', 20, 30);
+    doc.setTextColor('#1b10e8');
+    doc.text('Tel. ++381(0)18 562795; Fax: ++381 (0)18 562475 - PIB 10036937', 15, 35);
+    doc.setTextColor('#000000');
+    doc.setFontSize(12);
+    doc.text(customer, 145, 15);
+    doc.setFontSize(12);
+    doc.text(zipCode + ' ' + city, 135, 23);
+    doc.setFontSize(12);
+    doc.text(state, 155, 31);
+    doc.text('Attn: ' + attn, 145, 39);
+
+    doc.setFontSize(15);
+    doc.text('Proforma Invoice No. ' + invoiceNumber, 15, 50);
+    doc.text('Date: ' + date, 155, 50);
+
+    const prepare = [];
+    this.productInvoices.forEach(pi => {
+      const tempObj = [];
+      tempObj.push(pi.itemNumber);
+      tempObj.push(pi.product.code);
+      tempObj.push(pi.product.description);
+      tempObj.push(pi.product.unit);
+      tempObj.push(pi.quantity);
+      tempObj.push(pi.product.price);
+      tempObj.push(new Intl.NumberFormat('en-us', {minimumFractionDigits: 2}).format(pi.product.price * pi.quantity));
+      prepare.push(tempObj);
+    });
+    autoTable(doc, {
+      head: [['Item number', 'Code', 'Description', 'Unit', 'Quantity', 'Unit price', 'Total EUR']],
+      showHead: 'firstPage',
+      body: prepare,
+      startY: 55
+    });
+
+    doc.setFontSize(10);
+    doc.text('Total EUR: ' + totalPrice, 130, 180);
+    doc.text('Discount (advance payment) 0 %: 0.00', 130, 185);
+    doc.text('Insurance cost EUR: 0.00', 130, 190);
+    doc.text('Shipping fees EUR: ' + shippingFees, 130, 195);
+    doc.text('_________________________________', 130, 200);
+    doc.text('Invoice total EUR: ' + invoiceTotal, 130, 205);
+
+    doc.setTextColor('#000000');
+    doc.text(employee, 145, 270);
+
+    doc.save('Proforma Invoice ' + invoiceNumberForPDF + '.pdf');
+  }
+
+  async printPackingListToPDF() {
+    /*Customer info*/
+    const customer: string = this.productInvoices[0].invoice.invoiceDetail.customer.name;
+    const zipCode: string = this.productInvoices[0].invoice.invoiceDetail.customer.city.zipcode;
+    const city: string = this.productInvoices[0].invoice.invoiceDetail.customer.city.city;
+    const state: string = this.productInvoices[0].invoice.invoiceDetail.customer.state.name.toUpperCase();
+
+    /*Invoice info*/
+    const invoiceNumber: string = this.productInvoices[0].invoice.invoiceDetail.number;
+    const boxesInfo: string = this.productInvoices[0].invoice.invoiceDetail.boxesInfo;
+    const totalBoxes: number = this.productInvoices[0].invoice.invoiceDetail.totalBoxes;
+
+    /*Normalizacija zbog naziva dokumenta*/
+    const invoiceNumberForPDF: string = invoiceNumber.replace(/\//g, '-');
+
+    const date: string = this.productInvoices[0].invoice.invoiceDetail.date;
+
+    /*Financial Info*/
+    const employee: string = this.productInvoices[0].invoice.invoiceDetail.employee.firstName + ' '
+      + this.productInvoices[0].invoice.invoiceDetail.employee.lastName;
+
+    const logo = new Image();
+    logo.src = '../../assets/blinker-logo.png';
+
+    const doc = new jsPDF();
+    doc.addImage(logo, 'png', 35, 5, 45, 20);
+    doc.setFontSize(8);
+    doc.setTextColor('#1b10e8');
+    doc.text('Blinker Co. doo - Serbia - 18000 Niš - Vojvode Putnika 50a', 20, 30);
+    doc.setTextColor('#1b10e8');
+    doc.text('Tel. ++381(0)18 562795; Fax: ++381 (0)18 562475 - PIB 10036937', 15, 35);
+    doc.setTextColor('#000000');
+    doc.setFontSize(12);
+    doc.text(customer, 145, 15);
+    doc.setFontSize(12);
+    doc.text(zipCode + ' ' + city, 135, 23);
+    doc.setFontSize(12);
+    doc.text(state, 155, 31);
+
+    doc.setFontSize(15);
+    doc.text('PACKING LIST No. ' + invoiceNumber, 15, 45);
+    doc.text('Date: ' + date, 155, 45);
+
+    const prepare = [];
+    this.productInvoices.forEach(pi => {
+      const tempObj = [];
+      tempObj.push(pi.boxNumber);
+      tempObj.push(pi.product.code);
+      tempObj.push(pi.product.description);
+      tempObj.push(pi.product.unit);
+      tempObj.push(pi.quantity);
+      prepare.push(tempObj);
+    });
+    autoTable(doc, {
+      head: [['Box number', 'Code', 'Description', 'Unit', 'Quantity']],
+      showHead: 'firstPage',
+      body: prepare,
+      startY: 55
+    });
+
+    doc.setFontSize(10);
+    const split = doc.splitTextToSize('Total Boxes: ' + totalBoxes + ' ' + '(' + boxesInfo + ')', 180);
+    doc.text(split, 10, 130);
+
+    doc.setFontSize(8);
+    doc.text('Stamp and Signature:', 150, 265);
+    doc.setTextColor('#000000');
+    doc.text(employee, 145, 270);
+    doc.text('_________________________', 145, 280);
+
+    doc.save('Packing list ' + invoiceNumberForPDF + '.pdf');
   }
 }

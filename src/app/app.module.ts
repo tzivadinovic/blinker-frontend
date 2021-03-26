@@ -23,7 +23,6 @@ import {InvoicesComponent} from './invoices/invoices.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {ProformaInvoicesComponent} from './proforma-invoices/proforma-invoices.component';
 import {PackingListsComponent} from './packing-lists/packing-lists.component';
-import {PrintOptionsDialogComponent} from './invoices/dialogs/print-options-dialog/print-options-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {EditInvoiceDialogComponent} from './invoices/dialogs/edit-invoice-dialog/edit-invoice-dialog.component';
 import {MatSelectModule} from '@angular/material/select';
@@ -81,7 +80,6 @@ const appRoutes: Routes = [
     InvoicesComponent,
     ProformaInvoicesComponent,
     PackingListsComponent,
-    PrintOptionsDialogComponent,
     EditInvoiceDialogComponent,
     EditProformaInvoiceDialogComponent,
     EditPackingListDialogComponent,
@@ -137,7 +135,6 @@ const appRoutes: Routes = [
     MatProgressSpinnerModule,
     MatMenuModule
   ], entryComponents: [
-    PrintOptionsDialogComponent,
     EditInvoiceDialogComponent,
     EditPackingListDialogComponent,
     EditProformaInvoiceDialogComponent,
