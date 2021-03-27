@@ -17,6 +17,7 @@ export interface User {
     credentialsNonExpired?: boolean;
     enabled?: boolean;
     id?: number;
+    password?: string;
     username?: string;
 }
 

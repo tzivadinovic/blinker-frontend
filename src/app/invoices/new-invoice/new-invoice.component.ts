@@ -6,7 +6,7 @@ import {
   Customer,
   CustomerControllerService,
   Employee,
-  EmployeeControllerService,
+  EmployeeControllerService, Invoice,
   InvoiceControllerService,
   InvoiceDetailsControllerService,
   TransportTerm,
@@ -33,12 +33,14 @@ export class NewInvoiceComponent implements OnInit {
     shippingFees: new FormControl(null),
     date: new FormControl(null)
   });
+
   invoiceInputs: any[] = [];
 
   customers: Customer[] = [];
   transportTerms: TransportTerm[] = [];
   currencies: Currency[] = [];
   employees: Employee[] = [];
+  invoices: Invoice[] = [];
 
   constructor(private invoiceService: InvoiceControllerService,
               private snackBarService: SnackbarService,
@@ -50,6 +52,7 @@ export class NewInvoiceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAllInvoices();
     this.form.get('netWeight').disable();
     this.checkForm();
     this.getAllCurrencies();
@@ -98,6 +101,12 @@ export class NewInvoiceComponent implements OnInit {
   getAllEmployees(): void {
     this.employeeService.getAllEmployees().subscribe(data => {
       this.employees = data;
+    });
+  }
+
+  getAllInvoices(): void {
+    this.invoiceService.getAllInvoices().subscribe(data => {
+      this.invoices = data;
     });
   }
 }

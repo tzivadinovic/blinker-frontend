@@ -161,9 +161,9 @@ export class InvoicesComponent implements OnInit {
     doc.setFontSize(12);
     doc.text(customer, 145, 15);
     doc.setFontSize(12);
-    doc.text(zipCode + ' ' + city, 135, 23);
+    doc.text(zipCode + ' ' + city, 145, 23);
     doc.setFontSize(12);
-    doc.text(state, 155, 31);
+    doc.text(state, 145, 31);
 
     doc.setFontSize(10);
     doc.text('Invoice No. ' + invoiceNumber, 15, 45);
@@ -239,6 +239,7 @@ export class InvoicesComponent implements OnInit {
     const invoiceNumber: string = this.productInvoices[0].invoice.invoiceDetail.number;
     const date: string = this.productInvoices[0].invoice.invoiceDetail.date;
     const remarks: string = this.productInvoices[0].invoice.invoiceDetail.remarks;
+    const deliveryDate: string = this.productInvoices[0].invoice.invoiceDetail.deliveryDate;
 
     /*Normalizacija zbog naziva dokumenta*/
     const invoiceNumberForPDF: string = invoiceNumber.replace(/\//g, '-');
@@ -265,9 +266,9 @@ export class InvoicesComponent implements OnInit {
     doc.setFontSize(12);
     doc.text(customer, 145, 15);
     doc.setFontSize(12);
-    doc.text(zipCode + ' ' + city, 135, 23);
+    doc.text(zipCode + ' ' + city, 145, 23);
     doc.setFontSize(12);
-    doc.text(state, 155, 31);
+    doc.text(state, 145, 31);
     doc.text('Attn: ' + attn, 145, 39);
 
     doc.setFontSize(15);
@@ -293,7 +294,10 @@ export class InvoicesComponent implements OnInit {
       startY: 55
     });
 
+
     doc.setFontSize(10);
+    doc.text('Remarks: ' + remarks, 15, 180);
+    doc.text('Delivery Date: ' + deliveryDate, 15, 185);
     doc.text('Total EUR: ' + totalPrice, 130, 180);
     doc.text('Discount (advance payment) 0 %: 0.00', 130, 185);
     doc.text('Insurance cost EUR: 0.00', 130, 190);
@@ -342,9 +346,9 @@ export class InvoicesComponent implements OnInit {
     doc.setFontSize(12);
     doc.text(customer, 145, 15);
     doc.setFontSize(12);
-    doc.text(zipCode + ' ' + city, 135, 23);
+    doc.text(zipCode + ' ' + city, 145, 23);
     doc.setFontSize(12);
-    doc.text(state, 155, 31);
+    doc.text(state, 145, 31);
 
     doc.setFontSize(15);
     doc.text('PACKING LIST No. ' + invoiceNumber, 15, 45);

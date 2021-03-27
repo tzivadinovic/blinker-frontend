@@ -22,6 +22,7 @@ export interface InvoiceDetails {
     currency?: Currency;
     customer?: Customer;
     date?: string;
+    deliveryDate?: string;
     employee?: Employee;
     grossWeight?: number;
     id?: number;

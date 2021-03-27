@@ -26,8 +26,9 @@
           {{invoice.invoiceDetail.date}}
         </mat-panel-description>
         <mat-panel-description class="total-price">
-          <span *ngIf="!invoiceTotalValue">Click for total price</span>{{invoiceTotalValue | number}}<span
-          *ngIf="invoiceTotalValue">€</span>
+<!--          <span *ngIf="!invoiceTotalValue">Click for total price</span>{{invoiceTotalValue | number}}<span-->
+<!--          *ngIf="invoiceTotalValue">€</span>-->
+          {{invoice.invoiceDetail.totalPrice | number}}€
         </mat-panel-description>
         <mat-panel-description class="total-boxes">
           {{invoice.invoiceDetail.totalBoxes}} boxes

@@ -35,6 +35,7 @@ export class EditInvoiceDialogComponent implements OnInit {
     grossWeight: new FormControl(null),
     shippingFees: new FormControl(null),
     date: new FormControl(null),
+    deliveryDate: new FormControl(null),
     remarks: new FormControl(null),
     attn: new FormControl(null),
     itemsInfo: new FormControl(null),
@@ -76,6 +77,7 @@ export class EditInvoiceDialogComponent implements OnInit {
     this.form.get('grossWeight').setValue(this.invoiceDetails?.grossWeight);
     this.form.get('shippingFees').setValue(this.invoiceDetails?.shippingFees);
     this.form.get('date').setValue(this.invoiceDetails?.date);
+    this.form.get('deliveryDate').setValue(this.invoiceDetails?.deliveryDate);
     this.form.get('remarks').setValue(this.invoiceDetails?.remarks);
     this.form.get('attn').setValue(this.invoiceDetails?.attn);
     this.form.get('itemsInfo').setValue(this.invoiceDetails?.itemsInfo);
@@ -146,7 +148,7 @@ export class EditInvoiceDialogComponent implements OnInit {
     invoiceDetails.totalPrice = this.data.totalPrice;
     // invoiceDetails.invoice = this.data.invoice;
     if (this.form.valid) {
-      this.invoiceDetailsService.saveInvoiceDetails(invoiceDetails).subscribe(() => {
+      this.invoiceDetailsService.updateInvoiceDetails(invoiceDetails).subscribe(() => {
         this.closeDialog();
         this.getInvoiceDetailsById(invoiceDetails.id);
         this.snackBarService.showSuccessSnackbar('Successfully edited invoice details');

@@ -12,8 +12,8 @@ import {SnackbarService} from '../../../../utils/snackbar-handler';
 export class EditProductInvoiceDialogComponent implements OnInit {
   form = new FormGroup({
     itemNumber: new FormControl(null),
+    boxNumber: new FormControl(null),
     product: new FormControl(null),
-    unit: new FormControl(),
     quantity: new FormControl(null)
   });
 
@@ -32,7 +32,7 @@ export class EditProductInvoiceDialogComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProducts();
     this.form.get('itemNumber').setValue(this.productInvoice.itemNumber);
-    this.form.get('unit').setValue(this.productInvoice.product.unit);
+    this.form.get('boxNumber').setValue(this.productInvoice.boxNumber);
     this.form.get('product').setValue(this.productInvoice.product);
     this.form.get('quantity').setValue(this.productInvoice.quantity);
   }
@@ -40,9 +40,8 @@ export class EditProductInvoiceDialogComponent implements OnInit {
   editRecord() {
     const productInvoice: ProductInvoice = this.form.value;
     productInvoice.id = this.data.id;
-    productInvoice.invoice = this.data.invoice;
     if (this.form.valid) {
-      this.productInvoiceService.updateProductInvoice(productInvoice).subscribe(() => {
+      this.productInvoiceService.saveProductInvoice(productInvoice).subscribe(() => {
         this.closeDialog();
         this.snackBarService.showSuccessSnackbar('Successfully edited record');
         this.getAllProductInvoice();

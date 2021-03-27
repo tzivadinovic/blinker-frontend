@@ -61,6 +61,7 @@ import {EditCurrencyDialogComponent} from './home/currencies/dialogs/edit-curren
 import {CreateCurrencyDialogComponent} from './home/currencies/dialogs/create-currency-dialog/create-currency-dialog.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatMenuModule} from '@angular/material/menu';
+import { StatisticsComponent } from './home/statistics/statistics.component';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
@@ -106,6 +107,7 @@ const appRoutes: Routes = [
     EditTransportTermDialogComponent,
     EditCurrencyDialogComponent,
     CreateCurrencyDialogComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,

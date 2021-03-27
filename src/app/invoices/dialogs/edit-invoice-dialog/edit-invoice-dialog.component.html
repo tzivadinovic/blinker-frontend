@@ -11,6 +11,13 @@
       </mat-datepicker>
     </mat-form-field>
 
+    <mat-form-field tabindex="2" class="date-picker">
+      <input [matDatepicker]="picker2" formControlName="deliveryDate" matInput placeholder="Delivery date">
+      <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker2>
+      </mat-datepicker>
+    </mat-form-field>
+
     <mat-form-field class="example-full-width">
       <mat-label>Invoice number</mat-label>
       <input formControlName="number" matInput type="text">
@@ -77,7 +84,7 @@
       <input formControlName="remarks" matInput type="text">
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width attn-info">
       <mat-label>Attn</mat-label>
       <input formControlName="attn" matInput type="text">
     </mat-form-field>

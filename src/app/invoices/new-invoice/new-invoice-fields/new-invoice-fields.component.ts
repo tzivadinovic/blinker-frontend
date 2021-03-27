@@ -27,11 +27,9 @@ export class NewInvoiceFieldsComponent implements OnInit, AfterViewInit {
   @ViewChild('unitPriceRef') unitPriceRef: ElementRef;
   @ViewChild('totalPriceRef') totalPriceRef: ElementRef;
 
-  @Input()
-  inputs: InvoiceInputs;
+  @Input() inputs: InvoiceInputs;
   @Output() method: EventEmitter<any> = new EventEmitter<any>();
-  @Output()
-  inputEmitter: EventEmitter<InvoiceInputs> = new EventEmitter<InvoiceInputs>();
+  @Output() inputEmitter: EventEmitter<InvoiceInputs> = new EventEmitter<InvoiceInputs>();
 
   form = new FormGroup({
     itemNo: new FormControl(null, [Validators.required]),
