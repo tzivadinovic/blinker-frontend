@@ -83,7 +83,7 @@ tr:hover {
   margin-left: 45%;
 }
 
-.mat-column-description{
+.mat-column-description {
   width: 300px;
 }
 
@@ -100,4 +100,14 @@ tr:hover {
     height: 85%;
   }
 }
+
+::ng-deep .mat-sort-header-container {
+  display: inline-flex !important;
+}
+::ng-deep .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {
+  opacity: 0.54 !important;
+  transform: translateY(0px) !important;
+}
+
+
 

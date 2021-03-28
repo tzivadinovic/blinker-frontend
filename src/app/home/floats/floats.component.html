@@ -4,10 +4,10 @@
 </mat-form-field>
 <div class="main-content">
   <div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
     <ng-container matColumnDef="code">
-      <th mat-header-cell *matHeaderCellDef> Code</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Code</th>
       <td mat-cell *matCellDef="let element"> {{element.code}} </td>
     </ng-container>
 
@@ -22,7 +22,7 @@
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Price</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Price</th>
       <td mat-cell *matCellDef="let element"> {{element.price}} </td>
     </ng-container>
 

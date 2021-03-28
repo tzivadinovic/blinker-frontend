@@ -8,6 +8,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {CreateProductDialogComponent} from '../../invoices/dialogs/create-product-dialog/create-product-dialog.component';
 import {SnackbarService} from '../../../utils/snackbar-handler';
 import {filterProduct} from '../../../utils/filter';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-floats',
@@ -19,6 +20,7 @@ export class FloatsComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['code', 'description', 'category', 'price', 'stock', 'options'];
   dataSource = new MatTableDataSource<Product>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
 
   constructor(public dialog: MatDialog,
@@ -79,6 +81,7 @@ export class FloatsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   searchProduct(inputPar: string) {

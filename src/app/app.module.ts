@@ -62,6 +62,7 @@ import {CreateCurrencyDialogComponent} from './home/currencies/dialogs/create-cu
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatMenuModule} from '@angular/material/menu';
 import { StatisticsComponent } from './home/statistics/statistics.component';
+import {MatSortModule} from '@angular/material/sort';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
@@ -109,34 +110,35 @@ const appRoutes: Routes = [
     CreateCurrencyDialogComponent,
     StatisticsComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatLineModule,
-    RouterModule.forRoot(appRoutes),
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatTabsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatTooltipModule,
-    MatExpansionModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    HttpClientModule,
-    MatSnackBarModule,
-    MatAutocompleteModule,
-    FormsModule,
-    MatProgressSpinnerModule,
-    MatMenuModule
-  ], entryComponents: [
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatLineModule,
+        RouterModule.forRoot(appRoutes),
+        MatSidenavModule,
+        MatListModule,
+        MatIconModule,
+        MatTabsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatTooltipModule,
+        MatExpansionModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        HttpClientModule,
+        MatSnackBarModule,
+        MatAutocompleteModule,
+        FormsModule,
+        MatProgressSpinnerModule,
+        MatMenuModule,
+        MatSortModule
+    ], entryComponents: [
     EditInvoiceDialogComponent,
     EditPackingListDialogComponent,
     EditProformaInvoiceDialogComponent,
